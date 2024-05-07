@@ -59,5 +59,8 @@ public class Queries {
 	public static final String Q_QUOTE_DETAILS_REMOVE_BY_ID = "DELETE FROM cotizaciones_detalle WHERE id_cotizacion_detalle_pk = ?;";
 	public static final String Q_QUOTE_DETAILS_SAVE = "INSERT INTO cotizaciones_detalle(id_cotizacion_fk,mec,mano_obra_refacciones,importe) VALUES(?,?,?,?);";
 	public static final String Q_QUOTE_DETAILS_UPDATE_BY_ID = "UPDATE cotizaciones_detalle SET id_cotizacion_fk = ?, mec = ?, mano_obra_refacciones = ?, importe = ? WHERE id_cotizacion_detalle_pk = ?";
+
+	//CUSTOMER CRUD SQLS
+	public static final String Q_USERS_SEARCH_BY_USERNAME = "SELECT * FROM users WHERE username = ?;";
 	
 }
