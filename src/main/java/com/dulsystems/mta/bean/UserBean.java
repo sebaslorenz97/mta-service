@@ -2,11 +2,16 @@ package com.dulsystems.mta.bean;
 
 public class UserBean {
 	
+	//FIELDS FOR USERS
 	private String userName;
 	private String userPassword;
 	private String userEmail;
 	private Boolean userLocked;
 	private Boolean userDisabled;
+	
+	//REQUEST FIELDS FOR INNER OPERATIONS WITH USERS ROLE
+	private String userRole;
+	private String userRoleGrantedDate;
 	
 	public String getUserName() {
 		return userName;
@@ -38,5 +43,20 @@ public class UserBean {
 	public void setUserDisabled(Boolean userDisabled) {
 		this.userDisabled = userDisabled;
 	}
+	
+	//GETTER & SETTERS FOR INNER OPERATIONS WITH USERS ROLE
+	public String getUserRole() {
+		return userRole;
+	}
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
+	}
+	public String getUserRoleGrantedDate() {
+		return userRoleGrantedDate;
+	}
+	public void setUserRoleGrantedDate(String userRoleGrantedDate) {
+		this.userRoleGrantedDate = userRoleGrantedDate;
+	}
 
+	
 }

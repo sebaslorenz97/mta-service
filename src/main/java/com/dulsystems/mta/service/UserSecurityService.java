@@ -1,7 +1,12 @@
 package com.dulsystems.mta.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,13 +27,38 @@ public class UserSecurityService implements UserDetailsService{
 		if(ub == null) {
 			throw new UsernameNotFoundException("User Not Found");
 		}
+		
+		String[] roles = userDao.searchUserRolesByUsername(username).stream().map(UserBean::getUserRole).toArray(String[]::new);
+		
 		return User.builder()
 					.username(ub.getUserName())
 					.password(ub.getUserPassword())
-					.roles("ADMIN")
+					.authorities(grantedAuthorities(roles))
 					.accountLocked(ub.getUserLocked())
 					.disabled(ub.getUserDisabled())
 					.build();
+	}
+	
+	private String[] getAuthorities(String role) {
+		if("ADMIN".equals(role)/* || "EMPLOYEE".equals(role)*/) {
+			return new String[] {"search_vehicles_by_plate"};
+		}
+		return new String[] {};
+		
+	}
+	
+	private List<GrantedAuthority> grantedAuthorities(String[] roles){
+		List<GrantedAuthority> authorities = new ArrayList<>(roles.length);
+		
+		for(String role: roles) {
+			authorities.add(new SimpleGrantedAuthority("ROLE_"+role));
+			
+			for(String authority: getAuthorities(role)) {
+				authorities.add(new SimpleGrantedAuthority(authority));
+			}
+		}
+		return authorities;
+		
 	}
 
 }

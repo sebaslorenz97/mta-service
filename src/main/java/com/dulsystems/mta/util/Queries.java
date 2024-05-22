@@ -60,7 +60,12 @@ public class Queries {
 	public static final String Q_QUOTE_DETAILS_SAVE = "INSERT INTO cotizaciones_detalle(id_cotizacion_fk,mec,mano_obra_refacciones,importe) VALUES(?,?,?,?);";
 	public static final String Q_QUOTE_DETAILS_UPDATE_BY_ID = "UPDATE cotizaciones_detalle SET id_cotizacion_fk = ?, mec = ?, mano_obra_refacciones = ?, importe = ? WHERE id_cotizacion_detalle_pk = ?";
 
-	//CUSTOMER CRUD SQLS
-	public static final String Q_USERS_SEARCH_BY_USERNAME = "SELECT * FROM users WHERE username = ?;";
+	//USERS CRUD SQLS
+	public static final String Q_USERS_SEARCH_BY_USERNAME = "SELECT * FROM users WHERE username_pk = ?;";
+	//USERS INNER JOIN USER ROLES CRUD SQLS
+	public static final String Q_USERS_INNER_USERS_ROLE_BY_USERNAME = "SELECT users.username_pk, users_role.role_user_pk, users_role.granted_date\r\n"
+																	+ "FROM users\r\n"
+																	+ "INNER JOIN users_role ON users.username_pk = users_role.username_fk\r\n"
+																	+ "WHERE users.username_pk = ?;";
 	
 }
