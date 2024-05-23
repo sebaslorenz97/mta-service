@@ -32,15 +32,23 @@ public class AuthController {
 	
 	@PostMapping("/login")
 	public ResponseEntity<Void> login(@RequestBody UserBean ub){
+		HttpHeaders httpHeaders = new HttpHeaders();
 		UsernamePasswordAuthenticationToken login = new UsernamePasswordAuthenticationToken(ub.getUserName(), ub.getUserPassword());
 		
+		System.out.println("ANTES DE AUTENTICAR!!!!!");
 		Authentication authentication = authenticationManager.authenticate(login);
+		System.out.println("DESPUES DE AUTENTICAR!!!!!");
+		if(!authentication.isAuthenticated()) {
+			System.out.println("NO SE PUDO AUTENTICAR!!!!");
+			httpHeaders.add("message", "El usuario o contreseña no existe, rectificalos");
+		}
 		System.out.println(authentication.isAuthenticated());
 		System.out.println(authentication.getPrincipal());
 		
 		String jwt = jwtUtil.create(ub.getUserName());
+		httpHeaders.add(HttpHeaders.AUTHORIZATION, jwt);
 		
-		return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, jwt).build();
+		return ResponseEntity.ok().headers(httpHeaders).build();
 		
 	}
 

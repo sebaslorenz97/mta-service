@@ -40,7 +40,7 @@ public class UserSecurityService implements UserDetailsService{
 	}
 	
 	private String[] getAuthorities(String role) {
-		if("ADMIN".equals(role)/* || "EMPLOYEE".equals(role)*/) {
+		if(/*"ADMIN".equals(role) || */"EMPLOYEE".equals(role)) {
 			return new String[] {"search_vehicles_by_plate"};
 		}
 		return new String[] {};
