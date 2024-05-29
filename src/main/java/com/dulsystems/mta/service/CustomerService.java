@@ -8,9 +8,8 @@ import com.dulsystems.mta.bean.MunicipalityBean;
 import com.dulsystems.mta.bean.RequestBean;
 import com.dulsystems.mta.bean.ResponseBean;
 import com.dulsystems.mta.bean.StateBean;
+import com.dulsystems.mta.dao.AddressCatalogsDao;
 import com.dulsystems.mta.dao.CustomerDao;
-import com.dulsystems.mta.dao.MunicipalityDao;
-import com.dulsystems.mta.dao.StateDao;
 import com.dulsystems.mta.util.Queries;
 
 @Service
@@ -20,10 +19,7 @@ public class CustomerService implements ICustomerService {
 	private CustomerDao customerDao;
 	
 	@Autowired
-	private StateDao stateDao;
-	
-	@Autowired
-	private MunicipalityDao municipalityDao;
+	private AddressCatalogsDao addressCatalogsDao;
 	
 
 	@Override
@@ -45,8 +41,8 @@ public class CustomerService implements ICustomerService {
 	@Override
 	public ResponseBean executeSaveCustomer(RequestBean request) {
 		ResponseBean response = new ResponseBean();
-		StateBean sb = stateDao.searchStateByState(request.getStateNameFk());
-		MunicipalityBean mb = municipalityDao.searchMunicipalityByMunicipality(request.getMunicipalityNameFk());
+		StateBean sb = addressCatalogsDao.searchStateByState(request.getStateNameFk());
+		MunicipalityBean mb = addressCatalogsDao.searchMunicipalityByMunicipality(request.getMunicipalityNameFk());
 		if(sb != null) {
 			if(mb != null) {
 				if(customerDao.executeSaveCustomer(request, sb, mb) == true) {
@@ -71,8 +67,8 @@ public class CustomerService implements ICustomerService {
 	@Override
 	public ResponseBean executeUpdateCustomerById(RequestBean request) {
 		ResponseBean response = new ResponseBean();
-		StateBean sb = stateDao.searchStateByState(request.getStateNameFk());
-		MunicipalityBean mb = municipalityDao.searchMunicipalityByMunicipality(request.getMunicipalityNameFk());
+		StateBean sb = addressCatalogsDao.searchStateByState(request.getStateNameFk());
+		MunicipalityBean mb = addressCatalogsDao.searchMunicipalityByMunicipality(request.getMunicipalityNameFk());
 		if(sb != null) {
 			if(mb != null) {
 				if(customerDao.executeUpdateCustomerById(request, sb, mb) == true) {

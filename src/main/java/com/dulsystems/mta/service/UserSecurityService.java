@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.dulsystems.mta.bean.UserBean;
 import com.dulsystems.mta.dao.UserDao;
+import com.dulsystems.mta.exception.BusinessException;
 
 @Service
 public class UserSecurityService implements UserDetailsService{
@@ -22,11 +24,13 @@ public class UserSecurityService implements UserDetailsService{
 	private UserDao userDao;
 	
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username) throws /*UsernameNotFoundException*/ BusinessException {
 		UserBean ub = userDao.searchUserByUsername(username);
 		if(ub == null) {
-			throw new UsernameNotFoundException("User Not Found");
+			//throw new UsernameNotFoundException("User Not Found");
+			throw new BusinessException("E-404",HttpStatus.NOT_FOUND,"El usuario no existe, rectificalo");
 		}
+		System.out.println("SI EXISTE EL USUARIO!!!!!!!!!!!!!!!");
 		
 		String[] roles = userDao.searchUserRolesByUsername(username).stream().map(UserBean::getUserRole).toArray(String[]::new);
 		

@@ -11,10 +11,8 @@ import com.dulsystems.mta.bean.VehicleLineBean;
 import com.dulsystems.mta.bean.VehicleModelBean;
 import com.dulsystems.mta.bean.VehicleYearBean;
 import com.dulsystems.mta.dao.CustomerDao;
+import com.dulsystems.mta.dao.VehicleCatalogDao;
 import com.dulsystems.mta.dao.VehicleDao;
-import com.dulsystems.mta.dao.VehicleLineDao;
-import com.dulsystems.mta.dao.VehicleModelDao;
-import com.dulsystems.mta.dao.VehicleYearDao;
 
 @Service
 public class VehicleService implements IVehicleService {
@@ -26,13 +24,7 @@ public class VehicleService implements IVehicleService {
 	private CustomerDao customerDao;
 	
 	@Autowired
-	private VehicleLineDao vehicleLineDao;
-	
-	@Autowired
-	private VehicleModelDao vehicleModelDao;
-	
-	@Autowired
-	private VehicleYearDao vehicleYearDao;
+	private VehicleCatalogDao vehicleCatalogDao; 
 	
 	@Override
 	public ResponseBean searchVehicleByPlate(String plate) {
@@ -42,6 +34,7 @@ public class VehicleService implements IVehicleService {
 		if(vb != null) {
 			response.setCode("OK");
 			response.setMessage("Si existe el vehiculo");
+			System.out.println("SI EXISTE EL VEHICULO!!!!!!!!!!!!!!!!!!!!!");;
 			response.setVb(vb);
 		}else {
 			response.setCode("BAD00");
@@ -54,9 +47,9 @@ public class VehicleService implements IVehicleService {
 	public ResponseBean executeSaveVehicle(RequestBean request) {
 		ResponseBean response = new ResponseBean();
 		CustomerBean cb = customerDao.searchCustomerById(request.getCustomerIdFk());
-		VehicleLineBean vlb = vehicleLineDao.searchVehicleLineByLine(request.getVehicleLineNameFk());
-		VehicleModelBean vmb = vehicleModelDao.searchVehicleModelByModel(request.getVehicleModelNameFk());
-		VehicleYearBean vyb = vehicleYearDao.searchVehicleYearByYear(request.getVehicleYearValueFk());
+		VehicleLineBean vlb = vehicleCatalogDao.searchVehicleLineByLine(request.getVehicleLineNameFk());
+		VehicleModelBean vmb = vehicleCatalogDao.searchVehicleModelByModel(request.getVehicleModelNameFk());
+		VehicleYearBean vyb = vehicleCatalogDao.searchVehicleYearByYear(request.getVehicleYearValueFk());
 		if(cb != null) {
 			if(vlb != null) {
 				if(vmb != null) {
@@ -92,9 +85,9 @@ public class VehicleService implements IVehicleService {
 	public ResponseBean executeUpdateVehicleByPlate(RequestBean request) {
 		ResponseBean response = new ResponseBean();
 		CustomerBean cb = customerDao.searchCustomerById(request.getCustomerIdFk());
-		VehicleLineBean vlb = vehicleLineDao.searchVehicleLineByLine(request.getVehicleLineNameFk());
-		VehicleModelBean vmb = vehicleModelDao.searchVehicleModelByModel(request.getVehicleModelNameFk());
-		VehicleYearBean vyb = vehicleYearDao.searchVehicleYearByYear(request.getVehicleYearValueFk());
+		VehicleLineBean vlb = vehicleCatalogDao.searchVehicleLineByLine(request.getVehicleLineNameFk());
+		VehicleModelBean vmb = vehicleCatalogDao.searchVehicleModelByModel(request.getVehicleModelNameFk());
+		VehicleYearBean vyb = vehicleCatalogDao.searchVehicleYearByYear(request.getVehicleYearValueFk());
 		if(cb != null) {
 			if(vlb != null) {
 				if(vmb != null) {

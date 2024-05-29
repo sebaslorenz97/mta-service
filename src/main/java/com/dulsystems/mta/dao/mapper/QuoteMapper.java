@@ -15,7 +15,7 @@ public class QuoteMapper implements RowMapper<QuoteBean>{
 		qb.setQuoteId(rs.getInt("id_cotizacion_pk"));
 		qb.setQuoteOrderDate(rs.getString("fecha_orden"));
 		qb.setQuoteDeadline(rs.getString("fecha_entrega"));
-		qb.setQuoteStatusVehicle(rs.getBoolean("estatus_auto"));
+		qb.setQuoteStatusVehicle(rs.getString("estatus_auto"));
 		qb.setQuotePaymentMethod(rs.getBoolean("metodo_pago"));
 		qb.setQuotePaymentStatus(rs.getBoolean("estatus_pago"));
 		qb.setQuoteAdvancePayment(rs.getInt("adelanto_pago"));

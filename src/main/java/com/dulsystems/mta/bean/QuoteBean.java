@@ -5,7 +5,7 @@ public class QuoteBean {
 	private Integer quoteId;
 	private String quoteOrderDate;
 	private String quoteDeadline;
-	private Boolean quoteStatusVehicle;
+	private String quoteStatusVehicle;
 	private Boolean quotePaymentMethod;
 	private Boolean quotePaymentStatus;
 	private Integer quoteAdvancePayment;
@@ -30,10 +30,10 @@ public class QuoteBean {
 	public void setQuoteDeadline(String quoteDeadline) {
 		this.quoteDeadline = quoteDeadline;
 	}
-	public Boolean getQuoteStatusVehicle() {
+	public String getQuoteStatusVehicle() {
 		return quoteStatusVehicle;
 	}
-	public void setQuoteStatusVehicle(Boolean quoteStatusVehicle) {
+	public void setQuoteStatusVehicle(String quoteStatusVehicle) {
 		this.quoteStatusVehicle = quoteStatusVehicle;
 	}
 	public Boolean getQuotePaymentMethod() {

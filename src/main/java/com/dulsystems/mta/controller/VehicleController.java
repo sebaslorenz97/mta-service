@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dulsystems.mta.bean.RequestBean;
 import com.dulsystems.mta.bean.ResponseBean;
 import com.dulsystems.mta.service.VehicleService;
-import com.dulsystems.mta.service.VehicleYearService;
 
 import jakarta.validation.Valid;
 

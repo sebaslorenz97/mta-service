@@ -20,13 +20,35 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 
 @RestController
-@RequestMapping("/mi-taller-automotriz/quote-detail")
+@RequestMapping("/mi-taller-automotriz/quote-and-details")
 @Validated
 public class QuoteDetailController {
 
 	@Autowired
 	private QuoteDetailService quoteDetailService;
 	
+	//CONTROLLERS FOR QUOTE
+	@RequestMapping(value="getquotebyid/{quoteId}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    public ResponseBean searchQuoteById(@PathVariable("quoteId") @Pattern(regexp = "^\\d{2}$", message="El formato del id del empleado es invalido") String quoteId)  {
+		return quoteDetailService.searchQuoteById(Integer.parseInt(quoteId));
+    }
+	
+	@RequestMapping(value="savenewquote", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    public ResponseBean executeSaveQuote(@Valid @RequestBody RequestBean rb) {
+    	return quoteDetailService.executeSaveQuote(rb);
+    }
+	
+	@RequestMapping(value="editquotebyid", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
+    public ResponseBean executeUpdateQuoteById(@Valid @RequestBody RequestBean rb) {
+    	return quoteDetailService.executeUpdateQuoteById(rb);
+    }
+	
+	@RequestMapping(value="removequotebyid/{quoteId}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.DELETE)
+    public ResponseBean removeQuoteById(@PathVariable("quoteId") @Pattern(regexp = "^\\d{2}$", message="El formato del id del empleado es invalido") String quoteId) {
+    	return quoteDetailService.removeQuoteById(Integer.parseInt(quoteId));
+    }
+	
+	//CONTROLLERS FOR DETAILS OF A QUOTE
 	@RequestMapping(value="getallquotedetailsbyid/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public ResponseBean searchQuoteDetailsById(@PathVariable("id") @Pattern(regexp = "^\\d{2}$", message="El formato del id del empleado es invalido") String id)  {
 		return quoteDetailService.searchQuoteDetailsById(Integer.parseInt(id));
