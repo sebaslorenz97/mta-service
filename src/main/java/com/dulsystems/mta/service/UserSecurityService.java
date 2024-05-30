@@ -25,6 +25,7 @@ public class UserSecurityService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws /*UsernameNotFoundException*/ BusinessException {
+		System.out.println(username);
 		UserBean ub = userDao.searchUserByUsername(username);
 		if(ub == null) {
 			//throw new UsernameNotFoundException("User Not Found");
@@ -34,7 +35,7 @@ public class UserSecurityService implements UserDetailsService{
 		String[] roles = userDao.searchUserRolesByUsername(username).stream().map(UserBean::getRoleUser).toArray(String[]::new);
 		
 		return User.builder()
-					.username(ub.getUser())
+					.username(ub.getUserPk())
 					.password(ub.getUserPassword())
 					.authorities(grantedAuthorities(roles))
 					.accountLocked(ub.getUserLocked())

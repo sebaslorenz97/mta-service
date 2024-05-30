@@ -12,7 +12,7 @@ public class UserMapper implements RowMapper<UserBean>{
 	@Override
 	public UserBean mapRow(ResultSet rs, int rowNum) throws SQLException {
 		UserBean ub = new UserBean();
-		ub.setUser(rs.getString("username_pk"));
+		ub.setUserPk(rs.getString("username_pk"));
 		ub.setUserPassword(rs.getString("passwordd"));
 		ub.setUserName(rs.getString("user_name"));
 		ub.setUserPosition(rs.getString("cargo"));

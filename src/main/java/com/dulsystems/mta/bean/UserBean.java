@@ -3,7 +3,7 @@ package com.dulsystems.mta.bean;
 public class UserBean {
 	
 	//REQUEST FIELDS FOR LOGIN & USER
-	private String user;
+	private String userPk;
 	private String userPassword;
 	//REQUEST FIELDS FOR USER
 	private String userName;
@@ -16,11 +16,11 @@ public class UserBean {
 	private String roleUser;
 	private String roleUserGrantedDate;
 	
-	public String getUser() {
-		return user;
+	public String getUserPk() {
+		return userPk;
 	}
-	public void setUser(String user) {
-		this.user = user;
+	public void setUserPk(String userPk) {
+		this.userPk = userPk;
 	}
 	public String getUserPassword() {
 		return userPassword;

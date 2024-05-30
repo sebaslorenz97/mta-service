@@ -35,14 +35,14 @@ public class AuthController {
 	@PostMapping("/login")
 	public ResponseEntity<ResponseBean> login(@RequestBody RequestBean rb){
 		HttpHeaders httpHeaders = new HttpHeaders();
-		UsernamePasswordAuthenticationToken login = new UsernamePasswordAuthenticationToken(rb.getUser(), rb.getUserPassword());
+		UsernamePasswordAuthenticationToken login = new UsernamePasswordAuthenticationToken(rb.getUserPk(), rb.getUserPassword());
 
 		Authentication authentication = authenticationManager.authenticate(login);
 		
 		System.out.println(authentication.isAuthenticated());
 		System.out.println(authentication.getPrincipal());
 		
-		String jwt = jwtUtil.create(rb.getUser());
+		String jwt = jwtUtil.create(rb.getUserPk());
 		
 		httpHeaders.add(HttpHeaders.AUTHORIZATION, jwt);
 		
