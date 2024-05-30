@@ -65,6 +65,20 @@ public class RequestBean {
 	//REQUEST FIELDS FOR QUOTE DETAILS LIST
 	private List<QuoteDetailBean> lqdb;
 	
+	//REQUEST FIELDS FOR LOGIN & USER
+	private String user;
+	private String userPassword;
+	//REQUEST FIELDS FOR USER
+	private String userName;
+	private String userPosition;
+	private String userEmail;
+	private Boolean userLocked;
+	private Boolean userDisabled;
+	
+	//REQUEST FIELDS FOR USER ROLE
+	private String roleUserPk;
+	private String roleUserGrantedDate;
+	
 	//FKs FOR CUSTOMER ONLY
 	private String municipalityNameFk;
 	private Integer municipalityIdFk;
@@ -85,8 +99,8 @@ public class RequestBean {
 	private Integer vehicleIdFk;
 	//FKs FOR QUOTE DETAILS
 	private Integer quoteIdFk;
-	
-	
+	//FKs FOR USER ROLE
+	private String roleUserNamePkFk;
 	
 	//GETTERS AND SETTERS FOR CUSTOMER FIELDS
 	public Integer getCustomerId() {
@@ -270,7 +284,7 @@ public class RequestBean {
 		this.newVehicleModel = newVehicleModel;
 	}
 	
-	//REQUEST FIELDS FOR QUOTE
+	//GETTERS AND SETTERS FOR QUOTE
 	public Integer getQuoteId() {
 		return quoteId;
 	}
@@ -320,7 +334,7 @@ public class RequestBean {
 		this.quoteRequireInvoice = quoteRequireInvoice;
 	}
 	
-	//REQUEST FIELDS FOR QUOTE DETAILS
+	//GETTERS AND SETTERS FOR QUOTE DETAILS
 	public Integer getQuoteDetailIdl() {
 		return quoteDetailIdl;
 	}
@@ -346,12 +360,72 @@ public class RequestBean {
 		this.quoteDetailAmount = quoteDetailAmount;
 	}
 	
-	//REQUEST FIELDS FOR QUOTE DETAILS LIST
+	//GETTERS AND SETTERS FOR QUOTE DETAILS LIST
 	public List<QuoteDetailBean> getLqdb() {
 		return lqdb;
 	}
 	public void setLqdb(List<QuoteDetailBean> lqdb) {
 		this.lqdb = lqdb;
+	}
+	
+	//GETTERS AND SETTERS FOR LOGIN & USER
+	public String getUser() {
+		return user;
+	}
+	public void setUser(String user) {
+		this.user = user;
+	}
+	public String getUserPassword() {
+		return userPassword;
+	}
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
+	}
+	
+	//GETTERS AND SETTERS FOR USER
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getUserPosition() {
+		return userPosition;
+	}
+	public void setUserPosition(String userPosition) {
+		this.userPosition = userPosition;
+	}
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+	public Boolean getUserLocked() {
+		return userLocked;
+	}
+	public void setUserLocked(Boolean userLocked) {
+		this.userLocked = userLocked;
+	}
+	public Boolean getUserDisabled() {
+		return userDisabled;
+	}
+	public void setUserDisabled(Boolean userDisabled) {
+		this.userDisabled = userDisabled;
+	}
+	
+	//GETTERS AND SETTERS FOR USER ROLE
+	public String getRoleUserPk() {
+		return roleUserPk;
+	}
+	public void setRoleUserPk(String roleUserPk) {
+		this.roleUserPk = roleUserPk;
+	}
+	public String getRoleUserGrantedDate() {
+		return roleUserGrantedDate;
+	}
+	public void setRoleUserGrantedDate(String roleUserGrantedDate) {
+		this.roleUserGrantedDate = roleUserGrantedDate;
 	}
 	
 	//GETTERS AND SETTERS FOR CUSTOMER ONLY FKs FIELDS
@@ -443,6 +517,13 @@ public class RequestBean {
 	}
 	public void setQuoteIdFk(Integer quoteIdFk) {
 		this.quoteIdFk = quoteIdFk;
+	}
+	//GETTERS AND SETTERS FOR USER ROLE FKs FIELDS
+	public String getRoleUserNamePkFk() {
+		return roleUserNamePkFk;
+	}
+	public void setRoleUserNamePkFk(String roleUserNamePkFk) {
+		this.roleUserNamePkFk = roleUserNamePkFk;
 	}
 	
 }

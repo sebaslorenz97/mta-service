@@ -30,12 +30,11 @@ public class UserSecurityService implements UserDetailsService{
 			//throw new UsernameNotFoundException("User Not Found");
 			throw new BusinessException("E-404",HttpStatus.NOT_FOUND,"El usuario no existe, rectificalo");
 		}
-		System.out.println("SI EXISTE EL USUARIO!!!!!!!!!!!!!!!");
 		
-		String[] roles = userDao.searchUserRolesByUsername(username).stream().map(UserBean::getUserRole).toArray(String[]::new);
+		String[] roles = userDao.searchUserRolesByUsername(username).stream().map(UserBean::getRoleUser).toArray(String[]::new);
 		
 		return User.builder()
-					.username(ub.getUserName())
+					.username(ub.getUser())
 					.password(ub.getUserPassword())
 					.authorities(grantedAuthorities(roles))
 					.accountLocked(ub.getUserLocked())

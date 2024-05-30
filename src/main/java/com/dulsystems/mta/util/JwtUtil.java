@@ -15,10 +15,10 @@ public class JwtUtil {
 	private static String SECRET_KEY = "DULSystems";
 	private static Algorithm ALGORITHM = Algorithm.HMAC256(SECRET_KEY);
 
-	public String create(String username) {
+	public String create(String user) {
 		
 		return JWT.create()
-				.withSubject(username)
+				.withSubject(user)
 				.withIssuer("DULSystems")
 				.withIssuedAt(new Date())
 				.withExpiresAt(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(60)))
@@ -37,7 +37,7 @@ public class JwtUtil {
 		}
 	}
 	
-	public String getUsername(String jwt) {
+	public String getUser(String jwt) {
 		return JWT.require(ALGORITHM)
 				.build()
 				.verify(jwt)

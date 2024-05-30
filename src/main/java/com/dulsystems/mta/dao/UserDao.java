@@ -29,24 +29,6 @@ public class UserDao implements IUserDao{
 		}
 	}
 
-	@Override
-	public boolean executeSaveUser(RequestBean request) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean executeUpdateUserByUsername(RequestBean request) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean removeUserByUsername(String userName) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	//METHODS FOR INNER OPERATIONS WITH USERS ROLE
 	@Override
 	public List<UserBean> searchUserRolesByUsername(String userName) {

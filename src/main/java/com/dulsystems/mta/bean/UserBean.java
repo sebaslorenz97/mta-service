@@ -2,28 +2,43 @@ package com.dulsystems.mta.bean;
 
 public class UserBean {
 	
-	//FIELDS FOR USERS
-	private String userName;
+	//REQUEST FIELDS FOR LOGIN & USER
+	private String user;
 	private String userPassword;
+	//REQUEST FIELDS FOR USER
+	private String userName;
+	private String userPosition;
 	private String userEmail;
 	private Boolean userLocked;
 	private Boolean userDisabled;
 	
 	//REQUEST FIELDS FOR INNER OPERATIONS WITH USERS ROLE
-	private String userRole;
-	private String userRoleGrantedDate;
+	private String roleUser;
+	private String roleUserGrantedDate;
 	
-	public String getUserName() {
-		return userName;
+	public String getUser() {
+		return user;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUser(String user) {
+		this.user = user;
 	}
 	public String getUserPassword() {
 		return userPassword;
 	}
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getUserPosition() {
+		return userPosition;
+	}
+	public void setUserPosition(String userPosition) {
+		this.userPosition = userPosition;
 	}
 	public String getUserEmail() {
 		return userEmail;
@@ -45,18 +60,17 @@ public class UserBean {
 	}
 	
 	//GETTER & SETTERS FOR INNER OPERATIONS WITH USERS ROLE
-	public String getUserRole() {
-		return userRole;
+	public String getRoleUser() {
+		return roleUser;
 	}
-	public void setUserRole(String userRole) {
-		this.userRole = userRole;
+	public void setRoleUser(String roleUser) {
+		this.roleUser = roleUser;
 	}
-	public String getUserRoleGrantedDate() {
-		return userRoleGrantedDate;
+	public String getRoleUserGrantedDate() {
+		return roleUserGrantedDate;
 	}
-	public void setUserRoleGrantedDate(String userRoleGrantedDate) {
-		this.userRoleGrantedDate = userRoleGrantedDate;
+	public void setRoleUserGrantedDate(String roleUserGrantedDate) {
+		this.roleUserGrantedDate = roleUserGrantedDate;
 	}
-
 	
 }

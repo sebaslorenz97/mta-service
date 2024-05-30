@@ -51,7 +51,7 @@ public class JwtFilter extends OncePerRequestFilter{
 		}
 		
 		//3.- Load user from UserDetailSservice
-		String username = jwtUtil.getUsername(jwt);
+		String username = jwtUtil.getUser(jwt);
 		User user = (User) userDetailsService.loadUserByUsername(username);
 		System.out.println("---------> USUARIO CARGADO DESDE EL DETAIL SERVICE");
 		
