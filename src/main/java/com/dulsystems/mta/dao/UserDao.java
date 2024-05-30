@@ -22,7 +22,7 @@ public class UserDao implements IUserDao{
 	@Override
 	public UserBean searchUserByUsername(String userName) {
 		try {
-			UserBean ub = jdbcTemplate.queryForObject(Queries.Q_USERS_SEARCH_BY_USERNAME, new UserMapper(), userName);
+			UserBean ub = jdbcTemplate.queryForObject(Queries.Q_USERS_SEARCH_BY_USER_1, new UserMapper(), userName);
 			return ub;
 		}catch(EmptyResultDataAccessException e){
 			return null;
@@ -33,7 +33,7 @@ public class UserDao implements IUserDao{
 	@Override
 	public List<UserBean> searchUserRolesByUsername(String userName) {
 		try {
-			List<UserBean> lub = jdbcTemplate.query(Queries.Q_USERS_INNER_USERS_ROLE_BY_USERNAME, new UserInnerRolesMapper(), userName);
+			List<UserBean> lub = jdbcTemplate.query(Queries.Q_USERS_INNER_USER_ROLES_BY_USER, new UserInnerRolesMapper(), userName);
 			return lub;
 		}catch(EmptyResultDataAccessException e){
 			return null;

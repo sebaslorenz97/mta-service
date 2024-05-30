@@ -51,13 +51,13 @@ public class JwtFilter extends OncePerRequestFilter{
 		}
 		
 		//3.- Load user from UserDetailSservice
-		String username = jwtUtil.getUser(jwt);
-		User user = (User) userDetailsService.loadUserByUsername(username);
+		String user = jwtUtil.getUser(jwt);
+		User userr = (User) userDetailsService.loadUserByUsername(user);
 		System.out.println("---------> USUARIO CARGADO DESDE EL DETAIL SERVICE");
 		
 		//4.- Load user in security context
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-				user.getUsername(), user.getPassword(), user.getAuthorities()
+				userr.getUsername(), userr.getPassword(), userr.getAuthorities()
 		);
 		SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 		System.out.println("USUARIO CARGADO EN EL CONTEXTO DE SEGURIDAD");

@@ -61,11 +61,23 @@ public class Queries {
 	public static final String Q_QUOTE_DETAILS_UPDATE_BY_ID = "UPDATE cotizaciones_detalle SET id_cotizacion_fk = ?, mec = ?, mano_obra_refacciones = ?, importe = ? WHERE id_cotizacion_detalle_pk = ?";
 
 	//USERS CRUD SQLS
-	public static final String Q_USERS_SEARCH_BY_USERNAME = "SELECT * FROM users WHERE username_pk = ?;";
+	public static final String Q_USERS_SEARCH_BY_USER_1 = "SELECT * FROM users WHERE username_pk = ?;";
+	public static final String Q_USERS_SEARCH_BY_USER_2 = "SELECT username_pk, user_name, cargo, email, lockedd, disabled FROM users WHERE username_pk = ?;";
+	public static final String Q_USERS_REMOVE_BY_USER = "DELETE FROM users WHERE username_pk = ?;";
+	public static final String Q_USERS_SAVE = "INSERT INTO users(username_pk,passwordd,user_name,cargo,email,lockedd,disabled) VALUES(?,?,?,?,?,?,?);";
+	public static final String Q_USERS_UPDATE_ALL_EXCEPT_PASSWORD_AND_EMAIL_BY_USER = "UPDATE users SET username_pk = ?, user_name = ?, cargo = ?, lockedd = ?, disabled = ? WHERE username_pk = ?";
+	/*FALTA CONTROLLER PARA ESTE SQL*/public static final String Q_USERS_UPDATE_PASSWORD_BY_USER = "UPDATE users SET passwordd = ? WHERE username_pk = ?";
+	/*FALTA CONTROLLER PARA ESTE SQL*/public static final String Q_USERS_UPDATE_EMAIL_BY_USER = "UPDATE users SET email = ? WHERE username_pk = ?";
 	//USERS INNER JOIN USER ROLES CRUD SQLS
-	public static final String Q_USERS_INNER_USERS_ROLE_BY_USERNAME = "SELECT users.username_pk, users_role.role_user_pk, users_role.granted_date\r\n"
+	public static final String Q_USERS_INNER_USER_ROLES_BY_USER = "SELECT users.username_pk, users_role.role_user_pk, users_role.granted_date\r\n"
 																	+ "FROM users\r\n"
 																	+ "INNER JOIN users_role ON users.username_pk = users_role.username_fk\r\n"
 																	+ "WHERE users.username_pk = ?;";
-	
+
+	//USER ROLES CRUD SQLS
+	public static final String Q_USER_ROLES_SEARCH_BY_ROLE_AND_USER = "SELECT * FROM users_role WHERE role_user_pk = ? AND username_fk =?;";
+	public static final String Q_USER_ROLES_REMOVE_BY_ROLE_AND_USER = "DELETE FROM users_role WHERE role_user_pk = ? AND username_fk =?;";
+	public static final String Q_USER_ROLES_SAVE = "INSERT INTO users_role(role_user_pk,username_fk,granted_date) VALUES(?,?,?);";
+	public static final String Q_USER_ROLES_UPDATE_BY_ROLE_AND_USER = "UPDATE users_role SET role_user_pk = ?, username_fk = ?, granted_date = ? WHERE role_user_pk = ? AND username_fk = ?;";
+
 }

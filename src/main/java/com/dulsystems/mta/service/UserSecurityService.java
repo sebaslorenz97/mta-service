@@ -24,15 +24,15 @@ public class UserSecurityService implements UserDetailsService{
 	private UserDao userDao;
 	
 	@Override
-	public UserDetails loadUserByUsername(String username) throws /*UsernameNotFoundException*/ BusinessException {
-		System.out.println(username);
-		UserBean ub = userDao.searchUserByUsername(username);
+	public UserDetails loadUserByUsername(String user) throws /*UsernameNotFoundException*/ BusinessException {
+		System.out.println(user);
+		UserBean ub = userDao.searchUserByUsername(user);
 		if(ub == null) {
 			//throw new UsernameNotFoundException("User Not Found");
 			throw new BusinessException("E-404",HttpStatus.NOT_FOUND,"El usuario no existe, rectificalo");
 		}
 		
-		String[] roles = userDao.searchUserRolesByUsername(username).stream().map(UserBean::getRoleUser).toArray(String[]::new);
+		String[] roles = userDao.searchUserRolesByUsername(user).stream().map(UserBean::getRoleUser).toArray(String[]::new);
 		
 		return User.builder()
 					.username(ub.getUserPk())
