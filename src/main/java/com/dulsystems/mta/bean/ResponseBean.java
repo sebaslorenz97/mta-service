@@ -15,6 +15,8 @@ public class ResponseBean {
 	private VehicleYearBean vyb;
 	private QuoteBean qb;
 	private List<QuoteDetailBean> lqdb;
+	private UserBean ub;
+	private UserRoleBean urb;
 	
 	public String getCode() {
 		return code;
@@ -81,6 +83,24 @@ public class ResponseBean {
 	}
 	public void setLQdb(List<QuoteDetailBean> lqdb) {
 		this.lqdb = lqdb;
+	}
+	/*public List<QuoteDetailBean> getLqdb() {
+		return lqdb;
+	}
+	public void setLqdb(List<QuoteDetailBean> lqdb) {
+		this.lqdb = lqdb;
+	}*/
+	public UserBean getUb() {
+		return ub;
+	}
+	public void setUb(UserBean ub) {
+		this.ub = ub;
+	}
+	public UserRoleBean getUrb() {
+		return urb;
+	}
+	public void setUrb(UserRoleBean urb) {
+		this.urb = urb;
 	}
 	
 }

@@ -100,7 +100,7 @@ public class RequestBean {
 	//FKs FOR QUOTE DETAILS
 	private Integer quoteIdFk;
 	//FKs FOR USER ROLE
-	private String roleUserNamePkFk;
+	private String userPkFk;
 	
 	//GETTERS AND SETTERS FOR CUSTOMER FIELDS
 	public Integer getCustomerId() {
@@ -519,11 +519,11 @@ public class RequestBean {
 		this.quoteIdFk = quoteIdFk;
 	}
 	//GETTERS AND SETTERS FOR USER ROLE FKs FIELDS
-	public String getRoleUserNamePkFk() {
-		return roleUserNamePkFk;
+	public String getUserPkFk() {
+		return userPkFk;
 	}
-	public void setRoleUserNamePkFk(String roleUserNamePkFk) {
-		this.roleUserNamePkFk = roleUserNamePkFk;
+	public void setUserPkFk(String userPkFk) {
+		this.userPkFk = userPkFk;
 	}
 	
 }

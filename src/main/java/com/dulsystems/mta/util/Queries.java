@@ -62,10 +62,10 @@ public class Queries {
 
 	//USERS CRUD SQLS
 	public static final String Q_USERS_SEARCH_BY_USER_1 = "SELECT * FROM users WHERE username_pk = ?;";
-	public static final String Q_USERS_SEARCH_BY_USER_2 = "SELECT username_pk, user_name, cargo, email, lockedd, disabled FROM users WHERE username_pk = ?;";
+	/*FALTA CONTROLLER PARA ESTE SQL*/public static final String Q_USERS_SEARCH_BY_USER_2 = "SELECT username_pk, user_name, cargo, email, lockedd, disabled FROM users WHERE username_pk = ?;";
 	public static final String Q_USERS_REMOVE_BY_USER = "DELETE FROM users WHERE username_pk = ?;";
 	public static final String Q_USERS_SAVE = "INSERT INTO users(username_pk,passwordd,user_name,cargo,email,lockedd,disabled) VALUES(?,?,?,?,?,?,?);";
-	public static final String Q_USERS_UPDATE_ALL_EXCEPT_PASSWORD_AND_EMAIL_BY_USER = "UPDATE users SET username_pk = ?, user_name = ?, cargo = ?, lockedd = ?, disabled = ? WHERE username_pk = ?";
+	public static final String Q_USERS_UPDATE_ALL_EXCEPT_USER_PASSWORD_AND_EMAIL_BY_USER = "UPDATE users SET user_name = ?, cargo = ?, lockedd = ?, disabled = ? WHERE username_pk = ?";
 	/*FALTA CONTROLLER PARA ESTE SQL*/public static final String Q_USERS_UPDATE_PASSWORD_BY_USER = "UPDATE users SET passwordd = ? WHERE username_pk = ?";
 	/*FALTA CONTROLLER PARA ESTE SQL*/public static final String Q_USERS_UPDATE_EMAIL_BY_USER = "UPDATE users SET email = ? WHERE username_pk = ?";
 	//USERS INNER JOIN USER ROLES CRUD SQLS
