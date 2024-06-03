@@ -1,7 +1,9 @@
 package com.dulsystems.mta.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,44 +27,44 @@ public class AddressCatalogsController {
 	
 	//CONTROLLERS FOR STATE
 	@RequestMapping(value="getstatebystate/{state}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-    public ResponseBean searchStateByState(@PathVariable("state") /*@Pattern(regexp = "^\\d{2}$", message="El formato del estado del empleado es invalido")*/ String state)  {
-		return addressCatalogsService.searchStateByState(state);
+    public ResponseEntity<ResponseBean> searchStateByState(@PathVariable("state") String state)  {
+		return new ResponseEntity<ResponseBean>(addressCatalogsService.searchStateByState(state),HttpStatus.OK);
     }
 	
 	@RequestMapping(value="savenewstate", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    public ResponseBean executeSaveState(@Valid @RequestBody RequestBean request) {
-    	return addressCatalogsService.executeSaveState(request);
+    public ResponseEntity<ResponseBean> executeSaveState(@Valid @RequestBody RequestBean request) {
+		return new ResponseEntity<ResponseBean>(addressCatalogsService.executeSaveState(request),HttpStatus.CREATED);
     }
 	
 	@RequestMapping(value="editstatebystate", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
-    public ResponseBean executeUpdateStateByState(@Valid @RequestBody RequestBean request) {
-    	return addressCatalogsService.executeUpdateStateByState(request);
+    public ResponseEntity<ResponseBean> executeUpdateStateByState(@Valid @RequestBody RequestBean request) {
+		return new ResponseEntity<ResponseBean>(addressCatalogsService.executeUpdateStateByState(request),HttpStatus.OK);
     }
 	
 	@RequestMapping(value="removestatebystate/{state}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.DELETE)
-    public ResponseBean removeStateByState(@PathVariable("state") /*@Pattern(regexp = "^\\d{2}$", message="El formato del id del empleado es invalido")*/ String state) {
-    	return addressCatalogsService.removeStateByState(state);
+    public ResponseEntity<ResponseBean> removeStateByState(@PathVariable("state") String state) {
+		return new ResponseEntity<ResponseBean>(addressCatalogsService.removeStateByState(state),HttpStatus.OK);
     }
 	
 	//CONTROLLERS FOR MUNICIPALITY
 	@RequestMapping(value="getmunicipalitybymunicipality/{municipality}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-    public ResponseBean searchMunicipalitybyMunicipality(@PathVariable("municipality") /*@Pattern(regexp = "^\\d{2}$", message="El formato del estado del empleado es invalido")*/ String municipality)  {
-		return addressCatalogsService.searchMunicipalityByMunicipality(municipality);
+    public ResponseEntity<ResponseBean> searchMunicipalitybyMunicipality(@PathVariable("municipality") String municipality)  {
+		return new ResponseEntity<ResponseBean>(addressCatalogsService.searchMunicipalityByMunicipality(municipality),HttpStatus.OK);
     }
 	
 	@RequestMapping(value="savenewmunicipalitybymunicipality", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    public ResponseBean executeSaveMunicipality(@Valid @RequestBody RequestBean request) {
-    	return addressCatalogsService.executeSaveMunicipality(request);
+    public ResponseEntity<ResponseBean> executeSaveMunicipality(@Valid @RequestBody RequestBean request) {
+		return new ResponseEntity<ResponseBean>(addressCatalogsService.executeSaveMunicipality(request),HttpStatus.CREATED);
     }
 	
 	@RequestMapping(value="editmunicipalitybymunicipality", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
-    public ResponseBean executeUpdateMunicipalitybyMunicipality(@Valid @RequestBody RequestBean request) {
-    	return addressCatalogsService.executeUpdateMunicipalityByMunicipality(request);
+    public ResponseEntity<ResponseBean> executeUpdateMunicipalitybyMunicipality(@Valid @RequestBody RequestBean request) {
+		return new ResponseEntity<ResponseBean>(addressCatalogsService.executeUpdateMunicipalityByMunicipality(request),HttpStatus.OK);
     }
 	
 	@RequestMapping(value="removemunicipalitybymunicipality/{municipality}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.DELETE)
-    public ResponseBean removeMunicipalitybyMunicipality(@PathVariable("municipality") /*@Pattern(regexp = "^\\d{2}$", message="El formato del id del empleado es invalido")*/ String municipality) {
-    	return addressCatalogsService.removeMunicipalityByMunicipality(municipality);
+    public ResponseEntity<ResponseBean> removeMunicipalitybyMunicipality(@PathVariable("municipality") String municipality) {
+		return new ResponseEntity<ResponseBean>(addressCatalogsService.removeMunicipalityByMunicipality(municipality),HttpStatus.OK);
     }
 	
 }
