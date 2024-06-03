@@ -16,6 +16,7 @@ public interface IUserRoleDao {
 		
 	//METHODS FOR USER ROLES
 	List<String> searchAllUserRoles(RequestBean request);
+	UserRoleBean searchUserRoleByRoleAndUser(RequestBean request);
 	boolean executeSaveUserRole(RequestBean request);
 	boolean executeUpdateUserRoleByRoleAndUser(RequestBean request);
 	boolean removeUserRoleByRoleAndUser(RequestBean request);

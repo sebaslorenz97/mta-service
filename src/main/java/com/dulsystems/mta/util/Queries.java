@@ -74,7 +74,8 @@ public class Queries {
 																	+ "WHERE users.username_pk = ?;";
 
 	//USER ROLES CRUD SQLS
-	public static final String Q_USER_ROLES_SEARCH = "SELECT DISTINCT(role_user_pk) FROM users_role;";
+	public static final String Q_USER_ROLES_SEARCH_ALL_ROLES = "SELECT DISTINCT(role_user_pk) FROM users_role;";
+	public static final String Q_USER_ROLES_SEARCH_BY_ROLE_AND_USER = "SELECT * FROM users_role WHERE role_user_pk = ? AND username_fk =?;";
 	public static final String Q_USER_ROLES_REMOVE_BY_ROLE_AND_USER = "DELETE FROM users_role WHERE role_user_pk = ? AND username_fk =?;";
 	public static final String Q_USER_ROLES_SAVE = "INSERT INTO users_role(role_user_pk,username_fk,granted_date) VALUES(?,?,?);";
 	public static final String Q_USER_ROLES_UPDATE_BY_ROLE_AND_USER = "UPDATE users_role SET role_user_pk = ?, granted_date = ? WHERE role_user_pk = ? AND username_fk = ?;";

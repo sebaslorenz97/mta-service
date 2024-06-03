@@ -69,14 +69,23 @@ public class UserRoleDao implements IUserRoleDao{
 	@Override
 	public List<String> searchAllUserRoles(RequestBean request) {
 		try {
-			List<String> roles = jdbcTemplate.queryForList(Queries.Q_USER_ROLES_SEARCH,String.class);
-			System.out.println(roles.toArray().toString());
+			List<String> roles = jdbcTemplate.queryForList(Queries.Q_USER_ROLES_SEARCH_ALL_ROLES,String.class);
 			return roles;
 		}catch(EmptyResultDataAccessException e){
 			return null;
 		}
 	}
 
+	@Override
+	public UserRoleBean searchUserRoleByRoleAndUser(RequestBean request) {
+		try {
+			UserRoleBean urb = jdbcTemplate.queryForObject(Queries.Q_USER_ROLES_SEARCH_BY_ROLE_AND_USER, new UserRoleMapper(), new Object[] { request.getRoleUserPk(),request.getUserPkFk() });;
+			return urb;
+		}catch(EmptyResultDataAccessException e){
+			return null;
+		}
+	}
+	
 	@Override
 	public boolean executeSaveUserRole(RequestBean request) {
 		boolean bin = false;
