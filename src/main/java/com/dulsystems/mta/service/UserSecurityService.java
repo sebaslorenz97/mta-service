@@ -28,7 +28,7 @@ public class UserSecurityService implements UserDetailsService{
 		UserBean ub = userRoleDao.searchUserByUser(user);
 		if(ub == null) {
 			//throw new UsernameNotFoundException("User Not Found");
-			throw new BusinessException("E-404",HttpStatus.NOT_FOUND,"El usuario no existe, rectificalo");
+			throw new BusinessException("E-404",HttpStatus.NOT_FOUND,"Credenciales invalidas");
 		}
 		
 		String[] roles = userRoleDao.searchUserRolesByUser(user).stream().map(UserBean::getRoleUser).toArray(String[]::new);
