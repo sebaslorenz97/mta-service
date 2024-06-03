@@ -8,11 +8,11 @@ public interface IUserRoleService {
 	//METHODS FOR USER
 	ResponseBean searchUserByUser(String user);
 	ResponseBean executeSaveUser(RequestBean request);
-	ResponseBean executeUpdateUserByUser(RequestBean request);
+	ResponseBean executeUpdateUserByUserForAdmin(RequestBean request);
 	ResponseBean removeUserByUser(String user);
 		
 	//METHODS FOR USER ROLES
-	ResponseBean searchUserRoleByRoleAndUser(RequestBean request);
+	ResponseBean searchAllUserRoles(RequestBean request);
 	ResponseBean executeSaveUserRole(RequestBean request);
 	ResponseBean executeUpdateUserRoleByRoleAndUser(RequestBean request);
 	ResponseBean removeUserRoleByRoleAndUser(RequestBean request);

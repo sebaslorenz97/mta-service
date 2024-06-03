@@ -16,7 +16,7 @@ public class UserRoleMapper implements RowMapper<UserRoleBean>{
 		urb.setRoleUserPk(rs.getString("role_user_pk"));
 		urb.setRoleUserGrantedDate(rs.getString("username_fk"));
 		urb.setUserPkFk(rs.getString("granted_date"));
-		return null;
+		return urb;
 	}
 
 }

@@ -77,6 +77,7 @@ public class RequestBean {
 	
 	//REQUEST FIELDS FOR USER ROLE
 	private String roleUserPk;
+	private String newroleUserPk;
 	private String roleUserGrantedDate;
 	
 	//FKs FOR CUSTOMER ONLY
@@ -524,6 +525,12 @@ public class RequestBean {
 	}
 	public void setUserPkFk(String userPkFk) {
 		this.userPkFk = userPkFk;
+	}
+	public String getNewroleUserPk() {
+		return newroleUserPk;
+	}
+	public void setNewroleUserPk(String newroleUserPk) {
+		this.newroleUserPk = newroleUserPk;
 	}
 	
 }

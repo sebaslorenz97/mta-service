@@ -1,6 +1,9 @@
 package com.dulsystems.mta.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.dulsystems.mta.bean.RequestBean;
@@ -8,6 +11,7 @@ import com.dulsystems.mta.bean.ResponseBean;
 import com.dulsystems.mta.bean.UserBean;
 import com.dulsystems.mta.bean.UserRoleBean;
 import com.dulsystems.mta.dao.UserRoleDao;
+import com.dulsystems.mta.exception.BusinessException;
 
 @Service
 public class UserRoleService implements IUserRoleService {
@@ -22,6 +26,7 @@ public class UserRoleService implements IUserRoleService {
 		UserBean ub = new UserBean();
 		ub = userRoleDao.searchUserByUser(user);
 		if(ub != null) {
+			ub.setUserPassword(""); //THIS ENDPOINT MUST NOT RETURN THE PASSWORD SO WE REMOVE IT HERE
 			response.setCode("OK");
 			response.setMessage("Si existe el usuario");
 			response.setUb(ub);
@@ -31,24 +36,32 @@ public class UserRoleService implements IUserRoleService {
 		}
 		return response;
 	}
-
+	
 	@Override
 	public ResponseBean executeSaveUser(RequestBean request) {
 		ResponseBean response = new ResponseBean();
-		if(userRoleDao.executeSaveUser(request) == true) {
-			response.setCode("OK");
-			response.setMessage("Se registro correctamente");
-		}else{
-			response.setCode("BAD00");
-			response.setMessage("No se pudo registrar correctamente");
+		UserBean ub = userRoleDao.searchUserByUser(request.getUserPk());
+		if(ub == null) {
+			if(userRoleDao.executeSaveUser(request) == true) {
+				response.setCode("OK");
+				response.setMessage("Se registro correctamente");
+			}else{
+				response.setCode("BAD00");
+				response.setMessage("No se pudo registrar correctamente");
+			}
+			return response;
+		}else {
+			/*response.setCode("BAD00");
+			response.setMessage("Ese usuario ya existe, intenta con otro");
+			return response;*/
+			throw new BusinessException("E-404",HttpStatus.BAD_REQUEST,"Ese usuario ya existe, intenta con otro");
 		}
-		return response;
 	}
 
 	@Override
-	public ResponseBean executeUpdateUserByUser(RequestBean request) {
+	public ResponseBean executeUpdateUserByUserForAdmin(RequestBean request) {
 		ResponseBean response = new ResponseBean();
-		if(userRoleDao.executeUpdateUserByUser(request) == true) {
+		if(userRoleDao.executeUpdateUserByUserForAdmin(request) == true) {
 			response.setCode("OK");
 			response.setMessage("Se actualizo correctamente");
 		}else{
@@ -74,17 +87,16 @@ public class UserRoleService implements IUserRoleService {
 	
 	//METHODS FOR USER ROLES
 	@Override
-	public ResponseBean searchUserRoleByRoleAndUser(RequestBean request) {
+	public ResponseBean searchAllUserRoles(RequestBean request) {
 		ResponseBean response = new ResponseBean();
-		UserRoleBean urb = new UserRoleBean();
-		urb = userRoleDao.searchUserRoleByRoleAndUser(request);
-		if(urb != null) {
+		List<String> roles = userRoleDao.searchAllUserRoles(request);
+		if(roles.size() > 0) {
 			response.setCode("OK");
-			response.setMessage("Si existe el role");
-			response.setUrb(urb);
+			response.setMessage("Lista de roles exitosa");
+			response.setRoles(roles);
 		}else {
 			response.setCode("BAD00");
-			response.setMessage("No existe el role");
+			response.setMessage("No se pudieron obtener los roles");
 		}
 		return response;
 	}

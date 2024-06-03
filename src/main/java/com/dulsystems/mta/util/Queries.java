@@ -61,8 +61,7 @@ public class Queries {
 	public static final String Q_QUOTE_DETAILS_UPDATE_BY_ID = "UPDATE cotizaciones_detalle SET id_cotizacion_fk = ?, mec = ?, mano_obra_refacciones = ?, importe = ? WHERE id_cotizacion_detalle_pk = ?";
 
 	//USERS CRUD SQLS
-	public static final String Q_USERS_SEARCH_BY_USER_1 = "SELECT * FROM users WHERE username_pk = ?;";
-	/*FALTA CONTROLLER PARA ESTE SQL*/public static final String Q_USERS_SEARCH_BY_USER_2 = "SELECT username_pk, user_name, cargo, email, lockedd, disabled FROM users WHERE username_pk = ?;";
+	public static final String Q_USERS_SEARCH_BY_USER = "SELECT * FROM users WHERE username_pk = ?;";
 	public static final String Q_USERS_REMOVE_BY_USER = "DELETE FROM users WHERE username_pk = ?;";
 	public static final String Q_USERS_SAVE = "INSERT INTO users(username_pk,passwordd,user_name,cargo,email,lockedd,disabled) VALUES(?,?,?,?,?,?,?);";
 	public static final String Q_USERS_UPDATE_ALL_EXCEPT_USER_PASSWORD_AND_EMAIL_BY_USER = "UPDATE users SET user_name = ?, cargo = ?, lockedd = ?, disabled = ? WHERE username_pk = ?";
@@ -75,9 +74,9 @@ public class Queries {
 																	+ "WHERE users.username_pk = ?;";
 
 	//USER ROLES CRUD SQLS
-	public static final String Q_USER_ROLES_SEARCH_BY_ROLE_AND_USER = "SELECT * FROM users_role WHERE role_user_pk = ? AND username_fk =?;";
+	public static final String Q_USER_ROLES_SEARCH = "SELECT DISTINCT(role_user_pk) FROM users_role;";
 	public static final String Q_USER_ROLES_REMOVE_BY_ROLE_AND_USER = "DELETE FROM users_role WHERE role_user_pk = ? AND username_fk =?;";
 	public static final String Q_USER_ROLES_SAVE = "INSERT INTO users_role(role_user_pk,username_fk,granted_date) VALUES(?,?,?);";
-	public static final String Q_USER_ROLES_UPDATE_BY_ROLE_AND_USER = "UPDATE users_role SET role_user_pk = ?, username_fk = ?, granted_date = ? WHERE role_user_pk = ? AND username_fk = ?;";
+	public static final String Q_USER_ROLES_UPDATE_BY_ROLE_AND_USER = "UPDATE users_role SET role_user_pk = ?, granted_date = ? WHERE role_user_pk = ? AND username_fk = ?;";
 
 }

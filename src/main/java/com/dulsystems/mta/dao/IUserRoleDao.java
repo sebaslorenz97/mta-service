@@ -11,11 +11,11 @@ public interface IUserRoleDao {
 	//METHODS FOR USER
 	UserBean searchUserByUser(String user);
 	boolean executeSaveUser(RequestBean request);
-	boolean executeUpdateUserByUser(RequestBean request);
+	boolean executeUpdateUserByUserForAdmin(RequestBean request);
 	boolean removeUserByUser(String user);
 		
 	//METHODS FOR USER ROLES
-	UserRoleBean searchUserRoleByRoleAndUser(RequestBean request);
+	List<String> searchAllUserRoles(RequestBean request);
 	boolean executeSaveUserRole(RequestBean request);
 	boolean executeUpdateUserRoleByRoleAndUser(RequestBean request);
 	boolean removeUserRoleByRoleAndUser(RequestBean request);

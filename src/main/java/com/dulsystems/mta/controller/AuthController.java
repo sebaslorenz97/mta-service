@@ -1,14 +1,18 @@
 package com.dulsystems.mta.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,10 +38,14 @@ public class AuthController {
 	
 	@PostMapping("/login")
 	public ResponseEntity<ResponseBean> login(@RequestBody RequestBean rb){
+		ResponseBean response = new ResponseBean();
+		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		UsernamePasswordAuthenticationToken login = new UsernamePasswordAuthenticationToken(rb.getUserPk(), rb.getUserPassword());
 
 		Authentication authentication = authenticationManager.authenticate(login);
+		List theList = new ArrayList(authentication.getAuthorities());
+		response.setRolesFromAuthentication(theList);
 		
 		System.out.println(authentication.isAuthenticated());
 		System.out.println(authentication.getPrincipal());
@@ -50,7 +58,8 @@ public class AuthController {
 		customHeaders.add("Authorization");
 		httpHeaders.setAccessControlExposeHeaders(customHeaders);
 		
-		return ResponseEntity.ok().headers(httpHeaders).build();
+		//return ResponseEntity.ok().headers(httpHeaders).build();
+		return new ResponseEntity<ResponseBean>(response,httpHeaders,HttpStatus.OK);
 		
 	}
 

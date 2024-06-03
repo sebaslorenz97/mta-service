@@ -1,7 +1,9 @@
 package com.dulsystems.mta.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,21 +24,21 @@ public class UserRoleController {
 	
 	@Autowired
 	private UserRoleService userRoleService;
-	
-	//CONTROLLERS FOR QUOTE
+		
+	//CONTROLLERS FOR USER DASHBOARD HANDLE
 	@RequestMapping(value="getuserbyuser/{user}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
 	public ResponseBean searchUserByUser(@PathVariable("user") /*@Pattern(regexp = "^\\d{2}$", message="El formato del id del empleado es invalido")*/ String user)  {
 		return userRoleService.searchUserByUser(user);
 	}
-		
+	
 	@RequestMapping(value="savenewuser", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-	public ResponseBean executeSaveUser(@Valid @RequestBody RequestBean rb) {
-		return userRoleService.executeSaveUser(rb);
+	public ResponseEntity<ResponseBean> executeSaveUser(@Valid @RequestBody RequestBean rb) {
+		return new ResponseEntity<ResponseBean>(userRoleService.executeSaveUser(rb),HttpStatus.OK);
 	}
 		
-	@RequestMapping(value="edituserbyuser", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
-	public ResponseBean executeUpdateUserByUser(@Valid @RequestBody RequestBean rb) {
-	  	return userRoleService.executeUpdateUserByUser(rb);
+	@RequestMapping(value="edituserbyuserforadmin", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
+	public ResponseBean executeUpdateUserByUserForAdmin(@Valid @RequestBody RequestBean rb) {
+	  	return userRoleService.executeUpdateUserByUserForAdmin(rb);
 	}
 		
 	@RequestMapping(value="removeuserbyuser/{user}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.DELETE)
@@ -44,10 +46,10 @@ public class UserRoleController {
 	  	return userRoleService.removeUserByUser(user);
 	}
 		
-	//CONTROLLERS FOR DETAILS OF A QUOTE
-	@RequestMapping(value="getuserrolebyroleanduser", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-	public ResponseBean searchUserRoleByRoleAndUser(@Valid @RequestBody RequestBean rb)  {
-		return userRoleService.searchUserRoleByRoleAndUser(rb);
+	//CONTROLLERS FOR USER ROLES
+	@RequestMapping(value="getalluserroles", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+	public ResponseBean getAllUserRole(@Valid @RequestBody RequestBean rb)  {
+		return userRoleService.searchAllUserRoles(rb);
 	}
 		
 	@RequestMapping(value="savenewuserrole", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)

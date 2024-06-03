@@ -7,9 +7,11 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.dulsystems.mta.bean.QuoteDetailBean;
 import com.dulsystems.mta.bean.RequestBean;
 import com.dulsystems.mta.bean.UserBean;
 import com.dulsystems.mta.bean.UserRoleBean;
+import com.dulsystems.mta.dao.mapper.QuoteDetailMapper;
 import com.dulsystems.mta.dao.mapper.UserInnerRolesMapper;
 import com.dulsystems.mta.dao.mapper.UserMapper;
 import com.dulsystems.mta.dao.mapper.UserRoleMapper;
@@ -21,17 +23,18 @@ public class UserRoleDao implements IUserRoleDao{
 	@Autowired
     private JdbcTemplate jdbcTemplate;
 
-	//METHODS FOR USER
+	//METHODS FOR USER AUTH & USER
 	@Override
 	public UserBean searchUserByUser(String user) {
 		try {
-			UserBean ub = jdbcTemplate.queryForObject(Queries.Q_USERS_SEARCH_BY_USER_1, new UserMapper(), user);
+			UserBean ub = jdbcTemplate.queryForObject(Queries.Q_USERS_SEARCH_BY_USER, new UserMapper(), user);
 			return ub;
 		}catch(EmptyResultDataAccessException e){
 			return null;
 		}
 	}
 
+	//METHODS FOR USER
 	@Override
 	public boolean executeSaveUser(RequestBean request) {
 		boolean bin = false;
@@ -43,9 +46,9 @@ public class UserRoleDao implements IUserRoleDao{
 	}
 
 	@Override
-	public boolean executeUpdateUserByUser(RequestBean request) {
+	public boolean executeUpdateUserByUserForAdmin(RequestBean request) {
 		boolean bin = false;
-		int result = jdbcTemplate.update(Queries.Q_USERS_UPDATE_ALL_EXCEPT_USER_PASSWORD_AND_EMAIL_BY_USER, new Object[] { request.getUserPk(), request.getUserName(), request.getUserPosition(), request.getUserLocked(), request.getUserDisabled(), request.getUserPk() });
+		int result = jdbcTemplate.update(Queries.Q_USERS_UPDATE_ALL_EXCEPT_USER_PASSWORD_AND_EMAIL_BY_USER, new Object[] { request.getUserName(), request.getUserPosition(), request.getUserLocked(), request.getUserDisabled(), request.getUserPk() });
         if (result > 0) {
             bin = true;
         }
@@ -64,10 +67,11 @@ public class UserRoleDao implements IUserRoleDao{
 
 	//METHODS FOR USER ROLES
 	@Override
-	public UserRoleBean searchUserRoleByRoleAndUser(RequestBean request) {
+	public List<String> searchAllUserRoles(RequestBean request) {
 		try {
-			UserRoleBean urb = jdbcTemplate.queryForObject(Queries.Q_USER_ROLES_SEARCH_BY_ROLE_AND_USER, new UserRoleMapper(), new Object[] { request.getRoleUserPk(), request.getUserPkFk() } );
-			return urb;
+			List<String> roles = jdbcTemplate.queryForList(Queries.Q_USER_ROLES_SEARCH,String.class);
+			System.out.println(roles.toArray().toString());
+			return roles;
 		}catch(EmptyResultDataAccessException e){
 			return null;
 		}
@@ -86,8 +90,9 @@ public class UserRoleDao implements IUserRoleDao{
 	@Override
 	public boolean executeUpdateUserRoleByRoleAndUser(RequestBean request) {
 		boolean bin = false;
-		int result = jdbcTemplate.update(Queries.Q_USER_ROLES_UPDATE_BY_ROLE_AND_USER, new Object[] { request.getRoleUserPk(),request.getUserPkFk(),request.getRoleUserGrantedDate(), request.getRoleUserPk(), request.getUserPkFk() });
-        if (result > 0) {
+		System.out.println(request.getNewroleUserPk() + "  |  " + request.getRoleUserGrantedDate() + "  |  " + request.getRoleUserPk() + "  |  " + request.getUserPkFk() );
+		int result = jdbcTemplate.update(Queries.Q_USER_ROLES_UPDATE_BY_ROLE_AND_USER, new Object[] { request.getNewroleUserPk(),request.getRoleUserGrantedDate(), request.getRoleUserPk(), request.getUserPkFk() });
+		if (result > 0) {
             bin = true;
         }
 		return bin;

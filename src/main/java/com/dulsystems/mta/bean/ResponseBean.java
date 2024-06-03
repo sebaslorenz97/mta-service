@@ -2,6 +2,8 @@ package com.dulsystems.mta.bean;
 
 import java.util.List;
 
+import org.springframework.security.core.GrantedAuthority;
+
 public class ResponseBean {
 
 	private String code;
@@ -17,6 +19,9 @@ public class ResponseBean {
 	private List<QuoteDetailBean> lqdb;
 	private UserBean ub;
 	private UserRoleBean urb;
+	private List<String> roles;
+	private List<GrantedAuthority> rolesFromAuthentication;
+	
 	
 	public String getCode() {
 		return code;
@@ -101,6 +106,18 @@ public class ResponseBean {
 	}
 	public void setUrb(UserRoleBean urb) {
 		this.urb = urb;
+	}
+	public List<String> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
+	public List<GrantedAuthority> getRolesFromAuthentication() {
+		return rolesFromAuthentication;
+	}
+	public void setRolesFromAuthentication(List<GrantedAuthority> rolesFromAuthentication) {
+		this.rolesFromAuthentication = rolesFromAuthentication;
 	}
 	
 }
