@@ -3,9 +3,9 @@ package com.dulsystems.mta.util;
 public class Queries {
 	//CUSTOMER CRUD SQLS
 	public static final String Q_CUSTOMERS_SEARCH_BY_NAME = "SELECT * FROM clientes WHERE nombre = ?;";
-	public static final String Q_CUSTOMERS_REMOVE_BY_ID = "DELETE FROM clientes WHERE id_cliente_pk = ?";
+	public static final String Q_CUSTOMERS_REMOVE_BY_NAME = "DELETE FROM clientes WHERE nombre = ?";
 	public static final String Q_CUSTOMERS_SAVE = "INSERT INTO clientes(id_estado_fk, id_municipio_fk, nombre, particular_o_empresa, referencia, rfc, cp, email, telefono) VALUES(?,?,?,?,?,?,?,?,?);";
-	public static final String Q_CUSTOMERS_UPDATE_BY_ID = "UPDATE clientes SET id_estado_fk = ?, id_municipio_fk = ?, nombre = ?, particular_o_empresa = ?, referencia = ?, rfc = ?, cp = ?, email = ?, telefono = ? WHERE id_cliente_pk = ?";
+	public static final String Q_CUSTOMERS_UPDATE_BY_NAME = "UPDATE clientes SET id_estado_fk = ?, id_municipio_fk = ?, nombre = ?, particular_o_empresa = ?, referencia = ?, rfc = ?, cp = ?, email = ?, telefono = ? WHERE nombre = ?";
 	
 	//STATE CRUD SQLS
 	public static final String Q_STATES_SEARCH_BY_ID = "SELECT * FROM estados WHERE id_estado_pk = ?;";

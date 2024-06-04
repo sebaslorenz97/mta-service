@@ -65,7 +65,7 @@ public class AddressCatalogsService implements IAddressCatalogs{
 				throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese estado ya existe, intenta con otro");
 			}
 		}else{
-			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el estado");
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el estado que quieres actualizar");
 		}
 		return response;
 	}
@@ -127,9 +127,9 @@ public class AddressCatalogsService implements IAddressCatalogs{
 	public ResponseBean executeUpdateMunicipalityByMunicipality(RequestBean request) {
 		ResponseBean response = new ResponseBean();
 		if(addressCatalogsDao.searchMunicipalityByMunicipality(request.getMunicipalityName())!=null) {
-			StateBean sb = addressCatalogsDao.searchStateByState(request.getStateNameFk());
-			if(sb != null) {
-				if(addressCatalogsDao.searchMunicipalityByMunicipality(request.getNewMunicipalityName())==null) {
+			if(addressCatalogsDao.searchMunicipalityByMunicipality(request.getNewMunicipalityName())==null) {
+				StateBean sb = addressCatalogsDao.searchStateByState(request.getStateNameFk());
+				if(sb != null) {
 					if(addressCatalogsDao.executeUpdateMunicipalityByMunicipality(request, sb) == true) {
 						response.setCode("OK");
 						response.setMessage("Se actualizo el registro");
@@ -138,13 +138,13 @@ public class AddressCatalogsService implements IAddressCatalogs{
 						throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo actualizar el registro");
 					}
 				}else {
-					throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese municipio ya existe, intenta con otro");
+					throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el estado");
 				}
 			}else {
-				throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el estado");
+				throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese municipio ya existe, intenta con otro");
 			}
 		}else {
-			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el municipio");
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el municipio que quieres actualizar");
 		}
 		return response;
 	}
@@ -152,7 +152,7 @@ public class AddressCatalogsService implements IAddressCatalogs{
 	@Override
 	public ResponseBean removeMunicipalityByMunicipality(String municipality) {
 		ResponseBean response = new ResponseBean();
-		if(addressCatalogsDao.searchMunicipalityByMunicipality(municipality)==null) {
+		if(addressCatalogsDao.searchMunicipalityByMunicipality(municipality)!=null) {
 			if(addressCatalogsDao.removeMunicipalityByMunicipality(municipality)) {
 				response.setCode("OK");
 				response.setMessage("Se elimino el registro");

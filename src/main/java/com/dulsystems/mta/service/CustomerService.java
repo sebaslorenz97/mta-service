@@ -1,6 +1,7 @@
 package com.dulsystems.mta.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.dulsystems.mta.bean.CustomerBean;
@@ -10,6 +11,7 @@ import com.dulsystems.mta.bean.ResponseBean;
 import com.dulsystems.mta.bean.StateBean;
 import com.dulsystems.mta.dao.AddressCatalogsDao;
 import com.dulsystems.mta.dao.CustomerDao;
+import com.dulsystems.mta.exception.BusinessException;
 import com.dulsystems.mta.util.Queries;
 
 @Service
@@ -23,17 +25,18 @@ public class CustomerService implements ICustomerService {
 	
 
 	@Override
-	public ResponseBean searchCustomerById(Integer id) {
+	public ResponseBean searchCustomerByName(String name) {
 		ResponseBean response = new ResponseBean();
 		CustomerBean cb = new CustomerBean();
-		cb = customerDao.searchCustomerById(id);
+		cb = customerDao.searchCustomerByName(name);
 		if(cb != null) {
 			response.setCode("OK");
-			response.setMessage("Si existe el cliente");
+			response.setMessage("Consulta realizada");
 			response.setCb(cb);
 		}else {
 			response.setCode("BAD00");
 			response.setMessage("No existe el cliente");
+			throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No existe el cliente");
 		}
 		return response;
 	}
@@ -41,64 +44,72 @@ public class CustomerService implements ICustomerService {
 	@Override
 	public ResponseBean executeSaveCustomer(RequestBean request) {
 		ResponseBean response = new ResponseBean();
-		StateBean sb = addressCatalogsDao.searchStateByState(request.getStateNameFk());
-		MunicipalityBean mb = addressCatalogsDao.searchMunicipalityByMunicipality(request.getMunicipalityNameFk());
-		if(sb != null) {
-			if(mb != null) {
-				if(customerDao.executeSaveCustomer(request, sb, mb) == true) {
-					response.setCode("OK");
-					response.setMessage("Se registro correctamente");
-				
-				}else{
-					response.setCode("BAD00");
-					response.setMessage("No se pudo registrar correctamente");
+		if(customerDao.searchCustomerByName(request.getCustomerName())==null) {
+			StateBean sb = addressCatalogsDao.searchStateByState(request.getStateNameFk());
+			MunicipalityBean mb = addressCatalogsDao.searchMunicipalityByMunicipality(request.getMunicipalityNameFk());
+			if(sb != null) {
+				if(mb != null) {
+					if(customerDao.executeSaveCustomer(request, sb, mb) == true) {
+						response.setCode("OK");
+						response.setMessage("Se guardo el registro");
+					
+					}else{
+						throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo guardar el registro");
+					}
+				}else {
+					throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el municipio");
 				}
 			}else {
-				response.setCode("BAD01");
-				response.setMessage("El municipio no existe");
+				throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el estado");
 			}
 		}else {
-			response.setCode("BAD01");
-			response.setMessage("El estado no existe");
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese cliente ya existe, intenta con otro");
 		}
 		return response;
 	}
 	
 	@Override
-	public ResponseBean executeUpdateCustomerById(RequestBean request) {
+	public ResponseBean executeUpdateCustomerByName(RequestBean request) {
 		ResponseBean response = new ResponseBean();
-		StateBean sb = addressCatalogsDao.searchStateByState(request.getStateNameFk());
-		MunicipalityBean mb = addressCatalogsDao.searchMunicipalityByMunicipality(request.getMunicipalityNameFk());
-		if(sb != null) {
-			if(mb != null) {
-				if(customerDao.executeUpdateCustomerById(request, sb, mb) == true) {
-					response.setCode("OK");
-					response.setMessage("Se actualizo correctamente");
-				}else{
-					response.setCode("BAD00");
-					response.setMessage("No se pudo actualizar correctamente");
+		if(customerDao.searchCustomerByName(request.getCustomerName())!=null) {
+			if(customerDao.searchCustomerByName(request.getNewCustomerName())==null) {
+				StateBean sb = addressCatalogsDao.searchStateByState(request.getStateNameFk());
+				MunicipalityBean mb = addressCatalogsDao.searchMunicipalityByMunicipality(request.getMunicipalityNameFk());
+				if(sb != null) {
+					if(mb != null) {
+						if(customerDao.executeUpdateCustomerByName(request, sb, mb) == true) {
+							response.setCode("OK");
+							response.setMessage("Se actualizo correctamente");
+						}else{
+							throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo actualizar el registro");
+						}
+					}else {
+						throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el municipio");
+					}
+				}else {
+					throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el estado");
 				}
 			}else {
-				response.setCode("BAD01");
-				response.setMessage("El municipio no existe");
+				throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese cliente ya existe, intenta con otro");
 			}
 		}else {
-			response.setCode("BAD01");
-			response.setMessage("El estado no existe");
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el cliente que quieres actualizar");
 		}
 		return response;
 	}
 
 	@Override
-	public ResponseBean removeCustomerById(Integer id) {
+	public ResponseBean removeCustomerByName(String name) {
 		ResponseBean response = new ResponseBean();
-		if(customerDao.removeCustomerById(id)) {
-			response.setCode("OK");
-			response.setMessage("Se elimino correctamente");
-			
-		}else{
-			response.setCode("BAD00");
-			response.setMessage("No se pudo eliminar correctamente");
+		if(customerDao.searchCustomerByName(name)!=null){
+			if(customerDao.removeCustomerByName(name)) {
+				response.setCode("OK");
+				response.setMessage("Se elimino el registro");
+			}else{
+				throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo eliminar el registro");
+			}
+		}else {
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No se elimino porque el cliente no existe");
 		}
         return response;
 	}

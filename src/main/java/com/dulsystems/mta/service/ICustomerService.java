@@ -5,12 +5,12 @@ import com.dulsystems.mta.bean.ResponseBean;
 
 public interface ICustomerService {
 	
-	ResponseBean searchCustomerById(Integer id);
+	ResponseBean searchCustomerByName(String name);
 	
 	ResponseBean executeSaveCustomer(RequestBean request);
 	
-	ResponseBean executeUpdateCustomerById(RequestBean request);
+	ResponseBean executeUpdateCustomerByName(RequestBean request);
 	
-	ResponseBean removeCustomerById(Integer id);
+	ResponseBean removeCustomerByName(String name);
 	
 }

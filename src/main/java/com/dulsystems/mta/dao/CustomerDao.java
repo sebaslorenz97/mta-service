@@ -43,8 +43,9 @@ public class CustomerDao implements ICustomerDao{
 
 	@Override
 	public boolean executeUpdateCustomerByName(RequestBean request, StateBean sb, MunicipalityBean mb) {
+		System.out.println("YA ESTA EN UPDATE CUSTOMER DAO");
 		boolean bin = false;
-		int result = jdbcTemplate.update(Queries.Q_CUSTOMERS_UPDATE_BY_ID, new Object[] { sb.getStateId(), mb.getMunicipalityId(), request.getCustomerName(), request.getCustomerParticularEmpresa(), request.getCustomerReference(), request.getCustomerRfc(), request.getCustomerCp(), request.getCustomerEmail(), request.getCustomerPhoneNumber(), request.getCustomerId() });
+		int result = jdbcTemplate.update(Queries.Q_CUSTOMERS_UPDATE_BY_NAME, new Object[] { sb.getStateId(), mb.getMunicipalityId(), request.getNewCustomerName(), request.getCustomerParticularEmpresa(), request.getCustomerReference(), request.getCustomerRfc(), request.getCustomerCp(), request.getCustomerEmail(), request.getCustomerPhoneNumber(), request.getCustomerName() });
         if (result > 0) {
             bin = true;
         }
@@ -54,7 +55,7 @@ public class CustomerDao implements ICustomerDao{
 	@Override
 	public boolean removeCustomerByName(String name) {
 		boolean bin = false;
-		int result = jdbcTemplate.update(Queries.Q_CUSTOMERS_REMOVE_BY_ID, name);
+		int result = jdbcTemplate.update(Queries.Q_CUSTOMERS_REMOVE_BY_NAME, name);
 		if (result > 0) {
             bin = true;
         }

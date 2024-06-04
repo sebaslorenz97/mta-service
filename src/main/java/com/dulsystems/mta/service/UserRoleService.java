@@ -104,8 +104,8 @@ public class UserRoleService implements IUserRoleService {
 	@Override
 	public ResponseBean executeSaveUserRole(RequestBean request) {
 		ResponseBean response = new ResponseBean();
-		if(userRoleDao.searchUserByUser(request.getUserPkFk()) != null) {
-			if(userRoleDao.searchUserRoleByRoleAndUser(request) == null) {
+		if(userRoleDao.searchUserRoleByRoleAndUser(request) == null) {
+			if(userRoleDao.searchUserByUser(request.getUserPkFk()) != null) {
 				if(userRoleDao.executeSaveUserRole(request) == true) {
 					response.setCode("OK");
 					response.setMessage("Se asigno el rol al usuario");
@@ -113,10 +113,10 @@ public class UserRoleService implements IUserRoleService {
 					throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo asignar el rol al usuario");
 				}
 			}else {
-				throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese rol de usuario ya fue asignado, intenta con otro");
+				throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el usuario");
 			}
 		}else {
-			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el usuario");
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese rol de usuario ya fue asignado, intenta con otro");
 		}
 		return response;
 	}
@@ -126,11 +126,15 @@ public class UserRoleService implements IUserRoleService {
 		ResponseBean response = new ResponseBean();
 		if(userRoleDao.searchUserByUser(request.getUserPkFk()) != null) {
 			if(userRoleDao.searchUserRoleByRoleAndUser(request) != null) {
-				if(userRoleDao.executeUpdateUserRoleByRoleAndUser(request) == true) {
-					response.setCode("OK");
-					response.setMessage("Se actualizo el rol del usuario");
-				}else{
-					throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo reasignar el rol al usuario");
+				if(userRoleDao.searchUserRoleByRoleAndUser(request) == null) {
+					if(userRoleDao.executeUpdateUserRoleByRoleAndUser(request) == true) {
+						response.setCode("OK");
+						response.setMessage("Se actualizo el rol del usuario");
+					}else{
+						throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo reasignar el rol al usuario");
+					}
+				}else {
+					throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese rol del usuario ya existe, intenta con otro");
 				}
 			}else {
 				throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese rol de usuario no ha sido asignado");
