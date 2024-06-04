@@ -28,10 +28,10 @@ public class UserRoleService implements IUserRoleService {
 		if(ub != null) {
 			ub.setUserPassword(""); //THIS ENDPOINT MUST NOT RETURN THE PASSWORD SO WE REMOVE IT HERE
 			response.setCode("OK");
-			response.setMessage("Si existe el usuario");
+			response.setMessage("Consulta realizada");
 			response.setUb(ub);
 		}else {
-			throw new BusinessException("E-SERVICE",HttpStatus.BAD_REQUEST,"No existe el usuario");
+			throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No existe el usuario");
 		}
 		return response;
 	}
@@ -43,12 +43,12 @@ public class UserRoleService implements IUserRoleService {
 		if(ub == null) {
 			if(userRoleDao.executeSaveUser(request) == true) {
 				response.setCode("OK");
-				response.setMessage("Se registro correctamente");
+				response.setMessage("Se guardo el registro");
 			}else{
-				throw new BusinessException("E-DAO",HttpStatus.BAD_REQUEST,"No se pudo registrar correctamente");
+				throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo guardar el registro");
 			}
 		}else {
-			throw new BusinessException("E-SERVICE",HttpStatus.BAD_REQUEST,"Ese usuario ya existe, intenta con otro");
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese usuario ya existe, intenta con otro");
 		}
 		return response;
 	}
@@ -59,12 +59,12 @@ public class UserRoleService implements IUserRoleService {
 		if(userRoleDao.searchUserByUser(request.getUserPk())!=null) {
 			if(userRoleDao.executeUpdateUserByUserForAdmin(request) == true) {
 				response.setCode("OK");
-				response.setMessage("Se actualizo correctamente");
+				response.setMessage("Se actualizo el registro");
 			}else{
-				throw new BusinessException("E-DAO",HttpStatus.BAD_REQUEST,"No se pudo actualizar correctamente");
+				throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo actualizar el registro");
 			}
 		}else {
-			throw new BusinessException("E-SERVICE",HttpStatus.BAD_REQUEST,"El usuario no existe");
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el usuario que quieres actualizar");
 		}
 		return response;
 	}
@@ -75,13 +75,13 @@ public class UserRoleService implements IUserRoleService {
 		if(userRoleDao.searchUserByUser(user)!=null) {
 			if(userRoleDao.removeUserByUser(user)) {
 				response.setCode("OK");
-				response.setMessage("Se elimino correctamente");
+				response.setMessage("Se elimino el registro");
 				
 			}else{
-				throw new BusinessException("E-DAO",HttpStatus.BAD_REQUEST,"No se pudo eliminar correctamente");
+				throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo eliminar el registro");
 			}
 		}else {
-			throw new BusinessException("E-SERVICE",HttpStatus.BAD_REQUEST,"El usuario no existe");
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No se elimino porque el usuario no existe");
 		}
         return response;
 	}
@@ -93,10 +93,10 @@ public class UserRoleService implements IUserRoleService {
 		List<String> roles = userRoleDao.searchAllUserRoles(request);
 		if(roles.size() > 0) {
 			response.setCode("OK");
-			response.setMessage("Lista de roles exitosa");
+			response.setMessage("Consulta exitosa");
 			response.setRoles(roles);
 		}else {
-			throw new BusinessException("E-DAO",HttpStatus.BAD_REQUEST,"No se pudieron obtener los roles");
+			throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"Consulta fallida");
 		}
 		return response;
 	}
@@ -108,15 +108,15 @@ public class UserRoleService implements IUserRoleService {
 			if(userRoleDao.searchUserRoleByRoleAndUser(request) == null) {
 				if(userRoleDao.executeSaveUserRole(request) == true) {
 					response.setCode("OK");
-					response.setMessage("Se asigno el rol correctamente");
+					response.setMessage("Se asigno el rol al usuario");
 				}else{
-					throw new BusinessException("E-DAO",HttpStatus.BAD_REQUEST,"No se pudo asignar el rol");
+					throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo asignar el rol al usuario");
 				}
 			}else {
-				throw new BusinessException("E-SERVICE",HttpStatus.BAD_REQUEST,"El rol ya ha sido asignado al usuario");
+				throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese rol de usuario ya fue asignado, intenta con otro");
 			}
 		}else {
-			throw new BusinessException("E-SERVICE",HttpStatus.BAD_REQUEST,"El usuario no existe");
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el usuario");
 		}
 		return response;
 	}
@@ -124,20 +124,19 @@ public class UserRoleService implements IUserRoleService {
 	@Override
 	public ResponseBean executeUpdateUserRoleByRoleAndUser(RequestBean request) {
 		ResponseBean response = new ResponseBean();
-		UserBean ub = userRoleDao.searchUserByUser(request.getUserPkFk());	
-		if(ub != null) {
+		if(userRoleDao.searchUserByUser(request.getUserPkFk()) != null) {
 			if(userRoleDao.searchUserRoleByRoleAndUser(request) != null) {
 				if(userRoleDao.executeUpdateUserRoleByRoleAndUser(request) == true) {
 					response.setCode("OK");
-					response.setMessage("Se actualizo el rol correctamente");
+					response.setMessage("Se actualizo el rol del usuario");
 				}else{
-					throw new BusinessException("E-DAO",HttpStatus.BAD_REQUEST,"No se pudo actualizar el rol");
+					throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo reasignar el rol al usuario");
 				}
 			}else {
-				throw new BusinessException("E-SERVICE",HttpStatus.BAD_REQUEST,"El usuario con ese role, aun no ha sido asignado");
+				throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese rol de usuario no ha sido asignado");
 			}
 		}else {
-			throw new BusinessException("E-SERVICE",HttpStatus.BAD_REQUEST,"El usuario no existe");
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el usuario");
 		}
 		return response;
 		
@@ -149,13 +148,13 @@ public class UserRoleService implements IUserRoleService {
 		if(userRoleDao.searchUserRoleByRoleAndUser(request) != null) {
 			if(userRoleDao.removeUserRoleByRoleAndUser(request)) {
 				response.setCode("OK");
-				response.setMessage("Se elimino correctamente");
+				response.setMessage("Se elimino el rol del usuario");
 				
 			}else{
-				throw new BusinessException("E-DAO",HttpStatus.BAD_REQUEST,"No se pudo eliminar correctamente");
+				throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo eliminar el rol del usuario");
 			}
 		}else {
-			throw new BusinessException("E-SERVICE",HttpStatus.BAD_REQUEST,"No se elimino porque el usuario no existe");
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No se elimino el rol del usuario porque no existe");
 		}
         return response;
 	}
