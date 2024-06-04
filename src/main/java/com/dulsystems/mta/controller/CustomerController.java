@@ -26,9 +26,9 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 	
-	@RequestMapping(value="getcustomerbyid/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-    public ResponseEntity<ResponseBean> searchCustomerById(@PathVariable("id") @Pattern(regexp = "^\\d{2}$", message="El formato del id del empleado es invalido") String id)  {
-		return new ResponseEntity<ResponseBean>(customerService.searchCustomerById(Integer.parseInt(id)),HttpStatus.OK);
+	@RequestMapping(value="getcustomerbyname/{name}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    public ResponseEntity<ResponseBean> searchCustomerByName(@PathVariable("name") String name)  {
+		return new ResponseEntity<ResponseBean>(customerService.searchCustomerByName(name),HttpStatus.OK);
     }
 	
 	@RequestMapping(value="savenewcustomer", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
@@ -36,14 +36,14 @@ public class CustomerController {
 		return new ResponseEntity<ResponseBean>(customerService.executeSaveCustomer(rb),HttpStatus.CREATED);
     }
 	
-	@RequestMapping(value="editcustomer", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
-    public ResponseEntity<ResponseBean> executeUpdateCustomerById(@Valid @RequestBody RequestBean rb) {
-		return new ResponseEntity<ResponseBean>(customerService.executeUpdateCustomerById(rb),HttpStatus.OK);
+	@RequestMapping(value="editcustomerbyname", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
+    public ResponseEntity<ResponseBean> executeUpdateCustomerByName(@Valid @RequestBody RequestBean rb) {
+		return new ResponseEntity<ResponseBean>(customerService.executeUpdateCustomerByName(rb),HttpStatus.OK);
     }
 	
-	@RequestMapping(value="removecustomerbyid/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.DELETE)
-    public ResponseEntity<ResponseBean> removeCustomerById(@PathVariable("id") @Pattern(regexp = "^\\d{2}$", message="El formato del id del empleado es invalido") String id) {
-		return new ResponseEntity<ResponseBean>(customerService.removeCustomerById(Integer.parseInt(id)),HttpStatus.OK);
+	@RequestMapping(value="removecustomerbyname/{name}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.DELETE)
+    public ResponseEntity<ResponseBean> removeCustomerByName(@PathVariable("name") String name) {
+		return new ResponseEntity<ResponseBean>(customerService.removeCustomerByName(name),HttpStatus.OK);
     }
 
 }

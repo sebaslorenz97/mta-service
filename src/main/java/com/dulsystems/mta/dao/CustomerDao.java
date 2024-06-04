@@ -22,9 +22,9 @@ public class CustomerDao implements ICustomerDao{
     private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public CustomerBean searchCustomerById(Integer id) {
+	public CustomerBean searchCustomerByName(String name) {
 		try {
-			CustomerBean cb = jdbcTemplate.queryForObject(Queries.Q_CUSTOMERS_SEARCH_BY_ID, new CustomerMapper(), id);
+			CustomerBean cb = jdbcTemplate.queryForObject(Queries.Q_CUSTOMERS_SEARCH_BY_NAME, new CustomerMapper(), name);
 			return cb;
 		}catch(EmptyResultDataAccessException e){
 			return null;
@@ -42,7 +42,7 @@ public class CustomerDao implements ICustomerDao{
 	}
 
 	@Override
-	public boolean executeUpdateCustomerById(RequestBean request, StateBean sb, MunicipalityBean mb) {
+	public boolean executeUpdateCustomerByName(RequestBean request, StateBean sb, MunicipalityBean mb) {
 		boolean bin = false;
 		int result = jdbcTemplate.update(Queries.Q_CUSTOMERS_UPDATE_BY_ID, new Object[] { sb.getStateId(), mb.getMunicipalityId(), request.getCustomerName(), request.getCustomerParticularEmpresa(), request.getCustomerReference(), request.getCustomerRfc(), request.getCustomerCp(), request.getCustomerEmail(), request.getCustomerPhoneNumber(), request.getCustomerId() });
         if (result > 0) {
@@ -52,9 +52,9 @@ public class CustomerDao implements ICustomerDao{
 	}
 	
 	@Override
-	public boolean removeCustomerById(Integer id) {
+	public boolean removeCustomerByName(String name) {
 		boolean bin = false;
-		int result = jdbcTemplate.update(Queries.Q_CUSTOMERS_REMOVE_BY_ID, id);
+		int result = jdbcTemplate.update(Queries.Q_CUSTOMERS_REMOVE_BY_ID, name);
 		if (result > 0) {
             bin = true;
         }

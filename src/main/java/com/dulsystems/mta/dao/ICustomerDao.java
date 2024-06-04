@@ -9,12 +9,12 @@ import com.dulsystems.mta.bean.StateBean;
 
 public interface ICustomerDao {
 	
-	CustomerBean searchCustomerById(Integer id);
+	CustomerBean searchCustomerByName(String name);
 	
 	boolean executeSaveCustomer(RequestBean request, StateBean sb, MunicipalityBean mb);
 	
-	boolean executeUpdateCustomerById(RequestBean request, StateBean sb, MunicipalityBean mb);
+	boolean executeUpdateCustomerByName(RequestBean request, StateBean sb, MunicipalityBean mb);
 	
-	boolean removeCustomerById(Integer id);
+	boolean removeCustomerByName(String name);
 	
 }

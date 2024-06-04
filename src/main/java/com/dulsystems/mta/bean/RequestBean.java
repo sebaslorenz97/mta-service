@@ -13,6 +13,7 @@ public class RequestBean {
 	private String customerCp;
 	private String customerEmail;
 	private String customerPhoneNumber;
+	private String newCustomerName;
 	
 	//REQUEST FIELDS FOR STATE
 	private Integer stateId;
@@ -531,6 +532,12 @@ public class RequestBean {
 	}
 	public void setNewroleUserPk(String newroleUserPk) {
 		this.newroleUserPk = newroleUserPk;
+	}
+	public String getNewCustomerName() {
+		return newCustomerName;
+	}
+	public void setNewCustomerName(String newCustomerName) {
+		this.newCustomerName = newCustomerName;
 	}
 	
 }
