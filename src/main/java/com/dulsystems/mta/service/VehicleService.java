@@ -46,7 +46,7 @@ public class VehicleService implements IVehicleService {
 	@Override
 	public ResponseBean executeSaveVehicle(RequestBean request) {
 		ResponseBean response = new ResponseBean();
-		CustomerBean cb = customerDao.searchCustomerById(request.getCustomerIdFk());
+		CustomerBean cb = customerDao.searchCustomerByName(request.getCustomerNameFk());
 		VehicleLineBean vlb = vehicleCatalogDao.searchVehicleLineByLine(request.getVehicleLineNameFk());
 		VehicleModelBean vmb = vehicleCatalogDao.searchVehicleModelByModel(request.getVehicleModelNameFk());
 		VehicleYearBean vyb = vehicleCatalogDao.searchVehicleYearByYear(request.getVehicleYearValueFk());
@@ -84,7 +84,7 @@ public class VehicleService implements IVehicleService {
 	@Override
 	public ResponseBean executeUpdateVehicleByPlate(RequestBean request) {
 		ResponseBean response = new ResponseBean();
-		CustomerBean cb = customerDao.searchCustomerById(request.getCustomerIdFk());
+		CustomerBean cb = customerDao.searchCustomerByName(request.getCustomerNameFk());
 		VehicleLineBean vlb = vehicleCatalogDao.searchVehicleLineByLine(request.getVehicleLineNameFk());
 		VehicleModelBean vmb = vehicleCatalogDao.searchVehicleModelByModel(request.getVehicleModelNameFk());
 		VehicleYearBean vyb = vehicleCatalogDao.searchVehicleYearByYear(request.getVehicleYearValueFk());
