@@ -34,8 +34,6 @@ public class CustomerService implements ICustomerService {
 			response.setMessage("Consulta realizada");
 			response.setCb(cb);
 		}else {
-			response.setCode("BAD00");
-			response.setMessage("No existe el cliente");
 			throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No existe el cliente");
 		}
 		return response;

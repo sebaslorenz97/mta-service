@@ -56,7 +56,7 @@ public class Queries {
 		
 	//DETAIL QUOTES CRUD SQLS
 	public static final String Q_QUOTE_DETAILS_SEARCH_BY_ID = "SELECT * FROM cotizaciones_detalle WHERE id_cotizacion_fk = ?;";
-	public static final String Q_QUOTE_DETAILS_REMOVE_BY_ID = "DELETE FROM cotizaciones_detalle WHERE id_cotizacion_detalle_pk = ?;";
+	public static final String Q_QUOTE_DETAILS_REMOVE_BY_ID = "DELETE FROM cotizaciones_detalle WHERE id_cotizacion_fk = ?;";
 	public static final String Q_QUOTE_DETAILS_SAVE = "INSERT INTO cotizaciones_detalle(id_cotizacion_fk,mec,mano_obra_refacciones,importe) VALUES(?,?,?,?);";
 	public static final String Q_QUOTE_DETAILS_UPDATE_BY_ID = "UPDATE cotizaciones_detalle SET id_cotizacion_fk = ?, mec = ?, mano_obra_refacciones = ?, importe = ? WHERE id_cotizacion_detalle_pk = ?";
 

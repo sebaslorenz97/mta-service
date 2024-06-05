@@ -14,9 +14,9 @@ public interface IQuoteDetailService {
 	ResponseBean removeQuoteById(Integer id);
 	
 	//SERVICES FOR DETAILS OF A QUOTE
-	ResponseBean searchQuoteDetailsById(Integer quoteId);
+	ResponseBean searchQuoteDetailsByQuoteId(Integer quoteId);
 	ResponseBean executeSaveQuoteDetails(RequestBean request);
-	ResponseBean executeUpdateQuoteDetailsById(RequestBean request);
-	ResponseBean removeQuoteDetailById(Integer quoteId);
+	ResponseBean executeUpdateQuoteDetailsByQuoteId(RequestBean request);
+	ResponseBean removeQuoteDetailsByQuoteId(Integer quoteId);
 	
 }

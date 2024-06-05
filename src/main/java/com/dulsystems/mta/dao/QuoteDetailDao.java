@@ -68,10 +68,9 @@ public class QuoteDetailDao implements IQuoteDetailDao{
 	
 	//DAO FOR DETAILS OF A QUOTE
 	@Override
-	public List<QuoteDetailBean> searchQuoteDetailById(Integer quoteId) {
+	public List<QuoteDetailBean> searchQuoteDetailsByQuoteId(Integer quoteId) {
 		try {
 			List<QuoteDetailBean> lqdb = jdbcTemplate.query(Queries.Q_QUOTE_DETAILS_SEARCH_BY_ID,  new QuoteDetailMapper(), quoteId);
-			//QuoteDetailBean qdb = jdbcTemplate.queryForObject(Queries.Q_QUOTE_DETAILS_SEARCH_BY_ID, new QuoteDetailMapper(), id);
 			System.out.println(lqdb);
 			return lqdb;
 		}catch(EmptyResultDataAccessException e){
@@ -80,7 +79,7 @@ public class QuoteDetailDao implements IQuoteDetailDao{
 	}
 
 	@Override
-	public int[] executeSaveQuoteDetail(RequestBean request, /*QuoteBean qb,*/ List<QuoteDetailBean> lqdb) {
+	public int[] executeSaveQuoteDetails(RequestBean request, List<QuoteDetailBean> lqdb) {
 		return jdbcTemplate.batchUpdate(
 				Queries.Q_QUOTE_DETAILS_SAVE,
 				new BatchPreparedStatementSetter() {
@@ -106,7 +105,7 @@ public class QuoteDetailDao implements IQuoteDetailDao{
 	}*/
 
 	@Override
-	public int[] executeUpdateQuoteDetailById(RequestBean request, /*QuoteBean qb,*/ List<QuoteDetailBean> lqdb) {
+	public int[] executeUpdateQuoteDetailsByQuoteId(RequestBean request, List<QuoteDetailBean> lqdb) {
 		return jdbcTemplate.batchUpdate(
 				Queries.Q_QUOTE_DETAILS_UPDATE_BY_ID,
 				new BatchPreparedStatementSetter() {
@@ -133,7 +132,7 @@ public class QuoteDetailDao implements IQuoteDetailDao{
 	}*/
 
 	@Override
-	public boolean removeQuoteDetailById(Integer quoteId) {
+	public boolean removeQuoteDetailsByQuoteId(Integer quoteId) {
 		boolean bin = false;
 		int result = jdbcTemplate.update(Queries.Q_QUOTE_DETAILS_REMOVE_BY_ID, quoteId);
 		if (result > 0) {
