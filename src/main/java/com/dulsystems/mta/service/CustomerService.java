@@ -79,7 +79,7 @@ public class CustomerService implements ICustomerService {
 					if(mb != null) {
 						if(customerDao.executeUpdateCustomerByName(request, sb, mb) == true) {
 							response.setCode("OK");
-							response.setMessage("Se actualizo correctamente");
+							response.setMessage("Se actualizo el registro");
 						}else{
 							throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo actualizar el registro");
 						}

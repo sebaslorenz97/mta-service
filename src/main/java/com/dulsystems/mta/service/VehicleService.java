@@ -1,6 +1,7 @@
 package com.dulsystems.mta.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.dulsystems.mta.bean.CustomerBean;
@@ -13,6 +14,7 @@ import com.dulsystems.mta.bean.VehicleYearBean;
 import com.dulsystems.mta.dao.CustomerDao;
 import com.dulsystems.mta.dao.VehicleCatalogDao;
 import com.dulsystems.mta.dao.VehicleDao;
+import com.dulsystems.mta.exception.BusinessException;
 
 @Service
 public class VehicleService implements IVehicleService {
@@ -33,12 +35,10 @@ public class VehicleService implements IVehicleService {
 		vb = vehicleDao.searchVehicleByPlate(plate);
 		if(vb != null) {
 			response.setCode("OK");
-			response.setMessage("Si existe el vehiculo");
-			System.out.println("SI EXISTE EL VEHICULO!!!!!!!!!!!!!!!!!!!!!");;
+			response.setMessage("Consulta realizada");
 			response.setVb(vb);
 		}else {
-			response.setCode("BAD00");
-			response.setMessage("No existe el vehiculo");
+			throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No existe el vehiculo");
 		}
 		return response;
 	}
@@ -46,37 +46,36 @@ public class VehicleService implements IVehicleService {
 	@Override
 	public ResponseBean executeSaveVehicle(RequestBean request) {
 		ResponseBean response = new ResponseBean();
-		CustomerBean cb = customerDao.searchCustomerByName(request.getCustomerNameFk());
-		VehicleLineBean vlb = vehicleCatalogDao.searchVehicleLineByLine(request.getVehicleLineNameFk());
-		VehicleModelBean vmb = vehicleCatalogDao.searchVehicleModelByModel(request.getVehicleModelNameFk());
-		VehicleYearBean vyb = vehicleCatalogDao.searchVehicleYearByYear(request.getVehicleYearValueFk());
-		if(cb != null) {
-			if(vlb != null) {
-				if(vmb != null) {
-					if(vyb != null) {
-						if(vehicleDao.executeSaveVehicle(request, cb, vlb, vmb, vyb) == true) {
-							response.setCode("OK");
-							response.setMessage("Se registro correctamente");
-						
-						}else{
-							response.setCode("BAD00");
-							response.setMessage("No se pudo registrar correctamente");
+		if(vehicleDao.searchVehicleByPlate(request.getVehiclePlate())==null) {
+			CustomerBean cb = customerDao.searchCustomerByName(request.getCustomerNameFk());
+			VehicleLineBean vlb = vehicleCatalogDao.searchVehicleLineByLine(request.getVehicleLineNameFk());
+			VehicleModelBean vmb = vehicleCatalogDao.searchVehicleModelByModel(request.getVehicleModelNameFk());
+			VehicleYearBean vyb = vehicleCatalogDao.searchVehicleYearByYear(request.getVehicleYearValueFk());
+			if(cb != null) {
+				if(vlb != null) {
+					if(vmb != null) {
+						if(vyb != null) {
+							if(vehicleDao.executeSaveVehicle(request, cb, vlb, vmb, vyb) == true) {
+								response.setCode("OK");
+								response.setMessage("Se guardo el registro");
+							
+							}else{
+								throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo guardar el registro");
+							}
+						}else {
+							throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el año");
 						}
 					}else {
-						response.setCode("BAD01");
-						response.setMessage("El año no existe");
+						throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el modelo");
 					}
 				}else {
-					response.setCode("BAD01");
-					response.setMessage("El modelo no existe");
+					throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe la marca");
 				}
 			}else {
-				response.setCode("BAD01");
-				response.setMessage("La marca no existe");
+				throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el cliente");
 			}
 		}else {
-			response.setCode("BAD01");
-			response.setMessage("El cliente no existe");
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese vehiculo ya existe, intenta con otro");
 		}
 		return response;
 	}
@@ -84,36 +83,39 @@ public class VehicleService implements IVehicleService {
 	@Override
 	public ResponseBean executeUpdateVehicleByPlate(RequestBean request) {
 		ResponseBean response = new ResponseBean();
-		CustomerBean cb = customerDao.searchCustomerByName(request.getCustomerNameFk());
-		VehicleLineBean vlb = vehicleCatalogDao.searchVehicleLineByLine(request.getVehicleLineNameFk());
-		VehicleModelBean vmb = vehicleCatalogDao.searchVehicleModelByModel(request.getVehicleModelNameFk());
-		VehicleYearBean vyb = vehicleCatalogDao.searchVehicleYearByYear(request.getVehicleYearValueFk());
-		if(cb != null) {
-			if(vlb != null) {
-				if(vmb != null) {
-					if(vyb != null) {
-						if(vehicleDao.executeUpdateVehicleByPlate(request, cb, vlb, vmb, vyb) == true) {
-							response.setCode("OK");
-							response.setMessage("Se actualizo correctamente");
-						}else{
-							response.setCode("BAD00");
-							response.setMessage("No se pudo actualizar correctamente");
+		if(vehicleDao.searchVehicleByPlate(request.getVehiclePlate())!=null) {
+			if(vehicleDao.searchVehicleByPlate(request.getNewVehiclePlate())==null) {
+				CustomerBean cb = customerDao.searchCustomerByName(request.getCustomerNameFk());
+				VehicleLineBean vlb = vehicleCatalogDao.searchVehicleLineByLine(request.getVehicleLineNameFk());
+				VehicleModelBean vmb = vehicleCatalogDao.searchVehicleModelByModel(request.getVehicleModelNameFk());
+				VehicleYearBean vyb = vehicleCatalogDao.searchVehicleYearByYear(request.getVehicleYearValueFk());
+				if(cb != null) {
+					if(vlb != null) {
+						if(vmb != null) {
+							if(vyb != null) {
+								if(vehicleDao.executeUpdateVehicleByPlate(request, cb, vlb, vmb, vyb) == true) {
+									response.setCode("OK");
+									response.setMessage("Se actualizo el registro");
+								}else{
+									throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo actualizar el registro");
+								}
+							}else {
+								throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el año");
+							}
+						}else {
+							throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el modelo");
 						}
 					}else {
-						response.setCode("BAD01");
-						response.setMessage("El año no existe");
+						throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe la marca");
 					}
 				}else {
-					response.setCode("BAD01");
-					response.setMessage("El modelo no existe");
+					throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el cliente");
 				}
 			}else {
-				response.setCode("BAD01");
-				response.setMessage("La marca no existe");
+				throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese vehiculo ya existe, intenta con otro");
 			}
 		}else {
-			response.setCode("BAD01");
-			response.setMessage("El cliente no existe");
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el vehiculo que quieres actualizar");
 		}
 		return response;
 	}
@@ -121,13 +123,16 @@ public class VehicleService implements IVehicleService {
 	@Override
 	public ResponseBean removeVehicleByPlate(String plate) {
 		ResponseBean response = new ResponseBean();
-		if(vehicleDao.removeVehicleByPlate(plate)) {
-			response.setCode("OK");
-			response.setMessage("Se elimino correctamente");
-			
-		}else{
-			response.setCode("BAD00");
-			response.setMessage("No se pudo eliminar correctamente");
+		if(vehicleDao.searchVehicleByPlate(plate)!=null) {
+			if(vehicleDao.removeVehicleByPlate(plate)) {
+				response.setCode("OK");
+				response.setMessage("Se elimino el registro");
+				
+			}else{
+				throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo eliminar el registro");
+			}
+		}else {
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No se elimino porque el vehiculo no existe");
 		}
         return response;
 	}
