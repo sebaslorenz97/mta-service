@@ -24,7 +24,6 @@ public class UserSecurityService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String user) throws /*UsernameNotFoundException*/ BusinessException {
-		System.out.println(user);
 		UserBean ub = userRoleDao.searchUserByUser(user);
 		if(ub == null) {
 			//throw new UsernameNotFoundException("User Not Found");
@@ -32,7 +31,6 @@ public class UserSecurityService implements UserDetailsService{
 		}
 		
 		String[] roles = userRoleDao.searchUserRolesByUser(user).stream().map(UserBean::getRoleUser).toArray(String[]::new);
-		System.out.println(roles[0] + " | " + roles[1]);
 		
 		return User.builder()
 					.username(ub.getUserPk())
