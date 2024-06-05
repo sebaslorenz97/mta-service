@@ -24,7 +24,8 @@ public class VehicleCatalogDao implements IVehicleCatalogsDao{
 	@Override
 	public VehicleLineBean searchVehicleLineByLine(String vehicleLine) {
 		try {
-			VehicleLineBean vlb = jdbcTemplate.queryForObject(Queries.Q_VEHICLES_LINE_SEARCH_BY_LINE, new VehicleLineMapper(), vehicleLine);
+			VehicleLineBean vlb = null;
+			vlb = jdbcTemplate.queryForObject(Queries.Q_VEHICLES_LINE_SEARCH_BY_LINE, new VehicleLineMapper(), vehicleLine);
 			return vlb;
 		}catch(EmptyResultDataAccessException e){
 			return null;

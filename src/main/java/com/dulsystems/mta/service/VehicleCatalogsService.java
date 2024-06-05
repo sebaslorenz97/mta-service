@@ -1,6 +1,7 @@
 package com.dulsystems.mta.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.dulsystems.mta.bean.RequestBean;
@@ -9,6 +10,7 @@ import com.dulsystems.mta.bean.VehicleLineBean;
 import com.dulsystems.mta.bean.VehicleModelBean;
 import com.dulsystems.mta.bean.VehicleYearBean;
 import com.dulsystems.mta.dao.VehicleCatalogDao;
+import com.dulsystems.mta.exception.BusinessException;
 
 @Service
 public class VehicleCatalogsService implements IVehicleCatalogsService{
@@ -24,11 +26,10 @@ public class VehicleCatalogsService implements IVehicleCatalogsService{
 		vlb = vehicleCatalogDao.searchVehicleLineByLine(vehicleLine);
 		if(vlb != null) {
 			response.setCode("OK");
-			response.setMessage("Si existe la marca del auto");
+			response.setMessage("Consulta realizada");
 			response.setVlb(vlb);
 		}else {
-			response.setCode("BAD00");
-			response.setMessage("No existe la marca del auto");
+			throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No existe la marca");
 		}
 		return response;
 	}
@@ -36,13 +37,15 @@ public class VehicleCatalogsService implements IVehicleCatalogsService{
 	@Override
 	public ResponseBean executeSaveVehicleLine(RequestBean request) {
 		ResponseBean response = new ResponseBean();
-		if(vehicleCatalogDao.executeSaveVehicleLine(request) == true) {
-			response.setCode("OK");
-			response.setMessage("Se registro correctamente");
-		
-		}else{
-			response.setCode("BAD00");
-			response.setMessage("No se pudo registrar correctamente");
+		if(vehicleCatalogDao.searchVehicleLineByLine(request.getVehicleLine())==null) {
+			if(vehicleCatalogDao.executeSaveVehicleLine(request) == true) {
+				response.setCode("OK");
+				response.setMessage("Se guardo el registro");
+			}else{
+				throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No se pudo guardar el registro");
+			}
+		}else {
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Esa marca ya existe, intenta con otra");
 		}
 		return response;
 	}
@@ -50,13 +53,20 @@ public class VehicleCatalogsService implements IVehicleCatalogsService{
 	@Override
 	public ResponseBean executeUpdateVehicleLineByLine(RequestBean request) {
 		ResponseBean response = new ResponseBean();
-		if(vehicleCatalogDao.executeUpdateVehicleLineByLine(request) == true) {
-			response.setCode("OK");
-			response.setMessage("Se actualizo correctamente");
-		
-		}else{
-			response.setCode("BAD00");
-			response.setMessage("No se pudo actualizar correctamente");
+		if(vehicleCatalogDao.searchVehicleLineByLine(request.getVehicleLine())!=null) {
+			if(vehicleCatalogDao.searchVehicleLineByLine(request.getNewVehicleLine())==null) {
+				if(vehicleCatalogDao.executeUpdateVehicleLineByLine(request) == true) {
+					response.setCode("OK");
+					response.setMessage("Se actualizo el registro");
+				
+				}else{
+					throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo actualizar el registro");
+				}
+			}else {
+				throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Esa marca ya existe, intenta con otro");
+			}
+		}else {
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe la marca que quieres actualizar");
 		}
 		return response;
 	}
@@ -64,13 +74,16 @@ public class VehicleCatalogsService implements IVehicleCatalogsService{
 	@Override
 	public ResponseBean removeVehicleLineByLine(String vehicleLine) {
 		ResponseBean response = new ResponseBean();
-		if(vehicleCatalogDao.removeVehicleLineByLine(vehicleLine)) {
-			response.setCode("OK");
-			response.setMessage("Se elimino correctamente");
-			
-		}else{
-			response.setCode("BAD00");
-			response.setMessage("No se pudo eliminar correctamente");
+		if(vehicleCatalogDao.searchVehicleLineByLine(vehicleLine)!=null) {
+			if(vehicleCatalogDao.removeVehicleLineByLine(vehicleLine)) {
+				response.setCode("OK");
+				response.setMessage("Se elimino el registro");
+				
+			}else{
+				throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo eliminar el registro");
+			}
+		}else {
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No se elimino porque la marca no existe");
 		}
         return response;
 	}
@@ -79,15 +92,13 @@ public class VehicleCatalogsService implements IVehicleCatalogsService{
 	@Override
 	public ResponseBean searchVehicleModelByModel(String vehicleModel) {
 		ResponseBean response = new ResponseBean();
-		VehicleModelBean vmb = new VehicleModelBean();
-		vmb = vehicleCatalogDao.searchVehicleModelByModel(vehicleModel);
+		VehicleModelBean vmb = vehicleCatalogDao.searchVehicleModelByModel(vehicleModel);
 		if(vmb != null) {
 			response.setCode("OK");
-			response.setMessage("Si existe el modelo");
+			response.setMessage("Consulta realizada");
 			response.setVmb(vmb);
 		}else {
-			response.setCode("BAD00");
-			response.setMessage("No existe el modelo");
+			throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No existe el modelo");
 		}
 		return response;
 	}
@@ -95,19 +106,21 @@ public class VehicleCatalogsService implements IVehicleCatalogsService{
 	@Override
 	public ResponseBean executeSaveVehicleModel(RequestBean request) {
 		ResponseBean response = new ResponseBean();
-		VehicleLineBean vlb = vehicleCatalogDao.searchVehicleLineByLine(request.getVehicleLineNameFk());
-		if(vlb != null) {
-			if(vehicleCatalogDao.executeSaveVehicleModel(request, vlb) == true) {
-				response.setCode("OK");
-				response.setMessage("Se registro correctamente");
-			
-			}else{
-				response.setCode("BAD00");
-				response.setMessage("No se pudo registrar correctamente");
+		if(vehicleCatalogDao.searchVehicleModelByModel(request.getVehicleModel())==null) {
+			VehicleLineBean vlb = vehicleCatalogDao.searchVehicleLineByLine(request.getVehicleLineNameFk());
+			if(vlb != null) {
+				if(vehicleCatalogDao.executeSaveVehicleModel(request, vlb) == true) {
+					response.setCode("OK");
+					response.setMessage("Se guardo el registro");
+				
+				}else{
+					throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No se pudo guardar el registro");
+				}
+			}else {
+				throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe la marca");
 			}
 		}else {
-			response.setCode("BAD01");
-			response.setMessage("No existe la marca");
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese modelo ya existe, intenta con otro");
 		}
 		return response;
 	}
@@ -115,19 +128,24 @@ public class VehicleCatalogsService implements IVehicleCatalogsService{
 	@Override
 	public ResponseBean executeUpdateVehicleModelByModel(RequestBean request) {
 		ResponseBean response = new ResponseBean();
-		VehicleLineBean vlb = vehicleCatalogDao.searchVehicleLineByLine(request.getVehicleLineNameFk());
-		if(vlb != null) {
-			if(vehicleCatalogDao.executeUpdateVehicleModelByModel(request, vlb) == true) {
-				response.setCode("OK");
-				response.setMessage("Se actualizo correctamente");
-			
-			}else{
-				response.setCode("BAD00");
-				response.setMessage("No se pudo actualizar correctamente");
+		if(vehicleCatalogDao.searchVehicleModelByModel(request.getVehicleModel())!=null) {
+			if(vehicleCatalogDao.searchVehicleModelByModel(request.getNewVehicleModel())==null) {
+				VehicleLineBean vlb = vehicleCatalogDao.searchVehicleLineByLine(request.getVehicleLineNameFk());
+				if(vlb != null) {
+					if(vehicleCatalogDao.executeUpdateVehicleModelByModel(request, vlb) == true) {
+						response.setCode("OK");
+						response.setMessage("Se actualizo el registro");
+					}else{
+						throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo actualizar el registro");
+					}
+				}else {
+					throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe la marca");
+				}
+			}else {
+				throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese modelo ya existe, intenta con otro");
 			}
 		}else {
-			response.setCode("BAD01");
-			response.setMessage("No existe la marca");
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el modelo que quieres actualizar");
 		}
 		return response;
 	}
@@ -135,13 +153,16 @@ public class VehicleCatalogsService implements IVehicleCatalogsService{
 	@Override
 	public ResponseBean removeVehicleModelByModel(String vehicleModel) {
 		ResponseBean response = new ResponseBean();
-		if(vehicleCatalogDao.removeVehicleModelByModel(vehicleModel)) {
-			response.setCode("OK");
-			response.setMessage("Se elimino correctamente");
-			
-		}else{
-			response.setCode("BAD00");
-			response.setMessage("No se pudo eliminar correctamente");
+		if(vehicleCatalogDao.searchVehicleModelByModel(vehicleModel)!=null) {
+			if(vehicleCatalogDao.removeVehicleModelByModel(vehicleModel)) {
+				response.setCode("OK");
+				response.setMessage("Se elimino el registro");
+				
+			}else{
+				throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo eliminar el registro");
+			}
+		}else {
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No se elimino porque el modelo no existe");
 		}
         return response;
 	}
@@ -154,11 +175,10 @@ public class VehicleCatalogsService implements IVehicleCatalogsService{
 		vyb = vehicleCatalogDao.searchVehicleYearByYear(vehicleYear);
 		if(vyb != null) {
 			response.setCode("OK");
-			response.setMessage("Si existe el año");
+			response.setMessage("Consulta realizada");
 			response.setVyb(vyb);
 		}else {
-			response.setCode("BAD00");
-			response.setMessage("No existe el año");
+			throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No existe el año");
 		}
 		return response;
 	}
@@ -166,13 +186,15 @@ public class VehicleCatalogsService implements IVehicleCatalogsService{
 	@Override
 	public ResponseBean executeSaveVehicleYear(RequestBean request) {
 		ResponseBean response = new ResponseBean();
-		if(vehicleCatalogDao.executeSaveVehicleYear(request) == true) {
-			response.setCode("OK");
-			response.setMessage("Se registro correctamente");
-		
-		}else{
-			response.setCode("BAD00");
-			response.setMessage("No se pudo registrar correctamente");
+		if(vehicleCatalogDao.searchVehicleYearByYear(request.getVehicleYearValue())==null) {
+			if(vehicleCatalogDao.executeSaveVehicleYear(request) == true) {
+				response.setCode("OK");
+				response.setMessage("Se guardo el registro");
+			}else{
+				throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo guardar el registro");
+			}
+		}else {
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese año ya existe, intenta con otro");
 		}
 		return response;
 	}
@@ -180,13 +202,20 @@ public class VehicleCatalogsService implements IVehicleCatalogsService{
 	@Override
 	public ResponseBean executeUpdateVehicleYearByYear(RequestBean request) {
 		ResponseBean response = new ResponseBean();
-		if(vehicleCatalogDao.executeUpdateVehicleYearByYear(request) == true) {
-			response.setCode("OK");
-			response.setMessage("Se actualizo correctamente");
-		
-		}else{
-			response.setCode("BAD00");
-			response.setMessage("No se pudo actualizar correctamente");
+		if(vehicleCatalogDao.searchVehicleYearByYear(request.getVehicleYearValue())!=null) {
+			if(vehicleCatalogDao.searchVehicleYearByYear(request.getNewVehicleYearValue())==null) {
+				if(vehicleCatalogDao.executeUpdateVehicleYearByYear(request) == true) {
+					response.setCode("OK");
+					response.setMessage("Se actualizo el registro");
+				
+				}else{
+					throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo actualizar el registro");
+				}
+			}else {
+				throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese año ya existe, intenta con otro");
+			}
+		}else {
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el año que quieres actualizar");
 		}
 		return response;
 	}
@@ -194,13 +223,15 @@ public class VehicleCatalogsService implements IVehicleCatalogsService{
 	@Override
 	public ResponseBean removeVehicleYearByYear(Integer vehicleYear) {
 		ResponseBean response = new ResponseBean();
-		if(vehicleCatalogDao.removeVehicleYearByYear(vehicleYear)) {
-			response.setCode("OK");
-			response.setMessage("Se elimino correctamente");
-			
-		}else{
-			response.setCode("BAD00");
-			response.setMessage("No se pudo eliminar correctamente");
+		if(vehicleCatalogDao.searchVehicleYearByYear(vehicleYear)!=null) {
+			if(vehicleCatalogDao.removeVehicleYearByYear(vehicleYear)) {
+				response.setCode("OK");
+				response.setMessage("Se elimino correctamente");
+			}else{
+				throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo eliminar el registro");
+			}
+		}else {
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No se elimino porque el año no existe");
 		}
         return response;
 	}
