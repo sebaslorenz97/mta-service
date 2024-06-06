@@ -2,36 +2,42 @@ package com.dulsystems.mta.bean;
 
 public class VehicleBean {
 	
-	private Integer id;
-	private String color;
-	private String plates;
-	private Integer mileage;
+	private Integer vehicleId;
+	private String vehiclePlate;
+	private String vehicleColor;
+	private Integer vehicleMillage;
 	private String customerNameFk;
-	private String vehicleLineNameFk;
-	private String modelNameFk;
-	private Integer cYearValueFk;
 	private Integer customerIdFk;
+	private String vehicleModelNameFk;
+	private Integer vehicleModelIdFk;
+	private Integer vehicleYearValueFk;
+	private Integer vehicleYearIdFk;
+	private String vehicleLineNameFk;
 	private Integer vehicleLineIdFk;
-	private Integer modelIdFk;
-	private Integer cYearIdFk;
 	
-	public String getColor() {
-		return color;
+	public Integer getVehicleId() {
+		return vehicleId;
 	}
-	public void setColor(String color) {
-		this.color = color;
+	public void setVehicleId(Integer vehicleId) {
+		this.vehicleId = vehicleId;
 	}
-	public String getPlates() {
-		return plates;
+	public String getVehiclePlate() {
+		return vehiclePlate;
 	}
-	public void setPlates(String plates) {
-		this.plates = plates;
+	public void setVehiclePlate(String vehiclePlate) {
+		this.vehiclePlate = vehiclePlate;
 	}
-	public Integer getMileage() {
-		return mileage;
+	public String getVehicleColor() {
+		return vehicleColor;
 	}
-	public void setMileage(Integer mileage) {
-		this.mileage = mileage;
+	public void setVehicleColor(String vehicleColor) {
+		this.vehicleColor = vehicleColor;
+	}
+	public Integer getVehicleMillage() {
+		return vehicleMillage;
+	}
+	public void setVehicleMillage(Integer vehicleMillage) {
+		this.vehicleMillage = vehicleMillage;
 	}
 	public String getCustomerNameFk() {
 		return customerNameFk;
@@ -39,53 +45,47 @@ public class VehicleBean {
 	public void setCustomerNameFk(String customerNameFk) {
 		this.customerNameFk = customerNameFk;
 	}
-	public String getVehicleLineNameFk() {
-		return vehicleLineNameFk;
-	}
-	public void setVehicleLineNameFk(String vehicleLineNameFk) {
-		this.vehicleLineNameFk = vehicleLineNameFk;
-	}
-	public String getModelNameFk() {
-		return modelNameFk;
-	}
-	public void setModelNameFk(String modelNameFk) {
-		this.modelNameFk = modelNameFk;
-	}
-	public Integer getcYearValueFk() {
-		return cYearValueFk;
-	}
-	public void setcYearValueFk(Integer cYearValueFk) {
-		this.cYearValueFk = cYearValueFk;
-	}
 	public Integer getCustomerIdFk() {
 		return customerIdFk;
 	}
 	public void setCustomerIdFk(Integer customerIdFk) {
 		this.customerIdFk = customerIdFk;
 	}
+	public String getVehicleModelNameFk() {
+		return vehicleModelNameFk;
+	}
+	public void setVehicleModelNameFk(String vehicleModelNameFk) {
+		this.vehicleModelNameFk = vehicleModelNameFk;
+	}
+	public Integer getVehicleModelIdFk() {
+		return vehicleModelIdFk;
+	}
+	public void setVehicleModelIdFk(Integer vehicleModelIdFk) {
+		this.vehicleModelIdFk = vehicleModelIdFk;
+	}
+	public Integer getVehicleYearValueFk() {
+		return vehicleYearValueFk;
+	}
+	public void setVehicleYearValueFk(Integer vehicleYearValueFk) {
+		this.vehicleYearValueFk = vehicleYearValueFk;
+	}
+	public Integer getVehicleYearIdFk() {
+		return vehicleYearIdFk;
+	}
+	public void setVehicleYearIdFk(Integer vehicleYearIdFk) {
+		this.vehicleYearIdFk = vehicleYearIdFk;
+	}
+	public String getVehicleLineNameFk() {
+		return vehicleLineNameFk;
+	}
+	public void setVehicleLineNameFk(String vehicleLineNameFk) {
+		this.vehicleLineNameFk = vehicleLineNameFk;
+	}
 	public Integer getVehicleLineIdFk() {
 		return vehicleLineIdFk;
 	}
 	public void setVehicleLineIdFk(Integer vehicleLineIdFk) {
 		this.vehicleLineIdFk = vehicleLineIdFk;
-	}
-	public Integer getModelIdFk() {
-		return modelIdFk;
-	}
-	public void setModelIdFk(Integer modelIdFk) {
-		this.modelIdFk = modelIdFk;
-	}
-	public Integer getcYearIdFk() {
-		return cYearIdFk;
-	}
-	public void setcYearIdFk(Integer cYearIdFk) {
-		this.cYearIdFk = cYearIdFk;
-	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 }

@@ -58,6 +58,7 @@ public class VehicleService implements IVehicleService {
 							if(vehicleDao.executeSaveVehicle(request, cb, vlb, vmb, vyb) == true) {
 								response.setCode("OK");
 								response.setMessage("Se guardo el registro");
+								response.setVb(vehicleDao.searchVehicleByPlate(request.getVehiclePlate()));
 							
 							}else{
 								throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo guardar el registro");

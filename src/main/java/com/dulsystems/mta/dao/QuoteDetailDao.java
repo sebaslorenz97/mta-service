@@ -39,7 +39,7 @@ public class QuoteDetailDao implements IQuoteDetailDao{
 	@Override
 	public boolean executeSaveQuote(RequestBean request, VehicleBean vb) {
 		boolean bin = false;
-		int result = jdbcTemplate.update(Queries.Q_QUOTES_SAVE, new Object[] { vb.getId(),request.getQuoteOrderDate(),request.getQuoteDeadline(),request.getQuoteStatusVehicle(),request.getQuotePaymentMethod(),request.getQuotePaymentStatus(),request.getQuoteAdvancePayment(),request.getQuoteRequireInvoice() });
+		int result = jdbcTemplate.update(Queries.Q_QUOTES_SAVE, new Object[] { vb.getVehicleId(),request.getQuoteOrderDate(),request.getQuoteDeadline(),request.getQuoteStatusVehicle(),request.getQuotePaymentMethod(),request.getQuotePaymentStatus(),request.getQuoteAdvancePayment(),request.getQuoteRequireInvoice() });
         if (result > 0) {
             bin = true;
         }
@@ -49,7 +49,7 @@ public class QuoteDetailDao implements IQuoteDetailDao{
 	@Override
 	public boolean executeUpdateQuoteById(RequestBean request, VehicleBean vb) {
 		boolean bin = false;
-		int result = jdbcTemplate.update(Queries.Q_QUOTES_UPDATE_BY_ID, new Object[] { vb.getId(),request.getQuoteOrderDate(),request.getQuoteDeadline(),request.getQuoteStatusVehicle(),request.getQuotePaymentMethod(),request.getQuotePaymentStatus(),request.getQuoteAdvancePayment(),request.getQuoteRequireInvoice(), request.getQuoteId() });
+		int result = jdbcTemplate.update(Queries.Q_QUOTES_UPDATE_BY_ID, new Object[] { vb.getVehicleId(),request.getQuoteOrderDate(),request.getQuoteDeadline(),request.getQuoteStatusVehicle(),request.getQuotePaymentMethod(),request.getQuotePaymentStatus(),request.getQuoteAdvancePayment(),request.getQuoteRequireInvoice(), request.getQuoteId() });
         if (result > 0) {
             bin = true;
         }
