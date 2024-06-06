@@ -5,6 +5,7 @@ public class MunicipalityBean {
 	private Integer municipalityId;
 	private String municipalityName;
 	private Integer stateIdFk;
+	private String stateNameFk;
 	
 	public Integer getMunicipalityId() {
 		return municipalityId;
@@ -23,6 +24,12 @@ public class MunicipalityBean {
 	}
 	public void setStateIdFk(Integer stateIdFk) {
 		this.stateIdFk = stateIdFk;
+	}
+	public String getStateNameFk() {
+		return stateNameFk;
+	}
+	public void setStateNameFk(String stateNameFk) {
+		this.stateNameFk = stateNameFk;
 	}
 
 }

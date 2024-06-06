@@ -17,9 +17,13 @@ public class VehicleMapper implements RowMapper<VehicleBean>{
 		vb.setVehiclePlate(rs.getString("placas"));
 		vb.setVehicleMillage(rs.getInt("kilometraje_inicial"));
 		vb.setCustomerIdFk(rs.getInt("id_cliente_fk"));
+		vb.setCustomerNameFk(rs.getString("nombre"));
 		vb.setVehicleLineIdFk(rs.getInt("id_marca_fk"));
+		vb.setVehicleLineNameFk(rs.getString("marca"));
 		vb.setVehicleModelIdFk(rs.getInt("id_modelo_fk"));
+		vb.setVehicleModelNameFk(rs.getString("modelo"));
 		vb.setVehicleYearIdFk(rs.getInt("id_c_years_fk"));
+		vb.setVehicleYearValueFk(rs.getInt("c_year"));
 		return vb;
 	}
 

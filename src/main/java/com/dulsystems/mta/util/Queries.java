@@ -2,7 +2,11 @@ package com.dulsystems.mta.util;
 
 public class Queries {
 	//CUSTOMER CRUD SQLS
-	public static final String Q_CUSTOMERS_SEARCH_BY_NAME = "SELECT * FROM clientes WHERE nombre = ?;";
+	public static final String Q_CUSTOMERS_SEARCH_BY_NAME = "SELECT clientes.id_cliente_pk, clientes.id_estado_fk, estados.estado, clientes.id_municipio_fk, municipios.municipio, clientes.nombre, clientes.particular_o_empresa, clientes.referencia, clientes.rfc, clientes.cp, clientes.email, clientes.telefono\r\n"
+			+ "FROM clientes\r\n"
+			+ "INNER JOIN estados ON clientes.id_estado_fk = estados.id_estado_pk\r\n"
+			+ "INNER JOIN municipios ON clientes.id_municipio_fk = municipios.id_municipio_pk\r\n"
+			+ "WHERE clientes.nombre = ?;";
 	public static final String Q_CUSTOMERS_REMOVE_BY_NAME = "DELETE FROM clientes WHERE nombre = ?";
 	public static final String Q_CUSTOMERS_SAVE = "INSERT INTO clientes(id_estado_fk, id_municipio_fk, nombre, particular_o_empresa, referencia, rfc, cp, email, telefono) VALUES(?,?,?,?,?,?,?,?,?);";
 	public static final String Q_CUSTOMERS_UPDATE_BY_NAME = "UPDATE clientes SET id_estado_fk = ?, id_municipio_fk = ?, nombre = ?, particular_o_empresa = ?, referencia = ?, rfc = ?, cp = ?, email = ?, telefono = ? WHERE nombre = ?";
@@ -22,7 +26,13 @@ public class Queries {
 	public static final String Q_MUNICIPALITIES_UPDATE_BY_MUNICIPALITY = "UPDATE municipios SET id_estado_fk = ?, municipio = ? WHERE municipio = ?";
 	
 	//VEHICLE CRUD SQLS
-	public static final String Q_VEHICLES_SEARCH_BY_PLATE = "SELECT * FROM vehiculos WHERE placas = ?;";
+	public static final String Q_VEHICLES_SEARCH_BY_PLATE = "SELECT vehiculos.id_vehiculo_pk, vehiculos.id_cliente_fk, clientes.nombre, vehiculos.id_marca_fk, marcas.marca, vehiculos.id_modelo_fk, modelos.modelo, vehiculos.id_c_years_fk, c_years.c_year, vehiculos.color, vehiculos.placas, vehiculos.kilometraje_inicial\r\n"
+			+ "FROM vehiculos\r\n"
+			+ "INNER JOIN clientes ON vehiculos.id_cliente_fk = clientes.id_cliente_pk\r\n"
+			+ "INNER JOIN marcas ON vehiculos.id_marca_fk = marcas.id_marca_pk\r\n"
+			+ "INNER JOIN modelos ON vehiculos.id_modelo_fk = modelos.id_modelo_pk\r\n"
+			+ "INNER JOIN c_years ON vehiculos.id_c_years_fk = c_years.id_c_year_pk\r\n"
+			+ "WHERE vehiculos.placas = ?;";
 	public static final String Q_VEHICLES_REMOVE_BY_PLATE = "DELETE FROM vehiculos WHERE placas = ?";
 	public static final String Q_VEHICLES_SAVE = "INSERT INTO vehiculos(id_cliente_fk, id_marca_fk, id_modelo_fk, id_c_years_fk, color, placas, kilometraje_inicial) VALUES(?,?,?,?,?,?,?);";
 	public static final String Q_VEHICLES_UPDATE_BY_PLATE = "UPDATE vehiculos SET id_cliente_fk = ?, id_marca_fk = ?, id_modelo_fk = ?, id_c_years_fk = ?, color = ?, placas = ?, kilometraje_inicial = ? WHERE placas = ?";
@@ -49,7 +59,10 @@ public class Queries {
 	public static final String Q_VEHICLES_YEAR_UPDATE_BY_YEAR = "UPDATE c_years SET c_year = ? WHERE c_year = ?";
 	
 	//QUOTES CRUD SQLS
-	public static final String Q_QUOTES_SEARCH_BY_ID = "SELECT * FROM cotizaciones WHERE id_cotizacion_pk = ?;";
+	public static final String Q_QUOTES_SEARCH_BY_ID = "SELECT cotizaciones.id_cotizacion_pk, cotizaciones.id_vehiculo_fk, vehiculos.placas, cotizaciones.fecha_orden, cotizaciones.fecha_entrega, cotizaciones.estatus_auto, cotizaciones.metodo_pago, cotizaciones.estatus_pago, cotizaciones.adelanto_pago, cotizaciones.factura\r\n"
+			+ "FROM cotizaciones\r\n"
+			+ "INNER JOIN vehiculos ON cotizaciones.id_vehiculo_fk = vehiculos.id_vehiculo_pk\r\n"
+			+ "WHERE cotizaciones.id_cotizacion_pk = ?;";
 	public static final String Q_QUOTES_REMOVE_BY_ID = "DELETE FROM cotizaciones WHERE id_cotizacion_pk = ?;";
 	public static final String Q_QUOTES_SAVE = "INSERT INTO cotizaciones(id_vehiculo_fk,fecha_orden,fecha_entrega,estatus_auto,metodo_pago,estatus_pago,adelanto_pago,factura) VALUES(?,?,?,?,?,?,?,?);";
 	public static final String Q_QUOTES_UPDATE_BY_ID = "UPDATE cotizaciones SET id_vehiculo_fk = ?, fecha_orden = ?, fecha_entrega = ?, estatus_auto = ?, metodo_pago = ?, estatus_pago = ?, adelanto_pago = ?, factura = ? WHERE id_cotizacion_pk = ?";

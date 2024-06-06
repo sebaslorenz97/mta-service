@@ -9,6 +9,7 @@ public interface IVehicleCatalogsDao {
 	
 	//DAO FOR VEHICLE LINE
 	VehicleLineBean searchVehicleLineByLine(String vehicleLine);
+	VehicleLineBean searchVehicleLineById(Integer vehicleId);
 	boolean executeSaveVehicleLine(RequestBean request);
 	boolean executeUpdateVehicleLineByLine(RequestBean request);
 	boolean removeVehicleLineByLine(String vehicleLine);

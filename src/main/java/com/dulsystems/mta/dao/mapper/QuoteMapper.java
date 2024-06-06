@@ -21,6 +21,7 @@ public class QuoteMapper implements RowMapper<QuoteBean>{
 		qb.setQuoteAdvancePayment(rs.getInt("adelanto_pago"));
 		qb.setQuoteRequireInvoice(rs.getBoolean("factura"));
 		qb.setVehicleIdFk(rs.getInt("id_vehiculo_fk"));
+		qb.setVehicleNameFk(rs.getString("placas"));
 		return qb;
 	}
 

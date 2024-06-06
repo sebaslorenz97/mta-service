@@ -11,6 +11,7 @@ public class QuoteBean {
 	private Integer quoteAdvancePayment;
 	private Boolean quoteRequireInvoice;
 	private Integer vehicleIdFk;
+	private String vehicleNameFk;
 	
 	public Integer getQuoteId() {
 		return quoteId;
@@ -65,6 +66,12 @@ public class QuoteBean {
 	}
 	public void setVehicleIdFk(Integer vehicleIdFk) {
 		this.vehicleIdFk = vehicleIdFk;
+	}
+	public String getVehicleNameFk() {
+		return vehicleNameFk;
+	}
+	public void setVehicleNameFk(String vehicleNameFk) {
+		this.vehicleNameFk = vehicleNameFk;
 	}
 
 }

@@ -96,6 +96,7 @@ public class VehicleCatalogsService implements IVehicleCatalogsService{
 		if(vmb != null) {
 			response.setCode("OK");
 			response.setMessage("Consulta realizada");
+			vmb.setVehicleLineNameFk(vehicleCatalogDao.searchVehicleLineById(vmb.getVehicleLineIdFk()).getVehicleLineName());
 			response.setVmb(vmb);
 		}else {
 			throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No existe el modelo");

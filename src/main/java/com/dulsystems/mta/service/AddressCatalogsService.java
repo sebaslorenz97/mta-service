@@ -94,6 +94,7 @@ public class AddressCatalogsService implements IAddressCatalogs{
 		if(mb != null) {
 			response.setCode("OK");
 			response.setMessage("Consulta realizada");
+			mb.setStateNameFk(addressCatalogsDao.searchStateById(mb.getStateIdFk()).getStateName());
 			response.setMb(mb);
 		}else {
 			throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No existe el municipio");

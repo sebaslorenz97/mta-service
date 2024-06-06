@@ -11,7 +11,6 @@ public class CustomerMapper implements RowMapper<CustomerBean>{
 
 	@Override
 	public CustomerBean mapRow(ResultSet rs, int rowNum) throws SQLException {
-
 		CustomerBean cb = new CustomerBean();
 		cb.setCustomerId(rs.getInt("id_cliente_pk"));
 		cb.setCustomerName(rs.getString("nombre"));
@@ -22,7 +21,9 @@ public class CustomerMapper implements RowMapper<CustomerBean>{
 		cb.setCustomerEmail(rs.getString("email"));
 		cb.setCustomerPhoneNumber(rs.getString("telefono"));
 		cb.setCustomerStateIdFk(rs.getInt("id_estado_fk"));
+		cb.setCustomerStateNameFk(rs.getString("estado"));
 		cb.setCustomerMunicipalityIdFk(rs.getInt("id_municipio_fk"));
+		cb.setCustomerMunicipalityNameFk(rs.getString("municipio"));
 		return cb;
 
 	}
