@@ -3,17 +3,17 @@ package com.dulsystems.mta.bean;
 public class CustomerBean {
 	
 	private Integer customerId;
-	private String name;
-	private Boolean privateEnterprise;
-	private String reference;
-	private String rfcKey;
-	private String cp;
-	private String email;
-	private String phoneNumber;
-	private String stateNameFk;
-	private String municipalityNameFk;
-	private Integer stateIdFk;
-	private Integer municipalityIdFk;
+	private String customerName;
+	private Boolean customerPrivateEnterprise;
+	private String customerReference;
+	private String customerRfcKey;
+	private String customerCp;
+	private String customerEmail;
+	private String customerPhoneNumber;
+	private String customerStateNameFk;
+	private String customerMunicipalityNameFk;
+	private Integer customerStateIdFk;
+	private Integer customerMunicipalityIdFk;
 	
 	public Integer getCustomerId() {
 		return customerId;
@@ -21,71 +21,71 @@ public class CustomerBean {
 	public void setCustomerId(Integer customerId) {
 		this.customerId = customerId;
 	}
-	public String getName() {
-		return name;
+	public String getCustomerName() {
+		return customerName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
-	public Boolean getPrivateEnterprise() {
-		return privateEnterprise;
+	public Boolean getCustomerPrivateEnterprise() {
+		return customerPrivateEnterprise;
 	}
-	public void setPrivateEnterprise(Boolean privateEnterprise) {
-		this.privateEnterprise = privateEnterprise;
+	public void setCustomerPrivateEnterprise(Boolean customerPrivateEnterprise) {
+		this.customerPrivateEnterprise = customerPrivateEnterprise;
 	}
-	public String getReference() {
-		return reference;
+	public String getCustomerReference() {
+		return customerReference;
 	}
-	public void setReference(String reference) {
-		this.reference = reference;
+	public void setCustomerReference(String customerReference) {
+		this.customerReference = customerReference;
 	}
-	public String getRfcKey() {
-		return rfcKey;
+	public String getCustomerRfcKey() {
+		return customerRfcKey;
 	}
-	public void setRfcKey(String rfcKey) {
-		this.rfcKey = rfcKey;
+	public void setCustomerRfcKey(String customerRfcKey) {
+		this.customerRfcKey = customerRfcKey;
 	}
-	public String getCp() {
-		return cp;
+	public String getCustomerCp() {
+		return customerCp;
 	}
-	public void setCp(String cp) {
-		this.cp = cp;
+	public void setCustomerCp(String customerCp) {
+		this.customerCp = customerCp;
 	}
-	public String getEmail() {
-		return email;
+	public String getCustomerEmail() {
+		return customerEmail;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setCustomerEmail(String customerEmail) {
+		this.customerEmail = customerEmail;
 	}
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public String getCustomerPhoneNumber() {
+		return customerPhoneNumber;
 	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setCustomerPhoneNumber(String customerPhoneNumber) {
+		this.customerPhoneNumber = customerPhoneNumber;
 	}
-	public String getStateNameFk() {
-		return stateNameFk;
+	public String getCustomerStateNameFk() {
+		return customerStateNameFk;
 	}
-	public void setStateNameFk(String stateNameFk) {
-		this.stateNameFk = stateNameFk;
+	public void setCustomerStateNameFk(String customerStateNameFk) {
+		this.customerStateNameFk = customerStateNameFk;
 	}
-	public String getMunicipalityNameFk() {
-		return municipalityNameFk;
+	public String getCustomerMunicipalityNameFk() {
+		return customerMunicipalityNameFk;
 	}
-	public void setMunicipalityNameFk(String municipalityNameFk) {
-		this.municipalityNameFk = municipalityNameFk;
+	public void setCustomerMunicipalityNameFk(String customerMunicipalityNameFk) {
+		this.customerMunicipalityNameFk = customerMunicipalityNameFk;
 	}
-	public Integer getStateIdFk() {
-		return stateIdFk;
+	public Integer getCustomerStateIdFk() {
+		return customerStateIdFk;
 	}
-	public void setStateIdFk(Integer stateIdFk) {
-		this.stateIdFk = stateIdFk;
+	public void setCustomerStateIdFk(Integer customerStateIdFk) {
+		this.customerStateIdFk = customerStateIdFk;
 	}
-	public Integer getMunicipalityIdFk() {
-		return municipalityIdFk;
+	public Integer getCustomerMunicipalityIdFk() {
+		return customerMunicipalityIdFk;
 	}
-	public void setMunicipalityIdFk(Integer municipalityIdFk) {
-		this.municipalityIdFk = municipalityIdFk;
+	public void setCustomerMunicipalityIdFk(Integer customerMunicipalityIdFk) {
+		this.customerMunicipalityIdFk = customerMunicipalityIdFk;
 	}
 	
 }

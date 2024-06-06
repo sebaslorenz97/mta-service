@@ -50,7 +50,7 @@ public class CustomerService implements ICustomerService {
 					if(customerDao.executeSaveCustomer(request, sb, mb) == true) {
 						response.setCode("OK");
 						response.setMessage("Se guardo el registro");
-					
+						response.setCb(customerDao.searchCustomerByName(request.getCustomerName()));
 					}else{
 						throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo guardar el registro");
 					}
