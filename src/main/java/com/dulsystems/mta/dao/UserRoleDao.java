@@ -89,6 +89,7 @@ public class UserRoleDao implements IUserRoleDao{
 	@Override
 	public boolean executeSaveUserRole(RequestBean request) {
 		boolean bin = false;
+		System.out.println("FECHA -----------> " + request.getRoleUserGrantedDate());
 		int result = jdbcTemplate.update(Queries.Q_USER_ROLES_SAVE, new Object[] { request.getRoleUserPk(),request.getUserPkFk(),request.getRoleUserGrantedDate() });
         if (result > 0) {
             bin = true;

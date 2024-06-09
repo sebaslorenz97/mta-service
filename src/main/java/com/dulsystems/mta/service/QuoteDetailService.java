@@ -48,7 +48,7 @@ public class QuoteDetailService implements IQuoteDetailService{
 			if(quoteDetailDao.executeSaveQuote(request, vb) == true) {
 				response.setCode("OK");
 				response.setMessage("Se guardo el registro");
-			
+				response.setQb(quoteDetailDao.searchLastQuoteCreated(request, vehicleDao.searchVehicleByPlate(request.getVehiclePlate()).getVehicleId()));
 			}else{
 				throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo guardar el registro");
 			}
@@ -125,6 +125,7 @@ public class QuoteDetailService implements IQuoteDetailService{
 			if(quoteDetailDao.executeSaveQuoteDetails(request, request.getLqdb()).length > 0) {
 				response.setCode("OK");
 				response.setMessage("Se guardaron los detalles de la cotizacion");
+				response.setLQdb(request.getLqdb());
 			}else{
 				throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudieron guardar los detalles de la cotizacion");
 			}

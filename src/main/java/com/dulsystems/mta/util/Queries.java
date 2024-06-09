@@ -63,6 +63,11 @@ public class Queries {
 			+ "FROM cotizaciones\r\n"
 			+ "INNER JOIN vehiculos ON cotizaciones.id_vehiculo_fk = vehiculos.id_vehiculo_pk\r\n"
 			+ "WHERE cotizaciones.id_cotizacion_pk = ?;";
+	public static final String Q_QUOTES_SEARCH_LAST_QUOTE_CREATED = "SELECT * \r\n"
+			+ "FROM cotizaciones \r\n"
+			+ "INNER JOIN vehiculos ON cotizaciones.id_vehiculo_fk = vehiculos.id_vehiculo_pk \r\n"
+			+ "	WHERE cotizaciones.fecha_orden = (SELECT MAX(cotizaciones.fecha_orden) FROM cotizaciones \r\n"
+			+ "		WHERE cotizaciones.id_Vehiculo_fk = ? AND cotizaciones.fecha_entrega = ?);";
 	public static final String Q_QUOTES_REMOVE_BY_ID = "DELETE FROM cotizaciones WHERE id_cotizacion_pk = ?;";
 	public static final String Q_QUOTES_SAVE = "INSERT INTO cotizaciones(id_vehiculo_fk,fecha_orden,fecha_entrega,estatus_auto,metodo_pago,estatus_pago,adelanto_pago,factura) VALUES(?,?,?,?,?,?,?,?);";
 	public static final String Q_QUOTES_UPDATE_BY_ID = "UPDATE cotizaciones SET id_vehiculo_fk = ?, fecha_orden = ?, fecha_entrega = ?, estatus_auto = ?, metodo_pago = ?, estatus_pago = ?, adelanto_pago = ?, factura = ? WHERE id_cotizacion_pk = ?";

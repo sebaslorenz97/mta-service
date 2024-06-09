@@ -44,6 +44,7 @@ public class UserRoleService implements IUserRoleService {
 			if(userRoleDao.executeSaveUser(request) == true) {
 				response.setCode("OK");
 				response.setMessage("Se guardo el registro");
+				response.setUb(userRoleDao.searchUserByUser(request.getUserPk()));
 			}else{
 				throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo guardar el registro");
 			}
@@ -109,6 +110,7 @@ public class UserRoleService implements IUserRoleService {
 				if(userRoleDao.executeSaveUserRole(request) == true) {
 					response.setCode("OK");
 					response.setMessage("Se asigno el rol al usuario");
+					response.setUrb(userRoleDao.searchUserRoleByRoleAndUser(request));
 				}else{
 					throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo asignar el rol al usuario");
 				}

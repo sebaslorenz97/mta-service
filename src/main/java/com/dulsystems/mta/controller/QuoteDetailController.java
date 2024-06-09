@@ -58,6 +58,7 @@ public class QuoteDetailController {
 	
 	@RequestMapping(value="savenewquotedetails", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     public ResponseEntity<ResponseBean> executeSaveQuoteDetails(@Valid @RequestBody RequestBean rb) {
+		System.out.println("COTIZACION ID ---------> "+ rb.getLqdb().get(0).getQuoteDetailIdFk());
 		return new ResponseEntity<ResponseBean>(quoteDetailService.executeSaveQuoteDetails(rb),HttpStatus.CREATED);
     }
 	

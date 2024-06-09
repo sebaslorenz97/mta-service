@@ -14,8 +14,8 @@ public class UserRoleMapper implements RowMapper<UserRoleBean>{
 	public UserRoleBean mapRow(ResultSet rs, int rowNum) throws SQLException {
 		UserRoleBean urb = new UserRoleBean();
 		urb.setRoleUserPk(rs.getString("role_user_pk"));
-		urb.setRoleUserGrantedDate(rs.getString("username_fk"));
-		urb.setUserPkFk(rs.getString("granted_date"));
+		urb.setRoleUserGrantedDate(rs.getString("granted_date"));
+		urb.setUserPkFk(rs.getString("username_fk"));
 		return urb;
 	}
 

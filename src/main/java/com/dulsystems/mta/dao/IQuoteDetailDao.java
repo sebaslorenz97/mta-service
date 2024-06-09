@@ -11,6 +11,7 @@ public interface IQuoteDetailDao {
 	
 	//DAO FOR QUOTE
 	QuoteBean searchQuoteById(Integer id);
+	QuoteBean searchLastQuoteCreated(RequestBean request, Integer vehicleId);
 	boolean executeSaveQuote(RequestBean request, VehicleBean vb);
 	boolean executeUpdateQuoteById(RequestBean request, VehicleBean vb);
 	boolean removeQuoteById(Integer id);

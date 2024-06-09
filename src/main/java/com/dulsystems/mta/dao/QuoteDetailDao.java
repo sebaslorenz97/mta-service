@@ -35,6 +35,18 @@ public class QuoteDetailDao implements IQuoteDetailDao{
 			return null;
 		}
 	}
+	
+	@Override
+	public QuoteBean searchLastQuoteCreated(RequestBean request, Integer vehicleId) {
+		try {
+			System.out.println("ID DEL AUTO: " + vehicleId);
+			System.out.println("FECHA DE ENTREGA: " + request.getQuoteDeadline());
+			QuoteBean qb = jdbcTemplate.queryForObject(Queries.Q_QUOTES_SEARCH_LAST_QUOTE_CREATED, new QuoteMapper(), new Object[] { vehicleId, request.getQuoteDeadline() } );
+			return qb;
+		}catch(EmptyResultDataAccessException e){
+			return null;
+		}
+	}
 
 	@Override
 	public boolean executeSaveQuote(RequestBean request, VehicleBean vb) {
