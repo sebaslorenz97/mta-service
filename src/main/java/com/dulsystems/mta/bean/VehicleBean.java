@@ -15,6 +15,9 @@ public class VehicleBean {
 	private String vehicleLineNameFk;
 	private Integer vehicleLineIdFk;
 	
+	//REQUEST FIELDS IN MAPPER: FOR GET CUSTOMER VEHICLES
+	
+	
 	public Integer getVehicleId() {
 		return vehicleId;
 	}

@@ -39,6 +39,25 @@ public class QuoteDetailService implements IQuoteDetailService{
 		}
 		return response;
 	}
+	
+	@Override
+	public ResponseBean searchVehicleQuotesByVehiclePlate(String vehiclePlate) {
+		ResponseBean response = new ResponseBean();
+		VehicleBean vb = vehicleDao.searchVehicleByPlate(vehiclePlate);
+		if(vb != null) {
+			List<QuoteBean> lqb = quoteDetailDao.searchVehicleQuotesByVehicleId(vb.getVehicleId());
+			if(lqb.size() > 0) {
+				response.setCode("OK");
+				response.setMessage("Consulta realizada");
+				response.setLqb(lqb);
+			}else {
+				throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"El vehiculo no tiene cotizaciones");
+			}
+		}else{
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el vehiculo");
+		}
+		return response;
+	}
 
 	@Override
 	public ResponseBean executeSaveQuote(RequestBean request) {

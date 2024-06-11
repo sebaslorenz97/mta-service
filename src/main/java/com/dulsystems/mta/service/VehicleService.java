@@ -1,5 +1,7 @@
 package com.dulsystems.mta.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -26,7 +28,8 @@ public class VehicleService implements IVehicleService {
 	private CustomerDao customerDao;
 	
 	@Autowired
-	private VehicleCatalogDao vehicleCatalogDao; 
+	private VehicleCatalogDao vehicleCatalogDao;
+
 	
 	@Override
 	public ResponseBean searchVehicleByPlate(String plate) {
@@ -39,6 +42,25 @@ public class VehicleService implements IVehicleService {
 			response.setVb(vb);
 		}else {
 			throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No existe el vehiculo");
+		}
+		return response;
+	}
+	
+	@Override
+	public ResponseBean searchCustomerVehiclesByCustomerName(String customerName) {
+		ResponseBean response = new ResponseBean();
+		CustomerBean cb = customerDao.searchCustomerByName(customerName);
+		if(cb != null) {
+			List<VehicleBean> lvb = vehicleDao.searchCustomerVehiclesByCustomerName(cb.getCustomerId());
+			if(lvb.size() > 0) {
+				response.setCode("OK");
+				response.setMessage("Consulta realizada");
+				response.setLvb(lvb);
+			}else {
+				throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"El cliente no tiene registrado vehiculos");
+			}
+		}else {
+			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el cliente");
 		}
 		return response;
 	}

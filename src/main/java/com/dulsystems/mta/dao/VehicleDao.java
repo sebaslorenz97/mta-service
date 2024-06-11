@@ -1,16 +1,21 @@
 package com.dulsystems.mta.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.dulsystems.mta.bean.CustomerBean;
+import com.dulsystems.mta.bean.QuoteDetailBean;
 import com.dulsystems.mta.bean.RequestBean;
 import com.dulsystems.mta.bean.VehicleBean;
 import com.dulsystems.mta.bean.VehicleLineBean;
 import com.dulsystems.mta.bean.VehicleModelBean;
 import com.dulsystems.mta.bean.VehicleYearBean;
+import com.dulsystems.mta.dao.mapper.CustomerVehiclesMapper;
+import com.dulsystems.mta.dao.mapper.QuoteDetailMapper;
 import com.dulsystems.mta.dao.mapper.VehicleMapper;
 import com.dulsystems.mta.util.Queries;
 
@@ -30,6 +35,18 @@ public class VehicleDao implements IVehicleDao {
 		}
 	}
 
+	@Override
+	public List<VehicleBean> searchCustomerVehiclesByCustomerName(Integer customerId){
+		try {
+			List<VehicleBean> lvb = jdbcTemplate.query(Queries.Q_VEHICLES_SEARCH_CUSTOMER_VEHICLES,  new CustomerVehiclesMapper(), customerId);
+			System.out.println(lvb);
+			return lvb;
+		}catch(EmptyResultDataAccessException e){
+			return null;
+		}
+		
+	}
+	
 	@Override
 	public boolean executeSaveVehicle(RequestBean request, CustomerBean cb, VehicleLineBean vlb, VehicleModelBean vmb, VehicleYearBean vyb) {
 		boolean bin = false;

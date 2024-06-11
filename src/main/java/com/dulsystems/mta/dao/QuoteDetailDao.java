@@ -47,6 +47,16 @@ public class QuoteDetailDao implements IQuoteDetailDao{
 			return null;
 		}
 	}
+	
+	@Override
+	public List<QuoteBean> searchVehicleQuotesByVehicleId(Integer id){
+		try {
+			List<QuoteBean> lqb = jdbcTemplate.query(Queries.Q_QUOTES_SEARCH_VEHICLE_QUOTES, new QuoteMapper(), id);
+			return lqb;
+		}catch(EmptyResultDataAccessException e){
+			return null;
+		}
+	}
 
 	@Override
 	public boolean executeSaveQuote(RequestBean request, VehicleBean vb) {

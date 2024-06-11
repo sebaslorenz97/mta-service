@@ -2,6 +2,7 @@ package com.dulsystems.mta.service;
 
 import java.util.List;
 
+import com.dulsystems.mta.bean.QuoteBean;
 import com.dulsystems.mta.bean.RequestBean;
 import com.dulsystems.mta.bean.ResponseBean;
 
@@ -10,6 +11,7 @@ public interface IQuoteDetailService {
 	//SERVICES FOR QUOTE
 	ResponseBean searchQuoteById(Integer id);
 	ResponseBean executeSaveQuote(RequestBean request);
+	ResponseBean searchVehicleQuotesByVehiclePlate(String vehiclePlate);
 	ResponseBean executeUpdateQuoteById(RequestBean request);
 	ResponseBean removeQuoteById(Integer id);
 	

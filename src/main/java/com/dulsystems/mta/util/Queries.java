@@ -33,6 +33,12 @@ public class Queries {
 			+ "INNER JOIN modelos ON vehiculos.id_modelo_fk = modelos.id_modelo_pk\r\n"
 			+ "INNER JOIN c_years ON vehiculos.id_c_years_fk = c_years.id_c_year_pk\r\n"
 			+ "WHERE vehiculos.placas = ?;";
+	public static final String Q_VEHICLES_SEARCH_CUSTOMER_VEHICLES = "SELECT vehiculos.id_vehiculo_pk, vehiculos.color, vehiculos.placas, vehiculos.kilometraje_inicial, marcas.marca, modelos.modelo, c_years.c_year\r\n"
+			+ "	FROM vehiculos \r\n"
+			+ "    INNER JOIN marcas ON vehiculos.id_marca_fk = marcas.id_marca_pk\r\n"
+			+ "    INNER JOIN modelos ON vehiculos.id_modelo_fk = modelos.id_modelo_pk\r\n"
+			+ "    INNER JOIN c_years ON vehiculos.id_c_years_fk = c_years.id_c_year_pk\r\n"
+			+ "		WHERE id_cliente_fk = ?;";
 	public static final String Q_VEHICLES_REMOVE_BY_PLATE = "DELETE FROM vehiculos WHERE placas = ?";
 	public static final String Q_VEHICLES_SAVE = "INSERT INTO vehiculos(id_cliente_fk, id_marca_fk, id_modelo_fk, id_c_years_fk, color, placas, kilometraje_inicial) VALUES(?,?,?,?,?,?,?);";
 	public static final String Q_VEHICLES_UPDATE_BY_PLATE = "UPDATE vehiculos SET id_cliente_fk = ?, id_marca_fk = ?, id_modelo_fk = ?, id_c_years_fk = ?, color = ?, placas = ?, kilometraje_inicial = ? WHERE placas = ?";
@@ -68,10 +74,14 @@ public class Queries {
 			+ "INNER JOIN vehiculos ON cotizaciones.id_vehiculo_fk = vehiculos.id_vehiculo_pk \r\n"
 			+ "	WHERE cotizaciones.fecha_orden = (SELECT MAX(cotizaciones.fecha_orden) FROM cotizaciones \r\n"
 			+ "		WHERE cotizaciones.id_Vehiculo_fk = ? AND cotizaciones.fecha_entrega = ?);";
+	public static final String Q_QUOTES_SEARCH_VEHICLE_QUOTES = "SELECT * FROM cotizaciones\r\n"
+			+ "INNER JOIN vehiculos ON cotizaciones.id_vehiculo_fk = vehiculos.id_vehiculo_pk\r\n"
+			+ "	WHERE id_vehiculo_fk = ?;";
 	public static final String Q_QUOTES_REMOVE_BY_ID = "DELETE FROM cotizaciones WHERE id_cotizacion_pk = ?;";
 	public static final String Q_QUOTES_SAVE = "INSERT INTO cotizaciones(id_vehiculo_fk,fecha_orden,fecha_entrega,estatus_auto,metodo_pago,estatus_pago,adelanto_pago,factura) VALUES(?,?,?,?,?,?,?,?);";
 	public static final String Q_QUOTES_UPDATE_BY_ID = "UPDATE cotizaciones SET id_vehiculo_fk = ?, fecha_orden = ?, fecha_entrega = ?, estatus_auto = ?, metodo_pago = ?, estatus_pago = ?, adelanto_pago = ?, factura = ? WHERE id_cotizacion_pk = ?";
 		
+	
 	//DETAIL QUOTES CRUD SQLS
 	public static final String Q_QUOTE_DETAILS_SEARCH_BY_ID = "SELECT * FROM cotizaciones_detalle WHERE id_cotizacion_fk = ?;";
 	public static final String Q_QUOTE_DETAILS_REMOVE_BY_ID = "DELETE FROM cotizaciones_detalle WHERE id_cotizacion_fk = ?;";

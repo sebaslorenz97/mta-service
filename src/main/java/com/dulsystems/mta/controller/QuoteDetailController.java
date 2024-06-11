@@ -35,6 +35,11 @@ public class QuoteDetailController {
 		return new ResponseEntity<ResponseBean>(quoteDetailService.searchQuoteById(Integer.parseInt(quoteId)),HttpStatus.OK);
     }
 	
+    @RequestMapping(value="searchvehiclequotesbyvehicleplate/{plate}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    public ResponseEntity<ResponseBean> searchVehicleQuotesByVehiclePlate(@PathVariable("plate") String plate)  {
+		return new ResponseEntity<ResponseBean>(quoteDetailService.searchVehicleQuotesByVehiclePlate(plate),HttpStatus.OK);
+    }
+    
 	@RequestMapping(value="savenewquote", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     public ResponseEntity<ResponseBean> executeSaveQuote(@Valid @RequestBody RequestBean rb) {
 		return new ResponseEntity<ResponseBean>(quoteDetailService.executeSaveQuote(rb),HttpStatus.CREATED);

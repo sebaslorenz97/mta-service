@@ -17,6 +17,8 @@ public class ResponseBean {
 	private VehicleYearBean vyb;
 	private QuoteBean qb;
 	private List<QuoteDetailBean> lqdb;
+	private List<VehicleBean> lvb;
+	private List<QuoteBean> lqb;
 	private UserBean ub;
 	private UserRoleBean urb;
 	private List<String> roles;
@@ -118,6 +120,18 @@ public class ResponseBean {
 	}
 	public void setRolesFromAuthentication(List<GrantedAuthority> rolesFromAuthentication) {
 		this.rolesFromAuthentication = rolesFromAuthentication;
+	}
+	public List<VehicleBean> getLvb() {
+		return lvb;
+	}
+	public void setLvb(List<VehicleBean> lvb) {
+		this.lvb = lvb;
+	}
+	public List<QuoteBean> getLqb() {
+		return lqb;
+	}
+	public void setLqb(List<QuoteBean> lqb) {
+		this.lqb = lqb;
 	}
 	
 }
