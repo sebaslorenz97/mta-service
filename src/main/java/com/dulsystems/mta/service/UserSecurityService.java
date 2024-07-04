@@ -24,7 +24,7 @@ public class UserSecurityService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String user) throws /*UsernameNotFoundException*/ BusinessException {
-		UserBean ub = userRoleDao.searchUserByUser(user);
+		UserBean ub = userRoleDao.searchUserByUserOrMecId(user,null);
 		if(ub == null) {
 			//throw new UsernameNotFoundException("User Not Found");
 			throw new BusinessException("E-404",HttpStatus.NOT_FOUND,"Credenciales invalidas");

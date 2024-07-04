@@ -15,6 +15,7 @@ public class UserMapper implements RowMapper<UserBean>{
 		ub.setUserPk(rs.getString("username_pk"));
 		ub.setUserPassword(rs.getString("passwordd"));
 		ub.setUserName(rs.getString("user_name"));
+		ub.setUserMecId(rs.getString("mec_id"));
 		ub.setUserPosition(rs.getString("cargo"));
 		ub.setUserEmail(rs.getString("email"));
 		ub.setUserLocked(rs.getBoolean("lockedd"));

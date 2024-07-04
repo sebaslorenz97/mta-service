@@ -48,11 +48,12 @@ public class SecurityConfig {
 				auth
 					.requestMatchers("/mi-taller-automotriz/auth/login").permitAll()
 					.requestMatchers("/mi-taller-automotriz/user-and-roles/**").hasRole("ADMIN")
-					.requestMatchers("/mi-taller-automotriz/address-catalogs/**").hasAnyRole("ADMIN","EMPLOYEE")
-					.requestMatchers("/mi-taller-automotriz/customer/**").hasAnyRole("ADMIN","EMPLOYEE")
-					.requestMatchers("/mi-taller-automotriz/vehicle-catalogs/**").hasAnyRole("ADMIN","EMPLOYEE")
-					.requestMatchers("/mi-taller-automotriz/vehicle/**").hasAnyRole("ADMIN","EMPLOYEE")
-					.requestMatchers("/mi-taller-automotriz/quote-and-details/**").hasAnyRole("ADMIN","EMPLOYEE")
+					.requestMatchers("/mi-taller-automotriz/manager-account-owner/**").hasAnyRole("ADMIN","MANAGER","EMPLOYEE")
+					.requestMatchers("/mi-taller-automotriz/address-catalogs/**").hasAnyRole("ADMIN","MANAGER","EMPLOYEE")
+					.requestMatchers("/mi-taller-automotriz/customer/**").hasAnyRole("ADMIN","MANAGER","EMPLOYEE")
+					.requestMatchers("/mi-taller-automotriz/vehicle-catalogs/**").hasAnyRole("ADMIN","MANAGER","EMPLOYEE")
+					.requestMatchers("/mi-taller-automotriz/vehicle/**").hasAnyRole("ADMIN","MANAGER","EMPLOYEE")
+					.requestMatchers("/mi-taller-automotriz/quote-and-details/**").hasAnyRole("ADMIN","MANAGER","EMPLOYEE")
 					.anyRequest()
 					.authenticated();
 			})

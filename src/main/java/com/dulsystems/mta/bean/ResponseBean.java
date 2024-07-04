@@ -20,8 +20,9 @@ public class ResponseBean {
 	private List<VehicleBean> lvb;
 	private List<QuoteBean> lqb;
 	private UserBean ub;
-	private UserRoleBean urb;
+	private UserRoleBean urb;//
 	private List<String> roles;
+	private String roleAssignmentOperationResult;
 	private List<GrantedAuthority> rolesFromAuthentication;
 	
 	
@@ -132,6 +133,12 @@ public class ResponseBean {
 	}
 	public void setLqb(List<QuoteBean> lqb) {
 		this.lqb = lqb;
+	}
+	public String getRoleAssignmentOperationResult() {
+		return roleAssignmentOperationResult;
+	}
+	public void setRoleAssignmentOperationResult(String roleAssignmentOperationResult) {
+		this.roleAssignmentOperationResult = roleAssignmentOperationResult;
 	}
 	
 }

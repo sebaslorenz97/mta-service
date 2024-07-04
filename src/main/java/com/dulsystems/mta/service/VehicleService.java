@@ -107,7 +107,7 @@ public class VehicleService implements IVehicleService {
 	public ResponseBean executeUpdateVehicleByPlate(RequestBean request) {
 		ResponseBean response = new ResponseBean();
 		if(vehicleDao.searchVehicleByPlate(request.getVehiclePlate())!=null) {
-			if(vehicleDao.searchVehicleByPlate(request.getNewVehiclePlate())==null) {
+			if(request.getNewVehiclePlate().equals(request.getVehiclePlate())) {
 				CustomerBean cb = customerDao.searchCustomerByName(request.getCustomerNameFk());
 				VehicleLineBean vlb = vehicleCatalogDao.searchVehicleLineByLine(request.getVehicleLineNameFk());
 				VehicleModelBean vmb = vehicleCatalogDao.searchVehicleModelByModel(request.getVehicleModelNameFk());
@@ -135,7 +135,36 @@ public class VehicleService implements IVehicleService {
 					throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el cliente");
 				}
 			}else {
-				throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese vehiculo ya existe, intenta con otro");
+				if(vehicleDao.searchVehicleByPlate(request.getNewVehiclePlate())==null) {
+					CustomerBean cb = customerDao.searchCustomerByName(request.getCustomerNameFk());
+					VehicleLineBean vlb = vehicleCatalogDao.searchVehicleLineByLine(request.getVehicleLineNameFk());
+					VehicleModelBean vmb = vehicleCatalogDao.searchVehicleModelByModel(request.getVehicleModelNameFk());
+					VehicleYearBean vyb = vehicleCatalogDao.searchVehicleYearByYear(request.getVehicleYearValueFk());
+					if(cb != null) {
+						if(vlb != null) {
+							if(vmb != null) {
+								if(vyb != null) {
+									if(vehicleDao.executeUpdateVehicleByPlate(request, cb, vlb, vmb, vyb) == true) {
+										response.setCode("OK");
+										response.setMessage("Se actualizo el registro");
+									}else{
+										throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo actualizar el registro");
+									}
+								}else {
+									throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el año");
+								}
+							}else {
+								throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el modelo");
+							}
+						}else {
+							throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe la marca");
+						}
+					}else {
+						throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el cliente");
+					}
+				}else {
+					throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese vehiculo ya existe, intenta con otro");
+				}
 			}
 		}else {
 			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el vehiculo que quieres actualizar");

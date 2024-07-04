@@ -73,7 +73,7 @@ public class Queries {
 			+ "FROM cotizaciones \r\n"
 			+ "INNER JOIN vehiculos ON cotizaciones.id_vehiculo_fk = vehiculos.id_vehiculo_pk \r\n"
 			+ "	WHERE cotizaciones.fecha_orden = (SELECT MAX(cotizaciones.fecha_orden) FROM cotizaciones \r\n"
-			+ "		WHERE cotizaciones.id_Vehiculo_fk = ? AND cotizaciones.fecha_entrega = ?);";
+			+ "		WHERE cotizaciones.id_Vehiculo_fk = ? AND cotizaciones.fecha_orden = ? AND cotizaciones.fecha_entrega = ?);";
 	public static final String Q_QUOTES_SEARCH_VEHICLE_QUOTES = "SELECT * FROM cotizaciones\r\n"
 			+ "INNER JOIN vehiculos ON cotizaciones.id_vehiculo_fk = vehiculos.id_vehiculo_pk\r\n"
 			+ "	WHERE id_vehiculo_fk = ?;";
@@ -84,15 +84,20 @@ public class Queries {
 	
 	//DETAIL QUOTES CRUD SQLS
 	public static final String Q_QUOTE_DETAILS_SEARCH_BY_ID = "SELECT * FROM cotizaciones_detalle WHERE id_cotizacion_fk = ?;";
-	public static final String Q_QUOTE_DETAILS_REMOVE_BY_ID = "DELETE FROM cotizaciones_detalle WHERE id_cotizacion_fk = ?;";
+	public static final String Q_QUOTE_DETAILS_REMOVE_BY_QUOTE_ID = "DELETE FROM cotizaciones_detalle WHERE id_cotizacion_fk = ?;";
+	public static final String Q_QUOTE_DETAILS_REMOVE_BY_DETAIL_ID = "DELETE FROM cotizaciones_detalle WHERE id_cotizacion_detalle_pk = ?;";
+	public static final String Q_QUOTE_DETAILS_REMOVE_BY_DETAIL_ID_2 = "DELETE FROM cotizaciones_detalle WHERE id_cotizacion_detalle_pk IN (";
+	public static final String Q_QUOTE_DETAILS_REMOVE_BY_DETAIL_ID_3 = "DELETE FROM cotizaciones_detalle WHERE id_cotizacion_detalle_pk IN (:detailIds);";
 	public static final String Q_QUOTE_DETAILS_SAVE = "INSERT INTO cotizaciones_detalle(id_cotizacion_fk,mec,mano_obra_refacciones,importe) VALUES(?,?,?,?);";
-	public static final String Q_QUOTE_DETAILS_UPDATE_BY_ID = "UPDATE cotizaciones_detalle SET id_cotizacion_fk = ?, mec = ?, mano_obra_refacciones = ?, importe = ? WHERE id_cotizacion_detalle_pk = ?";
+	public static final String Q_QUOTE_DETAILS_UPDATE_BY_DETAIL_ID = "UPDATE cotizaciones_detalle SET id_cotizacion_fk = ?, mec = ?, mano_obra_refacciones = ?, importe = ? WHERE id_cotizacion_detalle_pk = ?";
 
 	//USERS CRUD SQLS
 	public static final String Q_USERS_SEARCH_BY_USER = "SELECT * FROM users WHERE username_pk = ?;";
+	public static final String Q_USERS_SEARCH_BY_USER_MEC_ID = "SELECT * FROM users WHERE mec_id = ?;";
+	public static final String Q_USERS_SEARCH_MAX_MEC_ID = "SELECT MAX(mec_id) FROM users;";
 	public static final String Q_USERS_REMOVE_BY_USER = "DELETE FROM users WHERE username_pk = ?;";
-	public static final String Q_USERS_SAVE = "INSERT INTO users(username_pk,passwordd,user_name,cargo,email,lockedd,disabled) VALUES(?,?,?,?,?,?,?);";
-	public static final String Q_USERS_UPDATE_ALL_EXCEPT_USER_PASSWORD_AND_EMAIL_BY_USER = "UPDATE users SET user_name = ?, cargo = ?, lockedd = ?, disabled = ? WHERE username_pk = ?";
+	public static final String Q_USERS_SAVE = "INSERT INTO users(username_pk,passwordd,user_name,mec_id,cargo,email,lockedd,disabled) VALUES(?,?,?,?,?,?,?,?);";
+	public static final String Q_USERS_UPDATE_ALL_EXCEPT_USER_PASSWORD_MECID_AND_EMAIL_BY_USER = "UPDATE users SET user_name = ?, cargo = ?, lockedd = ?, disabled = ? WHERE username_pk = ?";
 	/*FALTA CONTROLLER PARA ESTE SQL*/public static final String Q_USERS_UPDATE_PASSWORD_BY_USER = "UPDATE users SET passwordd = ? WHERE username_pk = ?";
 	/*FALTA CONTROLLER PARA ESTE SQL*/public static final String Q_USERS_UPDATE_EMAIL_BY_USER = "UPDATE users SET email = ? WHERE username_pk = ?";
 	//USERS INNER JOIN USER ROLES CRUD SQLS
@@ -102,10 +107,10 @@ public class Queries {
 																	+ "WHERE users.username_pk = ?;";
 
 	//USER ROLES CRUD SQLS
-	public static final String Q_USER_ROLES_SEARCH_ALL_ROLES = "SELECT DISTINCT(role_user_pk) FROM users_role;";
+	public static final String Q_USER_ROLES_SEARCH_ALL_ROLES = "SELECT role_user_pk FROM users_role WHERE username_fk = ?;";
 	public static final String Q_USER_ROLES_SEARCH_BY_ROLE_AND_USER = "SELECT * FROM users_role WHERE role_user_pk = ? AND username_fk =?;";
 	public static final String Q_USER_ROLES_REMOVE_BY_ROLE_AND_USER = "DELETE FROM users_role WHERE role_user_pk = ? AND username_fk =?;";
 	public static final String Q_USER_ROLES_SAVE = "INSERT INTO users_role(role_user_pk,username_fk,granted_date) VALUES(?,?,?);";
-	public static final String Q_USER_ROLES_UPDATE_BY_ROLE_AND_USER = "UPDATE users_role SET role_user_pk = ?, granted_date = ? WHERE role_user_pk = ? AND username_fk = ?;";
+	//public static final String Q_USER_ROLES_UPDATE_BY_ROLE_AND_USER = "UPDATE users_role SET role_user_pk = ?, granted_date = ? WHERE role_user_pk = ? AND username_fk = ?;";
 
 }

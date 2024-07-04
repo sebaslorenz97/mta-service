@@ -9,17 +9,20 @@ import com.dulsystems.mta.bean.UserRoleBean;
 public interface IUserRoleDao {
 	
 	//METHODS FOR USER
-	UserBean searchUserByUser(String user);
+	UserBean searchUserByUserOrMecId(String user, Integer userMecId);
 	boolean executeSaveUser(RequestBean request);
 	boolean executeUpdateUserByUserForAdmin(RequestBean request);
+	boolean executeUpdatePasswordForAccountOwner(RequestBean request, String user);
+	boolean executeUpdateEmailForAccountOwner(RequestBean request, String user);
 	boolean removeUserByUser(String user);
 		
 	//METHODS FOR USER ROLES
-	List<String> searchAllUserRoles(RequestBean request);
+	List<String> searchUserRolesByUserMethodTwo(String user);
 	UserRoleBean searchUserRoleByRoleAndUser(RequestBean request);
-	boolean executeSaveUserRole(RequestBean request);
-	boolean executeUpdateUserRoleByRoleAndUser(RequestBean request);
-	boolean removeUserRoleByRoleAndUser(RequestBean request);
+	UserRoleBean searchUserRoleByRoleAndUserMethodTwo(String role, RequestBean request);
+	boolean executeSaveUserRole(String role, RequestBean request);
+	//boolean executeUpdateUserRoleByRoleAndUser(RequestBean request);
+	boolean removeUserRoleByRoleAndUser(String role, RequestBean request);
 		
 	//METHODS FOR INNER OPERATIONS WITH USERS ROLE
 	List<UserBean> searchUserRolesByUser(String user);

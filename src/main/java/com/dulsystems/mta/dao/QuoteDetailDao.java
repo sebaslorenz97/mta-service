@@ -5,6 +5,9 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.stereotype.Repository;
 
 import com.dulsystems.mta.bean.QuoteBean;
@@ -17,13 +20,20 @@ import com.dulsystems.mta.util.Queries;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Types;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class QuoteDetailDao implements IQuoteDetailDao{
 
 	@Autowired
     private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+    private NamedParameterJdbcTemplate  namedParameterJdbcTemplate ;
 	
 	//DAO FOR QUOTE
 	@Override
@@ -41,7 +51,7 @@ public class QuoteDetailDao implements IQuoteDetailDao{
 		try {
 			System.out.println("ID DEL AUTO: " + vehicleId);
 			System.out.println("FECHA DE ENTREGA: " + request.getQuoteDeadline());
-			QuoteBean qb = jdbcTemplate.queryForObject(Queries.Q_QUOTES_SEARCH_LAST_QUOTE_CREATED, new QuoteMapper(), new Object[] { vehicleId, request.getQuoteDeadline() } );
+			QuoteBean qb = jdbcTemplate.queryForObject(Queries.Q_QUOTES_SEARCH_LAST_QUOTE_CREATED, new QuoteMapper(), new Object[] { vehicleId, request.getQuoteOrderDate(), request.getQuoteDeadline() } );
 			return qb;
 		}catch(EmptyResultDataAccessException e){
 			return null;
@@ -127,12 +137,12 @@ public class QuoteDetailDao implements IQuoteDetailDao{
 	}*/
 
 	@Override
-	public int[] executeUpdateQuoteDetailsByQuoteId(RequestBean request, List<QuoteDetailBean> lqdb) {
+	public int[] executeUpdateQuoteDetailsByDetailId(RequestBean request, List<QuoteDetailBean> lqdbForUpdate) {
 		return jdbcTemplate.batchUpdate(
-				Queries.Q_QUOTE_DETAILS_UPDATE_BY_ID,
+				Queries.Q_QUOTE_DETAILS_UPDATE_BY_DETAIL_ID,
 				new BatchPreparedStatementSetter() {
 					public void setValues(PreparedStatement ps, int i) throws SQLException {
-						QuoteDetailBean qdb = lqdb.get(i);
+						QuoteDetailBean qdb = lqdbForUpdate.get(i);
 						ps.setInt(1, qdb.getQuoteDetailIdFk());
 						ps.setInt(2, qdb.getQuoteDetailMecId());
 						ps.setString(3, qdb.getQuoteDetailLabour());
@@ -140,23 +150,62 @@ public class QuoteDetailDao implements IQuoteDetailDao{
 						ps.setInt(5, qdb.getQuoteDetailId());
 					}
 					public int getBatchSize() {
-						return lqdb.size();
+						return lqdbForUpdate.size();
 					}
 				});
 	}
-	/*public boolean executeUpdateQuoteDetailById(RequestBean request, QuoteBean qb, List<QuoteDetailBean> lqdb) {
+	
+	@Override
+	public int[] removeQuoteDetailsByDetailId(int[] lqdbForDelete/*, String finalQuery*/) {
+		int[] argTypes = { Types.INTEGER };
+		List<Object[]> batchArgs = new ArrayList<>();
+		for(int i = 0; i < lqdbForDelete.length; i++) {
+			batchArgs.add(new Object[] { lqdbForDelete[i] });
+		}
+		return jdbcTemplate.batchUpdate(Queries.Q_QUOTE_DETAILS_REMOVE_BY_DETAIL_ID, batchArgs, argTypes);
+		
+		/*
+		//WORKS FINE
 		boolean bin = false;
-		int result = jdbcTemplate.update(Queries.Q_QUOTES_UPDATE_BY_ID, new Object[] { qb.getQuoteId(),request.getQuoteDetailMecId(),request.getQuoteDetailLabour(),request.getQuoteDetailAmount(),request.getQuoteDetailIdl() });
-        if (result > 0) {
+		List<Integer> batchArgs = new ArrayList<>();
+		for(int i = 0; i < lqdbForDelete.length; i++) {
+			batchArgs.add(lqdbForDelete[i]);
+		}
+		
+		int result = jdbcTemplate.update(finalQuery, batchArgs.toArray());
+		if (result > 0) {
             bin = true;
         }
-		return bin;
-	}*/
+		return bin;*/
+		
+		/*
+		//WORKS FINE
+		List<Integer> params = new ArrayList<>();
+		for(int i = 0; i < lqdbForDelete.length; i++) {
+			params.add(lqdbForDelete[i]);
+		}
+		Map namedParameters = Collections.singletonMap("detailIds", params);
+		return namedParameterJdbcTemplate.update(Queries.Q_QUOTE_DETAILS_REMOVE_BY_DETAIL_ID_3, namedParameters);*/
+		
+		/*
+		//WORKS FINE
+		return jdbcTemplate.batchUpdate(
+			Queries.Q_QUOTE_DETAILS_REMOVE_BY_DETAIL_ID,
+			new BatchPreparedStatementSetter() {
+			public void setValues(PreparedStatement ps, int i) throws SQLException {
+				int qdbId = lqdbForDelete[i];
+				ps.setInt(1, qdbId);
+			}
+			public int getBatchSize() {
+				return lqdbForDelete.length;
+			}
+		});*/
+	}
 
 	@Override
 	public boolean removeQuoteDetailsByQuoteId(Integer quoteId) {
 		boolean bin = false;
-		int result = jdbcTemplate.update(Queries.Q_QUOTE_DETAILS_REMOVE_BY_ID, quoteId);
+		int result = jdbcTemplate.update(Queries.Q_QUOTE_DETAILS_REMOVE_BY_QUOTE_ID, quoteId);
 		if (result > 0) {
             bin = true;
         }

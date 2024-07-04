@@ -7,6 +7,7 @@ public class UserBean {
 	private String userPassword;
 	//REQUEST FIELDS FOR USER
 	private String userName;
+	private String userMecId;
 	private String userPosition;
 	private String userEmail;
 	private Boolean userLocked;
@@ -33,6 +34,12 @@ public class UserBean {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	public String getUserMecId() {
+		return userMecId;
+	}
+	public void setUserMecId(String userMecId) {
+		this.userMecId = userMecId;
 	}
 	public String getUserPosition() {
 		return userPosition;

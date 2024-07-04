@@ -20,7 +20,8 @@ public interface IQuoteDetailDao {
 	//DAO FOR DETAILS OF A QUOTE
 	List<QuoteDetailBean> searchQuoteDetailsByQuoteId(Integer quoteId);
 	int[] executeSaveQuoteDetails(RequestBean request, List<QuoteDetailBean> lqdb);
-	int[] executeUpdateQuoteDetailsByQuoteId(RequestBean request, List<QuoteDetailBean> lqdb);
+	int[] executeUpdateQuoteDetailsByDetailId(RequestBean request, List<QuoteDetailBean> lqdb);
+	int[] removeQuoteDetailsByDetailId(int[] lqdbForDelete/*, String finalQuery*/);
 	boolean removeQuoteDetailsByQuoteId(Integer quoteId);
 	
 }

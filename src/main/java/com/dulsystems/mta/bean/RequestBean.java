@@ -65,20 +65,33 @@ public class RequestBean {
 	
 	//REQUEST FIELDS FOR QUOTE DETAILS LIST
 	private List<QuoteDetailBean> lqdb;
+	private List<QuoteDetailBean> lqdbForUpdate;
+	private int[] lqdbForDelete;
+	private QuoteDetailsCUDBean quoteDetailsCud;
 	
 	//REQUEST FIELDS FOR LOGIN & USER
 	private String userPk;
 	private String userPassword;
 	//REQUEST FIELDS FOR USER
+	private String userMecId;
 	private String userName;
 	private String userPosition;
 	private String userEmail;
 	private Boolean userLocked;
 	private Boolean userDisabled;
 	
+	//REQUEST FIELDS FOR ACOOUNT OWNER
+	private String myCurrentUserPassword;
+	private String myUserPassword;
+	private String myUserEmail;
+	
 	//REQUEST FIELDS FOR USER ROLE
-	private String roleUserPk;
-	private String newroleUserPk;
+	private String roleUserPk; //ELIMINAR
+	private List<String> roles; //ELIMINAR
+	private String newroleUserPk;  //ELIMINAR
+	private Boolean adminRole;
+	private Boolean employeeRole;
+	private Boolean managerRole;
 	private String roleUserGrantedDate;
 	
 	//FKs FOR CUSTOMER ONLY
@@ -369,6 +382,24 @@ public class RequestBean {
 	public void setLqdb(List<QuoteDetailBean> lqdb) {
 		this.lqdb = lqdb;
 	}
+	public List<QuoteDetailBean> getLqdbForUpdate() {
+		return lqdbForUpdate;
+	}
+	public void setLqdbForUpdate(List<QuoteDetailBean> lqdbForUpdate) {
+		this.lqdbForUpdate = lqdbForUpdate;
+	}
+	public int[] getLqdbForDelete() {
+		return lqdbForDelete;
+	}
+	public void setLqdbForDelete(int[] lqdbForDelete) {
+		this.lqdbForDelete = lqdbForDelete;
+	}
+	public QuoteDetailsCUDBean getQuoteDetailsCud() {
+		return quoteDetailsCud;
+	}
+	public void setQuoteDetailsCud(QuoteDetailsCUDBean quoteDetailsCud) {
+		this.quoteDetailsCud = quoteDetailsCud;
+	}
 	
 	//GETTERS AND SETTERS FOR LOGIN & USER
 	public String getUserPk() {
@@ -384,7 +415,33 @@ public class RequestBean {
 		this.userPassword = userPassword;
 	}
 	
+	//GETTERS AND SETTERS FOR ACCOUNT OWNER
+	public String getMyCurrentUserPassword() {
+		return myCurrentUserPassword;
+	}
+	public void setMyCurrentUserPassword(String myCurrentUserPassword) {
+		this.myCurrentUserPassword = myCurrentUserPassword;
+	}
+	public String getMyUserPassword() {
+		return myUserPassword;
+	}
+	public void setMyUserPassword(String myUserPassword) {
+		this.myUserPassword = myUserPassword;
+	}
+	public String getMyUserEmail() {
+		return myUserEmail;
+	}
+	public void setMyUserEmail(String myUserEmail) {
+		this.myUserEmail = myUserEmail;
+	}
+	
 	//GETTERS AND SETTERS FOR USER
+	public String getUserMecId() {
+		return userMecId;
+	}
+	public void setUserMecId(String userMecId) {
+		this.userMecId = userMecId;
+	}
 	public String getUserName() {
 		return userName;
 	}
@@ -422,6 +479,31 @@ public class RequestBean {
 	}
 	public void setRoleUserPk(String roleUserPk) {
 		this.roleUserPk = roleUserPk;
+	}
+	public List<String> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
+	//////////////////////////////////////////////////////////////////////////
+	public Boolean getAdminRole() {
+		return adminRole;
+	}
+	public void setAdminRole(Boolean adminRole) {
+		this.adminRole = adminRole;
+	}
+	public Boolean getEmployeeRole() {
+		return employeeRole;
+	}
+	public void setEmployeeRole(Boolean employeeRole) {
+		this.employeeRole = employeeRole;
+	}
+	public Boolean getManagerRole() {
+		return managerRole;
+	}
+	public void setManagerRole(Boolean managerRole) {
+		this.managerRole = managerRole;
 	}
 	public String getRoleUserGrantedDate() {
 		return roleUserGrantedDate;

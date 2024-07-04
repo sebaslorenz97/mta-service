@@ -58,22 +58,22 @@ public class QuoteDetailController {
 	//CONTROLLERS FOR DETAILS OF A QUOTE
 	@RequestMapping(value="getallquotedetailsbyquoteid/{quoteid}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public ResponseEntity<ResponseBean> searchQuoteDetailsByQuoteId(@PathVariable("quoteid") String quoteid)  {
-		return new ResponseEntity<ResponseBean>(quoteDetailService.searchQuoteDetailsByQuoteId(Integer.parseInt(quoteid)),HttpStatus.OK);
+		return new ResponseEntity<ResponseBean>(quoteDetailService.searchQuoteDetailsByQuoteId(Integer.parseInt(quoteid), null),HttpStatus.OK);
     }
 	
-	@RequestMapping(value="savenewquotedetails", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    public ResponseEntity<ResponseBean> executeSaveQuoteDetails(@Valid @RequestBody RequestBean rb) {
+	@RequestMapping(value="saveeditanddeletequotedetailsbydetailid", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    public ResponseEntity<ResponseBean> executeSaveEditAndDeleteQuoteDetailsByDetailId(@Valid @RequestBody RequestBean rb) {
 		System.out.println("COTIZACION ID ---------> "+ rb.getLqdb().get(0).getQuoteDetailIdFk());
-		return new ResponseEntity<ResponseBean>(quoteDetailService.executeSaveQuoteDetails(rb),HttpStatus.CREATED);
+		return new ResponseEntity<ResponseBean>(quoteDetailService.executeSaveEditAndDeleteQuoteDetailsByDetailId(rb),HttpStatus.CREATED);
     }
 	
-	@RequestMapping(value="editquotedetailsbyquoteid", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
-    public ResponseEntity<ResponseBean> executeUpdateQuoteDetailsByQuoteId(@Valid @RequestBody RequestBean rb) {
-		return new ResponseEntity<ResponseBean>(quoteDetailService.executeUpdateQuoteDetailsByQuoteId(rb),HttpStatus.OK);
+	@RequestMapping(value="editquotedetailsbydetailid", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
+    public ResponseEntity<ResponseBean> executeUpdateQuoteDetailsByDetailId(@Valid @RequestBody RequestBean rb) {
+		return new ResponseEntity<ResponseBean>(quoteDetailService.executeUpdateQuoteDetailsByDetailId(rb, null, null),HttpStatus.OK);
     }
 	
 	@RequestMapping(value="removequotedetailsbyquoteid/{quoteId}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.DELETE)
     public ResponseEntity<ResponseBean> removeQuoteDetailsByQuoteId(@PathVariable("quoteId") String quoteId) {
-		return new ResponseEntity<ResponseBean>(quoteDetailService.removeQuoteDetailsByQuoteId(Integer.parseInt(quoteId)),HttpStatus.OK);
+		return new ResponseEntity<ResponseBean>(quoteDetailService.removeQuoteDetailsByQuoteId(Integer.parseInt(quoteId), null),HttpStatus.OK);
     }
 }

@@ -70,7 +70,7 @@ public class CustomerService implements ICustomerService {
 	public ResponseBean executeUpdateCustomerByName(RequestBean request) {
 		ResponseBean response = new ResponseBean();
 		if(customerDao.searchCustomerByName(request.getCustomerName())!=null) {
-			if(customerDao.searchCustomerByName(request.getNewCustomerName())==null) {
+			if(request.getNewCustomerName().equals(request.getCustomerName())) {
 				StateBean sb = addressCatalogsDao.searchStateByState(request.getStateNameFk());
 				MunicipalityBean mb = addressCatalogsDao.searchMunicipalityByMunicipality(request.getMunicipalityNameFk());
 				if(sb != null) {
@@ -88,7 +88,26 @@ public class CustomerService implements ICustomerService {
 					throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el estado");
 				}
 			}else {
-				throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese cliente ya existe, intenta con otro");
+				if(customerDao.searchCustomerByName(request.getNewCustomerName())==null) {
+					StateBean sb = addressCatalogsDao.searchStateByState(request.getStateNameFk());
+					MunicipalityBean mb = addressCatalogsDao.searchMunicipalityByMunicipality(request.getMunicipalityNameFk());
+					if(sb != null) {
+						if(mb != null) {
+							if(customerDao.executeUpdateCustomerByName(request, sb, mb) == true) {
+								response.setCode("OK");
+								response.setMessage("Se actualizo el registro");
+							}else{
+								throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No se pudo actualizar el registro");
+							}
+						}else {
+							throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el municipio");
+						}
+					}else {
+						throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el estado");
+					}
+				}else {
+					throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"Ese cliente ya existe, intenta con otro");
+				}
 			}
 		}else {
 			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el cliente que quieres actualizar");
