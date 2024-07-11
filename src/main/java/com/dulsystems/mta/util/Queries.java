@@ -7,6 +7,7 @@ public class Queries {
 			+ "INNER JOIN estados ON clientes.id_estado_fk = estados.id_estado_pk\r\n"
 			+ "INNER JOIN municipios ON clientes.id_municipio_fk = municipios.id_municipio_pk\r\n"
 			+ "WHERE clientes.nombre = ?;";
+	public static final String Q_CUSTOMERS_SEARCH_CONTAINS = "SELECT nombre FROM clientes WHERE nombre LIKE ?";
 	public static final String Q_CUSTOMERS_REMOVE_BY_NAME = "DELETE FROM clientes WHERE nombre = ?";
 	public static final String Q_CUSTOMERS_SAVE = "INSERT INTO clientes(id_estado_fk, id_municipio_fk, nombre, particular_o_empresa, referencia, rfc, cp, email, telefono) VALUES(?,?,?,?,?,?,?,?,?);";
 	public static final String Q_CUSTOMERS_UPDATE_BY_NAME = "UPDATE clientes SET id_estado_fk = ?, id_municipio_fk = ?, nombre = ?, particular_o_empresa = ?, referencia = ?, rfc = ?, cp = ?, email = ?, telefono = ? WHERE nombre = ?";
@@ -39,6 +40,7 @@ public class Queries {
 			+ "    INNER JOIN modelos ON vehiculos.id_modelo_fk = modelos.id_modelo_pk\r\n"
 			+ "    INNER JOIN c_years ON vehiculos.id_c_years_fk = c_years.id_c_year_pk\r\n"
 			+ "		WHERE id_cliente_fk = ?;";
+	public static final String Q_VEHICLES_SEARCH_CONTAINS = "SELECT placas FROM vehiculos WHERE placas LIKE ?";
 	public static final String Q_VEHICLES_REMOVE_BY_PLATE = "DELETE FROM vehiculos WHERE placas = ?";
 	public static final String Q_VEHICLES_SAVE = "INSERT INTO vehiculos(id_cliente_fk, id_marca_fk, id_modelo_fk, id_c_years_fk, color, placas, kilometraje_inicial) VALUES(?,?,?,?,?,?,?);";
 	public static final String Q_VEHICLES_UPDATE_BY_PLATE = "UPDATE vehiculos SET id_cliente_fk = ?, id_marca_fk = ?, id_modelo_fk = ?, id_c_years_fk = ?, color = ?, placas = ?, kilometraje_inicial = ? WHERE placas = ?";
@@ -113,4 +115,9 @@ public class Queries {
 	public static final String Q_USER_ROLES_SAVE = "INSERT INTO users_role(role_user_pk,username_fk,granted_date) VALUES(?,?,?);";
 	//public static final String Q_USER_ROLES_UPDATE_BY_ROLE_AND_USER = "UPDATE users_role SET role_user_pk = ?, granted_date = ? WHERE role_user_pk = ? AND username_fk = ?;";
 
+	//VEHICLE CATALOGS CRUD SQLS
+	public static final String Q_VEHICLE_LINES_SEARCH_ALL = "SELECT marca FROM marcas;";
+	public static final String Q_VEHICLE_MODELS_SEARCH_ALL = "SELECT modelo FROM modelos;";
+	public static final String Q_VEHICLE_YEARS_SEARCH_ALL = "SELECT c_year FROM c_years;";
+	
 }

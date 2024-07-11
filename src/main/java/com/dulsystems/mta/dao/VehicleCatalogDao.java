@@ -1,5 +1,7 @@
 package com.dulsystems.mta.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,6 +21,36 @@ public class VehicleCatalogDao implements IVehicleCatalogsDao{
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Override
+	public List<String> searchVehicleLines() {
+		try {
+			List<String> lines = jdbcTemplate.queryForList(Queries.Q_VEHICLE_LINES_SEARCH_ALL, String.class);
+			return lines;
+		}catch(EmptyResultDataAccessException e){
+			return null;
+		}
+	}
+	
+	@Override
+	public List<String> searchVehicleModels() {
+		try {
+			List<String> models = jdbcTemplate.queryForList(Queries.Q_VEHICLE_MODELS_SEARCH_ALL, String.class);
+			return models;
+		}catch(EmptyResultDataAccessException e){
+			return null;
+		}
+	}
+	
+	@Override
+	public List<String> searchVehicleYears() {
+		try {
+			List<String> years = jdbcTemplate.queryForList(Queries.Q_VEHICLE_YEARS_SEARCH_ALL, String.class);
+			return years;
+		}catch(EmptyResultDataAccessException e){
+			return null;
+		}
+	}
 
 	//DAO FOR VEHICLE LINE
 	@Override

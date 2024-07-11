@@ -8,6 +8,9 @@ public class ResponseBean {
 
 	private String code;
 	private String message;
+	private String customer;
+	private String vehicle;
+	private String quote;
 	private CustomerBean cb;
 	private StateBean sb;
 	private MunicipalityBean mb;
@@ -21,7 +24,12 @@ public class ResponseBean {
 	private List<QuoteBean> lqb;
 	private UserBean ub;
 	private UserRoleBean urb;//
+	private List<String> lines;
+	private List<String> models;
+	private List<String> years;
 	private List<String> roles;
+	private List<String> vl;
+	private List<String> cl;
 	private String roleAssignmentOperationResult;
 	private List<GrantedAuthority> rolesFromAuthentication;
 	
@@ -139,6 +147,54 @@ public class ResponseBean {
 	}
 	public void setRoleAssignmentOperationResult(String roleAssignmentOperationResult) {
 		this.roleAssignmentOperationResult = roleAssignmentOperationResult;
+	}
+	public List<String> getVl() {
+		return vl;
+	}
+	public void setVl(List<String> vl) {
+		this.vl = vl;
+	}
+	public List<String> getCl() {
+		return cl;
+	}
+	public void setCl(List<String> cl) {
+		this.cl = cl;
+	}
+	public String getCustomer() {
+		return customer;
+	}
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+	public String getVehicle() {
+		return vehicle;
+	}
+	public void setVehicle(String vehicle) {
+		this.vehicle = vehicle;
+	}
+	public String getQuote() {
+		return quote;
+	}
+	public void setQuote(String quote) {
+		this.quote = quote;
+	}
+	public List<String> getLines() {
+		return lines;
+	}
+	public void setLines(List<String> lines) {
+		this.lines = lines;
+	}
+	public List<String> getModels() {
+		return models;
+	}
+	public void setModels(List<String> models) {
+		this.models = models;
+	}
+	public List<String> getYears() {
+		return years;
+	}
+	public void setYears(List<String> years) {
+		this.years = years;
 	}
 	
 }

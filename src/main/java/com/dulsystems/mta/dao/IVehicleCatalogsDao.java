@@ -1,11 +1,17 @@
 package com.dulsystems.mta.dao;
 
+import java.util.List;
+
 import com.dulsystems.mta.bean.RequestBean;
 import com.dulsystems.mta.bean.VehicleLineBean;
 import com.dulsystems.mta.bean.VehicleModelBean;
 import com.dulsystems.mta.bean.VehicleYearBean;
 
 public interface IVehicleCatalogsDao {
+	
+	List<String> searchVehicleLines();
+	List<String> searchVehicleModels();
+	List<String> searchVehicleYears();
 	
 	//DAO FOR VEHICLE LINE
 	VehicleLineBean searchVehicleLineByLine(String vehicleLine);

@@ -12,6 +12,8 @@ public interface IVehicleService {
 	
 	ResponseBean searchCustomerVehiclesByCustomerName(String customerName);
 	
+	ResponseBean searchVehiclesByStringName(String string);
+	
 	ResponseBean executeSaveVehicle(RequestBean request);
 	
 	ResponseBean executeUpdateVehicleByPlate(RequestBean request);

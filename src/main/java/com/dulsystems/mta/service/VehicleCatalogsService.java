@@ -1,5 +1,7 @@
 package com.dulsystems.mta.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,23 @@ import com.dulsystems.mta.exception.BusinessException;
 public class VehicleCatalogsService implements IVehicleCatalogsService{
 	
 	@Autowired
-	private VehicleCatalogDao vehicleCatalogDao; 
+	private VehicleCatalogDao vehicleCatalogDao;
+	
+	@Override
+	public ResponseBean searchVehicleLinesModelsAndYears(ResponseBean response) {
+		if(response == null) {
+			response = new ResponseBean();
+		}
+		List<String> lines = vehicleCatalogDao.searchVehicleLines();
+		List<String> models = vehicleCatalogDao.searchVehicleModels();
+		List<String> years = vehicleCatalogDao.searchVehicleYears();
+		response.setCode("OK");
+		response.setMessage("Consulta realizada");
+		response.setLines(lines);
+		response.setModels(models);
+		response.setYears(years);
+		return response;
+	}
 
 	//SERVICES FOR VEHICLE LINES
 	@Override

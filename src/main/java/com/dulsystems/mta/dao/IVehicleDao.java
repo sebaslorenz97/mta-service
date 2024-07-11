@@ -15,6 +15,8 @@ public interface IVehicleDao {
 	
 	List<VehicleBean> searchCustomerVehiclesByCustomerName(Integer customerId);
 	
+	List<String> searchVehicleByStringPlate(String string);
+	
 	boolean executeSaveVehicle(RequestBean request, CustomerBean cb, VehicleLineBean vlb, VehicleModelBean vmb, VehicleYearBean vyb);
 	
 	boolean executeUpdateVehicleByPlate(RequestBean request, CustomerBean cb, VehicleLineBean vlb, VehicleModelBean vmb, VehicleYearBean vyb);

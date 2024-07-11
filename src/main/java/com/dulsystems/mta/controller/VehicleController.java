@@ -34,6 +34,11 @@ public class VehicleController {
     public ResponseEntity<ResponseBean> searchCustomerVehiclesByCustomerName(@PathVariable("customer") String customer)  {
 		return new ResponseEntity<ResponseBean>(vehicleService.searchCustomerVehiclesByCustomerName(customer),HttpStatus.OK);
     }
+    
+    @RequestMapping(value="getvehiclesbystringplate/{string}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    public ResponseEntity<ResponseBean> searchVehiclesByStringName(@PathVariable("string") String string)  {
+		return new ResponseEntity<ResponseBean>(vehicleService.searchVehiclesByStringName(string),HttpStatus.OK);
+    }
 	
 	@RequestMapping(value="savenewvehicle", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     public ResponseEntity<ResponseBean> executeSaveVehicle(@Valid @RequestBody RequestBean request) {

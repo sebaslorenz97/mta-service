@@ -48,6 +48,21 @@ public class VehicleDao implements IVehicleDao {
 	}
 	
 	@Override
+	public List<String> searchVehicleByStringPlate(String string){
+		try {
+			StringBuilder stringB = new StringBuilder();
+			stringB.append("%");
+			stringB.append(string);
+			stringB.append("%");
+			List<String> vl = jdbcTemplate.queryForList(Queries.Q_VEHICLES_SEARCH_CONTAINS,  String.class, stringB.toString());
+			return vl;
+		}catch(EmptyResultDataAccessException e){
+			return null;
+		}
+		
+	}
+	
+	@Override
 	public boolean executeSaveVehicle(RequestBean request, CustomerBean cb, VehicleLineBean vlb, VehicleModelBean vmb, VehicleYearBean vyb) {
 		boolean bin = false;
 		int result = jdbcTemplate.update(Queries.Q_VEHICLES_SAVE, new Object[] { cb.getCustomerId(), vlb.getVehicleLineId(), vmb.getVehicleModelId(), vyb.getVehicleYearId(), request.getVehicleColor(), request.getVehiclePlate(), request.getVehicleMillage() });

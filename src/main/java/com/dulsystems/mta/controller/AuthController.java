@@ -44,11 +44,17 @@ public class AuthController {
 		UsernamePasswordAuthenticationToken login = new UsernamePasswordAuthenticationToken(rb.getUserPk(), rb.getUserPassword());
 
 		Authentication authentication = authenticationManager.authenticate(login);
-		List theList = new ArrayList(authentication.getAuthorities());
-		response.setRolesFromAuthentication(theList);
+		/*List theList = new ArrayList(authentication.getAuthorities());
+		response.setRolesFromAuthentication(theList);*/
 		
 		System.out.println(authentication.isAuthenticated());
 		System.out.println(authentication.getPrincipal());
+		
+		List<String> roles = new ArrayList<String>();
+		for(GrantedAuthority grantedAuthority: authentication.getAuthorities()) {
+			roles.add(grantedAuthority.getAuthority());
+		}
+		response.setRoles(roles);
 		
 		String jwt = jwtUtil.create(rb.getUserPk());
 		

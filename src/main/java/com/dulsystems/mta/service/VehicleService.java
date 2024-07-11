@@ -1,5 +1,6 @@
 package com.dulsystems.mta.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class VehicleService implements IVehicleService {
 	
 	@Autowired
 	private VehicleCatalogDao vehicleCatalogDao;
+	
+	@Autowired
+	private VehicleCatalogsService vehicleCatalogService; 
 
 	
 	@Override
@@ -43,6 +47,7 @@ public class VehicleService implements IVehicleService {
 		}else {
 			throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No existe el vehiculo");
 		}
+		vehicleCatalogService.searchVehicleLinesModelsAndYears(response);
 		return response;
 	}
 	
@@ -56,12 +61,24 @@ public class VehicleService implements IVehicleService {
 				response.setCode("OK");
 				response.setMessage("Consulta realizada");
 				response.setLvb(lvb);
+				response.setCustomer(customerName);
 			}else {
 				throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"El cliente no tiene registrado vehiculos");
 			}
 		}else {
 			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe el cliente");
 		}
+		return response;
+	}
+	
+	@Override
+	public ResponseBean searchVehiclesByStringName(String string) {
+		ResponseBean response = new ResponseBean();
+		List<String> vl = new ArrayList<String>();
+		vl = vehicleDao.searchVehicleByStringPlate(string);
+		response.setCode("OK");
+		response.setMessage("Consulta realizada");
+		response.setVl(vl);
 		return response;
 	}
 

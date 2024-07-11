@@ -1,7 +1,11 @@
 package com.dulsystems.mta.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Service;
 
 import com.dulsystems.mta.bean.CustomerBean;
@@ -36,6 +40,17 @@ public class CustomerService implements ICustomerService {
 		}else {
 			throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"No existe el cliente");
 		}
+		return response;
+	}
+	
+	@Override
+	public ResponseBean searchCustomersByStringName(String string) {
+		ResponseBean response = new ResponseBean();
+		List<String> cl = new ArrayList<String>();
+		cl = customerDao.searchCustomersByStringName(string);
+		response.setCode("OK");
+		response.setMessage("Consulta realizada");
+		response.setCl(cl);
 		return response;
 	}
 	

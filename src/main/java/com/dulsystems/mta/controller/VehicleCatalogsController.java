@@ -25,6 +25,12 @@ public class VehicleCatalogsController {
 	@Autowired
 	VehicleCatalogsService vehicleCatalogsService;
 	
+	//CONTROLLER FOR SEARCH VEHICLE LINES MODELS AND YEARS
+	@RequestMapping(value="getvehiclelinesmodelsandyears", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    public ResponseEntity<ResponseBean> searchVehicleLinesModelsAndYears()  {
+		return new ResponseEntity<ResponseBean>(vehicleCatalogsService.searchVehicleLinesModelsAndYears(null),HttpStatus.OK);
+    }
+	
 	//CONTROLLERS FOR VEHICLE LINE
 	@RequestMapping(value="getvehiclelinebyline/{line}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public ResponseEntity<ResponseBean> searchVehicleLineByLine(@PathVariable("line") String line)  {

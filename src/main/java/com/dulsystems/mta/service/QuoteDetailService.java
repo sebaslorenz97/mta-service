@@ -55,6 +55,7 @@ public class QuoteDetailService implements IQuoteDetailService{
 				response.setCode("OK");
 				response.setMessage("Consulta realizada");
 				response.setLqb(lqb);
+				response.setVehicle(vehiclePlate);
 			}else {
 				throw new BusinessException("E-SERVICE-DAO",HttpStatus.BAD_REQUEST,"El vehiculo no tiene cotizaciones");
 			}
@@ -137,10 +138,12 @@ public class QuoteDetailService implements IQuoteDetailService{
 				response.setCode("OK");
 				response.setMessage("Consulta realizada");
 				response.setLQdb(lqdb);
+				response.setQuote(quoteDetail.toString());
 			}else {
 				response.setCode("OK");
 				response.setMessage("No existen detalles de la cotizacion");
 				response.setLQdb(lqdb);
+				response.setQuote(quoteDetail.toString());
 			}
 		}else {
 			throw new BusinessException("E-SERVICE-DAO_VALIDATIONS",HttpStatus.BAD_REQUEST,"No existe la cotizacion");

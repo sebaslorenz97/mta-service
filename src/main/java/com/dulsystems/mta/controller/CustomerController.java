@@ -31,6 +31,11 @@ public class CustomerController {
 		return new ResponseEntity<ResponseBean>(customerService.searchCustomerByName(name),HttpStatus.OK);
     }
 	
+	@RequestMapping(value="getcustomersbystringname/{string}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    public ResponseEntity<ResponseBean> searchCustomersByStringName(@PathVariable("string") String string)  {
+		return new ResponseEntity<ResponseBean>(customerService.searchCustomersByStringName(string),HttpStatus.OK);
+    }
+	
 	@RequestMapping(value="savenewcustomer", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     public ResponseEntity<ResponseBean> executeSaveCustomer(@Valid @RequestBody RequestBean rb) {
 		return new ResponseEntity<ResponseBean>(customerService.executeSaveCustomer(rb),HttpStatus.CREATED);

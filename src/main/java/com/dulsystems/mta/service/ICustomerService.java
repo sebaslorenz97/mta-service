@@ -7,6 +7,8 @@ public interface ICustomerService {
 	
 	ResponseBean searchCustomerByName(String name);
 	
+	ResponseBean searchCustomersByStringName(String string);
+	
 	ResponseBean executeSaveCustomer(RequestBean request);
 	
 	ResponseBean executeUpdateCustomerByName(RequestBean request);

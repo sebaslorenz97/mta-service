@@ -5,6 +5,8 @@ import com.dulsystems.mta.bean.ResponseBean;
 
 public interface IVehicleCatalogsService {
 	
+	ResponseBean searchVehicleLinesModelsAndYears(ResponseBean response);
+	
 	//SERVICES FOR VEHICLE LINES
 	ResponseBean searchVehicleLineByLine(String vehicleLine);
 	ResponseBean executeSaveVehicleLine(RequestBean request);

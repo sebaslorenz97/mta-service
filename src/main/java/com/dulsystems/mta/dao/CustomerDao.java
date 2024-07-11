@@ -1,7 +1,11 @@
 package com.dulsystems.mta.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
@@ -26,6 +30,20 @@ public class CustomerDao implements ICustomerDao{
 		try {
 			CustomerBean cb = jdbcTemplate.queryForObject(Queries.Q_CUSTOMERS_SEARCH_BY_NAME, new CustomerMapper(), name);
 			return cb;
+		}catch(EmptyResultDataAccessException e){
+			return null;
+		}
+	}
+	
+	@Override
+	public List<String> searchCustomersByStringName(String string) {
+		try {
+			StringBuilder stringB = new StringBuilder();
+			stringB.append("%");
+			stringB.append(string);
+			stringB.append("%");
+			List<String> cl = jdbcTemplate.queryForList(Queries.Q_CUSTOMERS_SEARCH_CONTAINS, String.class, stringB.toString());
+			return cl;
 		}catch(EmptyResultDataAccessException e){
 			return null;
 		}
