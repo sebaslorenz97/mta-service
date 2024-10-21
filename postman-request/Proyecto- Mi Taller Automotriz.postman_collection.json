@@ -1,0 +1,1870 @@
+{
+	"info": {
+		"_postman_id": "397e5630-9046-4ce2-9a62-a2585b677298",
+		"name": "Proyecto: Mi Taller Automotriz",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Authentication",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userPk\":\"sebaslorenz97\",\r\n    \"userPassword\":\"sebaslorenz97\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Account Owner",
+			"item": [
+				{
+					"name": "Update user password by account owner",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxOTkwNDkxOSwiZXhwIjoxNzE5OTA4NTE5fQ.uNQqNJqZGEvodAn1wVzB-dtKAam2Bi84VaD_IJe9D3s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userPassword\": \"abcde12ABCDE$@$!%*?&\",\r\n    \"newUserPassword\": \"sebaslorenz97#\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/manager-account-owner/changepasswordforaccountowner",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"manager-account-owner",
+								"changepasswordforaccountowner"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user email by account owner Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxOTkzODI4NCwiZXhwIjoxNzE5OTQxODg0fQ.FMEH_aD-sJ9tzHjKEg9BY6sBdWTiC48VLedo_KMD8UU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userEmail\": \"dulsystems@duls.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/manager-account-owner/changeemailforaccountowner",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"manager-account-owner",
+								"changeemailforaccountowner"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Search user by user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxODg0NzU3MiwiZXhwIjoxNzE4ODUxMTcyfQ.h_LOxKc9gdvY32-1f0e2D92HhmVhcgtXC6hByTz7bGI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/user-and-roles/getuserbyuser/aaaaaaaaA1!",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"user-and-roles",
+								"getuserbyuser",
+								"aaaaaaaaA1!"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzQ1NDU0OCwiZXhwIjoxNzE3NDU4MTQ4fQ.pXj_CJvJOy2gqjtAgBz26Svj6rAILwoMUMCv7Whhpw4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mecId\": \"1\",\r\n    \"userPk\": \"test1\",\r\n    \"userPassword\": \"test1\",\r\n    \"userName\": \"Carla Herreraa\",\r\n    \"userPosition\": \"Recursos Humanos\",\r\n    \"userEmail\": \"carla.herr@gmail.com\",\r\n    \"userLocked\": false,\r\n    \"userDisabled\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/user-and-roles/savenewuser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"user-and-roles",
+								"savenewuser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user by user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxODc4MzU5NywiZXhwIjoxNzE4Nzg3MTk3fQ.5fXGe8xCZ0Gi7KhVQUP3VE27_xfXUviE8__-oaCLMrQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userPk\": \"test1\",\r\n    \"userPassword\": \"test1\",\r\n    \"userName\": \"Carla Herreraa\",\r\n    \"userPosition\": \"Recursos Humanos\",\r\n    \"userEmail\": \"carla.herr@gmail.com\",\r\n    \"userLocked\": false,\r\n    \"userDisabled\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/user-and-roles/savenewuser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"user-and-roles",
+								"savenewuser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove user by user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzE5MDYwOCwiZXhwIjoxNzE3MTk0MjA4fQ.wZDZb-9dXt2hYxI3iMrPhO56wH_Fzh1UMrWL1pyxZI4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/user-and-roles/removeuserbyuser/test1kk",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"user-and-roles",
+								"removeuserbyuser",
+								"test1kk"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users Roles",
+			"item": [
+				{
+					"name": "Search user roles by user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcyMDQ2MjU3OSwiZXhwIjoxNzIwNDY2MTc5fQ.wADoLACscrxWcCqi-X3Ba0Kpbg_iBk9-8nKS-qqzliY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/user-and-roles/searchuserrolesbyuser/sebaslorenz97",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"user-and-roles",
+								"searchuserrolesbyuser",
+								"sebaslorenz97"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assign roles to user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxODQzNzM4NywiZXhwIjoxNzE4NDQwOTg3fQ.LvyUz0R_TJuqTYTdhL-m056hxGqTFIZQzBHnjF7UO3c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"roleUserGrantedDate\": \"2024-05-31 15:31:00\",\r\n    \"userPkFk\": \"sebaslorenz97\",\r\n    \"adminRole\": true,\r\n    \"employeeRole\": true,\r\n    \"managerRole\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/user-and-roles/savenewuserrole",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"user-and-roles",
+								"savenewuserrole"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "States",
+			"item": [
+				{
+					"name": "Search state by state",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzcxNzY1MCwiZXhwIjoxNzE3NzIxMjUwfQ.54tVQPPMAVggMp2IBxhYwrHAsgEo_8Okk8ht4KXPQeA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/address-catalogs/getstatebystate/Queretaro",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"address-catalogs",
+								"getstatebystate",
+								"Queretaro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new state",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzUyNTE4NCwiZXhwIjoxNzE3NTI4Nzg0fQ.EZK-HQ5-tse6o52nUPjjFLw_h3-SfrI8OaXn5CVQMmE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stateName\": \"Queretaro1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/address-catalogs/savenewstate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"address-catalogs",
+								"savenewstate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update state by state",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzUyNTgxNiwiZXhwIjoxNzE3NTI5NDE2fQ.9bIdoNN-BeFmVxVtgVYTuhaNIOaOWzEh0__Ba-Jt9Gg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stateName\": \"Queretaro1\",\r\n    \"newStateName\": \"queretaro2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/address-catalogs/editstatebystate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"address-catalogs",
+								"editstatebystate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove state by state",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzUyNTgxNiwiZXhwIjoxNzE3NTI5NDE2fQ.9bIdoNN-BeFmVxVtgVYTuhaNIOaOWzEh0__Ba-Jt9Gg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/address-catalogs/removestatebystate/queretaro2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"address-catalogs",
+								"removestatebystate",
+								"queretaro2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Municipalities",
+			"item": [
+				{
+					"name": "Search municipality by municipality",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxODQzNzM4NywiZXhwIjoxNzE4NDQwOTg3fQ.LvyUz0R_TJuqTYTdhL-m056hxGqTFIZQzBHnjF7UO3c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/address-catalogs/getmunicipalitybymunicipality/Corregidora",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"address-catalogs",
+								"getmunicipalitybymunicipality",
+								"Corregidora"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new municipality",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzExMzY1OCwiZXhwIjoxNzE3MTE3MjU4fQ.Ej6dETLhJg-_pykj1QrhsTE8cOt-241Q4QjRHJ9kYws",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"municipalityName\": \"ElMarquesaa\",\r\n    \"stateNameFk\": \"Queretaro\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/address-catalogs/savenewmunicipalitybymunicipality",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"address-catalogs",
+								"savenewmunicipalitybymunicipality"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update municipality by municipality",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzExMzY1OCwiZXhwIjoxNzE3MTE3MjU4fQ.Ej6dETLhJg-_pykj1QrhsTE8cOt-241Q4QjRHJ9kYws",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"municipalityName\": \"ElMarquesaa\",\r\n    \"stateNameFk\": \"Queretaro\",\r\n    \"newMunicipalityName\": \"Eadasdadsad\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/address-catalogs/editmunicipalitybymunicipality",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"address-catalogs",
+								"editmunicipalitybymunicipality"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove municipality by municipality",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzEzNzM3OSwiZXhwIjoxNzE3MTQwOTc5fQ.9dv8fCtF1bmt7nyJJnBL0TIb9NXHRaBPAtS8cTteBb4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/address-catalogs/removemunicipalitybymunicipality/El Marquesas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"address-catalogs",
+								"removemunicipalitybymunicipality",
+								"El Marquesas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customers",
+			"item": [
+				{
+					"name": "Search customer by Name",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxOTM0OTIwMywiZXhwIjoxNzE5MzUyODAzfQ.LSmiQ2L9EmYk1BlQwBqwIOE_OlSmBUuQMuY185mSVE8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/customer/getcustomerbyname/Uziel Lorenzo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"customer",
+								"getcustomerbyname",
+								"Uziel Lorenzo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search customers filtered by string name",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcyMDQ4OTM5MiwiZXhwIjoxNzIwNDkyOTkyfQ.7DLY0Ss27r6sayjMJfZncr_oD0SKStOaalcwOpENMcc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/customer/getcustomersbystringname/lor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"customer",
+								"getcustomersbystringname",
+								"lor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzYzNzg2OSwiZXhwIjoxNzE3NjQxNDY5fQ.CxNN1JE0MjjiEWjVIVJ1BHkR5j0Ta7eAD6kLT2m3EzM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerName\": \"dasdaadsda\",\r\n    \"customerParticularEmpresa\": \"true\",\r\n    \"customerReference\":\"test1\",\r\n    \"customerRfc\": \"AGR971125\",\r\n    \"customerCp\": \"76093\",\r\n    \"customerEmail\": \"testempresa.guerey@gmail.com\",\r\n    \"customerPhoneNumber\": \"4426775198\",\r\n    \"stateNameFk\": \"Queretaro\",\r\n    \"municipalityNameFk\": \"El Marques\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/customer/savenewcustomer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"customer",
+								"savenewcustomer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update customer by Name",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxOTM1MTQxMywiZXhwIjoxNzE5MzU1MDEzfQ.haY90X63KBOvdVs3nE7FiyewYge1Hizl4-XSf8ogmRk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerName\": \"DavidL\",\r\n    \"newCustomerName\": \"David\",\r\n    \"customerParticularEmpresa\": \"false\",\r\n    \"customerReference\":\"\",\r\n    \"customerRfc\": \"AGR971125\",\r\n    \"customerCp\": \"76093\",\r\n    \"customerEmail\": \"david.guerey@gmail.com\",\r\n    \"customerPhoneNumber\": \"4426775198\",\r\n    \"stateNameFk\": \"Queretaro\",\r\n    \"municipalityNameFk\": \"El Marques\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/customer/editcustomerbyname",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"customer",
+								"editcustomerbyname"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove customer by Name",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzEzNzM3OSwiZXhwIjoxNzE3MTQwOTc5fQ.9dv8fCtF1bmt7nyJJnBL0TIb9NXHRaBPAtS8cTteBb4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/customer/removecustomerbyname/customername",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"customer",
+								"removecustomerbyname",
+								"customername"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicle Lines",
+			"item": [
+				{
+					"name": "Search vehicle lines, models, and years",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcyMDYyOTQxMSwiZXhwIjoxNzIwNjMzMDExfQ.G6DV7hpy2IPNNEzcOlpCOBTMPsUqrvSuxNhlRAvsQOk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/vehicle-catalogs/getvehiclelinesmodelsandyears",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"vehicle-catalogs",
+								"getvehiclelinesmodelsandyears"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search vehicle line by line Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzcwNTMwNiwiZXhwIjoxNzE3NzA4OTA2fQ.Fdys59JjrnQ4IrL_SFnYFSIsJzW4gTit4dxNDY8TyJg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/vehicle-catalogs/getvehiclelinebyline/Nissan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"vehicle-catalogs",
+								"getvehiclelinebyline",
+								"Nissan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new vehicle line",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzExMzY1OCwiZXhwIjoxNzE3MTE3MjU4fQ.Ej6dETLhJg-_pykj1QrhsTE8cOt-241Q4QjRHJ9kYws",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vehicleLine\": \"Ford\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/vehicle-catalogs/savenewvehicleline",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"vehicle-catalogs",
+								"savenewvehicleline"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update vehicle line by line",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzExMzY1OCwiZXhwIjoxNzE3MTE3MjU4fQ.Ej6dETLhJg-_pykj1QrhsTE8cOt-241Q4QjRHJ9kYws",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vehicleLine\": \"Ford\",\r\n    \"newVehicleLine\": \"Toyota\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/vehicle-catalogs/editvehicleline",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"vehicle-catalogs",
+								"editvehicleline"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove vehicle line by line",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzE0MTQwOCwiZXhwIjoxNzE3MTQ1MDA4fQ.JHswAZsmTlSotWvmNeJNpVQmDdtUItSWpTJtimIuctE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/vehicle-catalogs/removevehiclelinebyline/Toyota",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"vehicle-catalogs",
+								"removevehiclelinebyline",
+								"Toyota"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicle Models",
+			"item": [
+				{
+					"name": "Search vehicle line by line",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzcxNzM5NywiZXhwIjoxNzE3NzIwOTk3fQ.5GeZwZZMpXH_Zj3eaK3s_80sO-TDIgxV-3tZzedxDno",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/vehicle-catalogs/getvehiclemodelbymodel/Jetta",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"vehicle-catalogs",
+								"getvehiclemodelbymodel",
+								"Jetta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new vehicle line",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzExMzY1OCwiZXhwIjoxNzE3MTE3MjU4fQ.Ej6dETLhJg-_pykj1QrhsTE8cOt-241Q4QjRHJ9kYws",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vehicleModel\": \"jetta 9\",\r\n    \"vehicleLineNameFk\": \"nissan\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/vehicle-catalogs/savenewvehiclemodel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"vehicle-catalogs",
+								"savenewvehiclemodel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update vehicle line by line",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzExNzMyNiwiZXhwIjoxNzE3MTIwOTI2fQ.IdQjOB_Y-feuo5EZFFQHStXujpV8r6BBtZV1f_Qq7sY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vehicleModel\": \"jetta 9\",\r\n    \"newVehicleModel\": \"jetta Z\",\r\n    \"vehicleLineNameFk\": \"nissan\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/vehicle-catalogs/editvehiclemodel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"vehicle-catalogs",
+								"editvehiclemodel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove vehicle line by line",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzE0MTQwOCwiZXhwIjoxNzE3MTQ1MDA4fQ.JHswAZsmTlSotWvmNeJNpVQmDdtUItSWpTJtimIuctE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/vehicle-catalogs/removevehiclemodelbymodel/jetta Z",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"vehicle-catalogs",
+								"removevehiclemodelbymodel",
+								"jetta Z"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicle Years",
+			"item": [
+				{
+					"name": "Search vehicle line by line",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzExMjkyNCwiZXhwIjoxNzE3MTE2NTI0fQ.JEH1p3YDq7Wo9S7r6w7B3kIoc2jVsjyuRey9ku_BMPg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/vehicle-catalogs/getvehicleyearbyyear/2024",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"vehicle-catalogs",
+								"getvehicleyearbyyear",
+								"2024"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new vehicle line",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzExMzY1OCwiZXhwIjoxNzE3MTE3MjU4fQ.Ej6dETLhJg-_pykj1QrhsTE8cOt-241Q4QjRHJ9kYws",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vehicleYearValue\": \"2025\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/vehicle-catalogs/savenewvehicleyear",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"vehicle-catalogs",
+								"savenewvehicleyear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update vehicle line by line",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzExNzMyNiwiZXhwIjoxNzE3MTIwOTI2fQ.IdQjOB_Y-feuo5EZFFQHStXujpV8r6BBtZV1f_Qq7sY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vehicleYearValue\": \"2025\",\r\n    \"newVehicleYearValue\": \"2026\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/vehicle-catalogs/editvehicleyear",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"vehicle-catalogs",
+								"editvehicleyear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove vehicle line by line",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzE0MTQwOCwiZXhwIjoxNzE3MTQ1MDA4fQ.JHswAZsmTlSotWvmNeJNpVQmDdtUItSWpTJtimIuctE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/vehicle-catalogs/removevehicleyearbyyear/2026",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"vehicle-catalogs",
+								"removevehicleyearbyyear",
+								"2026"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicles",
+			"item": [
+				{
+					"name": "Search vehicle by plate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxOTQyOTM0NCwiZXhwIjoxNzE5NDMyOTQ0fQ.M9YELs10p8xZW99gSHProTWoh-MChP2n1BNmp8Z0cNc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/vehicle/getvehiclebyplate/UNK-529-D",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"vehicle",
+								"getvehiclebyplate",
+								"UNK-529-D"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search customer vehicles by customer ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxODQwMjUxMywiZXhwIjoxNzE4NDA2MTEzfQ.jFBgzj7ESfgYbjB0xK5JujRbn7-BtsjFlJYZ7DVZVlQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/vehicle/getcustomervehiclesbycustomername/Uziel Lorenzo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"vehicle",
+								"getcustomervehiclesbycustomername",
+								"Uziel Lorenzo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search vehicles filtered by string plate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcyMDQ4OTM5MiwiZXhwIjoxNzIwNDkyOTkyfQ.7DLY0Ss27r6sayjMJfZncr_oD0SKStOaalcwOpENMcc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/vehicle/getvehiclesbystringplate/UNK",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"vehicle",
+								"getvehiclesbystringplate",
+								"UNK"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new vehicle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxODM0ODY4NCwiZXhwIjoxNzE4MzUyMjg0fQ.K-wfDMrkRUYbaQfdD-mmVX6lcLp8ffPIqigT2k-j0Bs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vehiclePlate\": \"UNK-250-P\",\r\n    \"vehicleColor\": \"Rojo\",\r\n    \"vehicleMillage\": \"20030\",\r\n    \"customerNameFk\": \"Uziel Lorenzo\",\r\n    \"vehicleLineNameFk\": \"Nissan\",\r\n    \"vehicleModelNameFk\": \"Versa Exclusive\",\r\n    \"vehicleYearValueFk\": 2021\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/vehicle/savenewvehicle",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"vehicle",
+								"savenewvehicle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update vehicle by plate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzExNzMyNiwiZXhwIjoxNzE3MTIwOTI2fQ.IdQjOB_Y-feuo5EZFFQHStXujpV8r6BBtZV1f_Qq7sY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vehiclePlate\": \"UNK-529-P\",\r\n    \"newVehiclePlate\": \"UNK-529-L\",\r\n    \"vehicleColor\": \"Rojo\",\r\n    \"vehicleMillage\": \"20030\",\r\n    \"customerNameFk\": \"Uziel Lorenzo\",\r\n    \"vehicleLineNameFk\": \"Nissan\",\r\n    \"vehicleModelNameFk\": \"Versa Exclusive\",\r\n    \"vehicleYearValueFk\": 2021\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/vehicle/editvehiclebyplate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"vehicle",
+								"editvehiclebyplate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove vehicle by plate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzE0MTI3MywiZXhwIjoxNzE3MTQ0ODczfQ.EwwCHMpts8bvUGUFuO2jrqmYJjfZ-V3_noFnYDG6vkY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/vehicle/removevehiclebyplate/UNK-529-L",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"vehicle",
+								"removevehiclebyplate",
+								"UNK-529-L"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Quotes",
+			"item": [
+				{
+					"name": "Search quote by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxOTQ0Mjk1MywiZXhwIjoxNzE5NDQ2NTUzfQ.wFHtjw7LXMzhfo19-Y26PNLBMuNiwLcwWk_o8JPxT9I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/quote-and-details/getquotebyid/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"quote-and-details",
+								"getquotebyid",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search vehicle quotes by placa",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxODQwMjUxMywiZXhwIjoxNzE4NDA2MTEzfQ.jFBgzj7ESfgYbjB0xK5JujRbn7-BtsjFlJYZ7DVZVlQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/quote-and-details/searchvehiclequotesbyvehicleplate/UNK-529-D",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"quote-and-details",
+								"searchvehiclequotesbyvehicleplate",
+								"UNK-529-D"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new quote",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxODM0OTQ0NiwiZXhwIjoxNzE4MzUzMDQ2fQ.H-O-_cSjaIMgz5muk_vAdxUg5eSlg_7zWJO1FiV6Ivw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quoteOrderDate\":\"2024-05-04 13:40:38\",\r\n    \"quoteDeadline\":\"2024-05-10 12:00:00\",\r\n    \"vehiclePlate\":\"UNK-529-D\",\r\n    \"quoteStatusVehicle\":\"Pendiente\",\r\n    \"quotePaymentMethod\":false,\r\n    \"quotePaymentStatus\":false,\r\n    \"quoteAdvancePayment\":2000,\r\n    \"quoteRequireInvoice\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/quote-and-details/savenewquote",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"quote-and-details",
+								"savenewquote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update quote by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzE5MzM3OCwiZXhwIjoxNzE3MTk2OTc4fQ.AW7Xfk9piPyj6JMgmMRmPpKVvfgnNrXpU7DArc6ADyw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quoteId\":\"6\",\r\n    \"quoteOrderDate\":\"2024-05-04 13:44:30\",\r\n    \"quoteDeadline\":\"2024-05-10 12:00:00\",\r\n    \"vehiclePlate\":\"UNK-339-D\",\r\n    \"quoteStatusVehicle\":\"En proceso\",\r\n    \"quotePaymentMethod\":false,\r\n    \"quotePaymentStatus\":false,\r\n    \"quoteAdvancePayment\":2000,\r\n    \"quoteRequireInvoice\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/quote-and-details/editquotebyid",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"quote-and-details",
+								"editquotebyid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove quote by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzE0MTQwOCwiZXhwIjoxNzE3MTQ1MDA4fQ.JHswAZsmTlSotWvmNeJNpVQmDdtUItSWpTJtimIuctE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/quote-and-details/removequotebyid/06",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"quote-and-details",
+								"removequotebyid",
+								"06"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Quote Details",
+			"item": [
+				{
+					"name": "Search quote details by quote ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxOTUxMDgxOSwiZXhwIjoxNzE5NTE0NDE5fQ.NNhlNj02QW8PNFkMPfRmFfzMtuK_e8CyQuVudYeg1wQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/quote-and-details/getallquotedetailsbyquoteid/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"quote-and-details",
+								"getallquotedetailsbyquoteid",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new quote details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzc5MTY0OSwiZXhwIjoxNzE3Nzk1MjQ5fQ.9lTG07BgHOmPlwPcdv87OWwsDNkAKwwplySzp_DPSJo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lqdb\":[\r\n        {\r\n            \"quoteDetailMecId\":\"1\",\r\n            \"quoteDetailLabour\":\"Aceite\",\r\n            \"quoteDetailAmount\":\"800\",\r\n            \"quoteDetailIdFk\":\"5\"\r\n        },\r\n        {\r\n            \"quoteDetailMecId\":\"1\",\r\n            \"quoteDetailLabour\":\"Filtro de aceite\",\r\n            \"quoteDetailAmount\":\"300\",\r\n            \"quoteDetailIdFk\":\"5\"\r\n        },\r\n        {\r\n            \"quoteDetailMecId\":\"1\",\r\n            \"quoteDetailLabour\":\"Afinacion\",\r\n            \"quoteDetailAmount\":\"500\",\r\n            \"quoteDetailIdFk\":\"5\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/quote-and-details/saveeditanddeletequotedetailsbydetailid",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"quote-and-details",
+								"saveeditanddeletequotedetailsbydetailid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update quote details by quote ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxNzEzNzM3OSwiZXhwIjoxNzE3MTQwOTc5fQ.9dv8fCtF1bmt7nyJJnBL0TIb9NXHRaBPAtS8cTteBb4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lqdb\":[\r\n        {\r\n            \"quoteDetailId\":\"9\",\r\n            \"quoteDetailMecId\":\"1\",\r\n            \"quoteDetailLabour\":\"Mano de obra\",\r\n            \"quoteDetailAmount\":\"200\",\r\n            \"quoteDetailIdFk\":\"7\"\r\n        },\r\n        {\r\n            \"quoteDetailId\":\"10\",\r\n            \"quoteDetailMecId\":\"1\",\r\n            \"quoteDetailLabour\":\"Otros\",\r\n            \"quoteDetailAmount\":\"1200\",\r\n            \"quoteDetailIdFk\":\"7\"\r\n        },\r\n        {\r\n            \"quoteDetailId\":\"11\",\r\n            \"quoteDetailMecId\":\"1\",\r\n            \"quoteDetailLabour\":\"Limpiado\",\r\n            \"quoteDetailAmount\":\"400\",\r\n            \"quoteDetailIdFk\":\"7\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/quote-and-details/editquotedetailsbydetailid",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"quote-and-details",
+								"editquotedetailsbydetailid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove quote details by quote ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzZWJhc2xvcmVuejk3IiwiaXNzIjoiRFVMU3lzdGVtcyIsImlhdCI6MTcxOTUxNTA0OSwiZXhwIjoxNzE5NTE4NjQ5fQ.s87BmWXhC32N7UzDglvXiyeLfDiVPC5lTLbiT9X6lsw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/mi-taller-automotriz/quote-and-details/removequotedetailsbyquoteid/05",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mi-taller-automotriz",
+								"quote-and-details",
+								"removequotedetailsbyquoteid",
+								"05"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
