@@ -2,6 +2,8 @@ package com.dulsystems.mta.config;
 
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.dulsystems.mta.controller.AuthController;
 import com.dulsystems.mta.util.JwtUtil;
 
 import jakarta.servlet.FilterChain;
@@ -20,6 +23,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter{
+	
+	private static final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
 	
 	private final JwtUtil jwtUtil;
 	private final UserDetailsService userDetailsService;
@@ -38,7 +43,8 @@ public class JwtFilter extends OncePerRequestFilter{
 		String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 		if(authHeader == null || authHeader.isEmpty() || !authHeader.startsWith("Bearer")) {
 			filterChain.doFilter(request, response);
-			System.out.println("---------> HEADER NO VALIDO" + "Header: " + authHeader);
+			logger.info("---------> HEADER NO VALIDO Header: {}",authHeader);
+			//System.out.println("---------> HEADER NO VALIDO" + "Header: " + authHeader);
 			return;
 		}
 		
@@ -46,22 +52,26 @@ public class JwtFilter extends OncePerRequestFilter{
 		String jwt = authHeader.split(" ")[1].trim();
 		if(!jwtUtil.isValid(jwt)) {
 			filterChain.doFilter(request, response);
-			System.out.println("---------> JWT NO VALIDO");
+			logger.info("---------> JWT NO VALIDO");
+			//System.out.println("---------> JWT NO VALIDO");
 			return;
 		}
 		
 		//3.- Load user from UserDetailSservice
 		String user = jwtUtil.getUser(jwt);
 		User userr = (User) userDetailsService.loadUserByUsername(user);
-		System.out.println("---------> USUARIO CARGADO DESDE EL DETAIL SERVICE");
+		logger.info("---------> USUARIO CARGADO DESDE EL DETAIL SERVICE");
+		//System.out.println("---------> USUARIO CARGADO DESDE EL DETAIL SERVICE");
 		
 		//4.- Load user in security context
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
 				userr.getUsername(), userr.getPassword(), userr.getAuthorities()
 		);
 		SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-		System.out.println("USUARIO CARGADO EN EL CONTEXTO DE SEGURIDAD");
-		System.out.println(authenticationToken);
+		logger.info("USUARIO CARGADO EN EL CONTEXTO DE SEGURIDAD");
+		logger.info("{}",authenticationToken);
+		//System.out.println("USUARIO CARGADO EN EL CONTEXTO DE SEGURIDAD");
+		//System.out.println(authenticationToken);
 		filterChain.doFilter(request, response);
 	}
 

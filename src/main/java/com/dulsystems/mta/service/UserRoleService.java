@@ -163,7 +163,7 @@ public class UserRoleService implements IUserRoleService {
 		executeSaveUserRoles(request);
 		
 		//STEP 2: Remove the user
-		if(!user.equals("sebaslorenz97")) {
+		if(!user.equals("fernandoOrtega90")) {
 			if(userRoleDao.searchUserByUserOrMecId(user, null)!=null) {
 				if(userRoleDao.removeUserByUser(user)) {
 					response.setCode("OK");
@@ -222,7 +222,7 @@ public class UserRoleService implements IUserRoleService {
 						}
 					}
 				}else {
-					if(!request.getUserPkFk().equals("sebaslorenz97")) {
+					if(!request.getUserPkFk().equals("fernandoOrtega90")) {
 						if(userRoleDao.searchUserRoleByRoleAndUserMethodTwo(roles.get(0),request)!=null) {
 							if(userRoleDao.removeUserRoleByRoleAndUser(roles.get(0),request) == true) {
 								sb.append("Se desasigno el rol: " + roles.get(0) + ". ");

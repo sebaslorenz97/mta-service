@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -27,6 +29,8 @@ import com.dulsystems.mta.util.JwtUtil;
 @RequestMapping("/mi-taller-automotriz/auth")
 public class AuthController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+	
 	private final AuthenticationManager authenticationManager;
 	private final JwtUtil jwtUtil;
 	
@@ -38,17 +42,21 @@ public class AuthController {
 	
 	@PostMapping("/login")
 	public ResponseEntity<ResponseBean> login(@RequestBody RequestBean rb){
+		logger.info("The user enter to login controller method");
 		ResponseBean response = new ResponseBean();
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
+		logger.info("-----------------------> 1");
 		UsernamePasswordAuthenticationToken login = new UsernamePasswordAuthenticationToken(rb.getUserPk(), rb.getUserPassword());
+		logger.info("-----------------------> 2");
 
 		Authentication authentication = authenticationManager.authenticate(login);
+		logger.info("-----------------------> 3");
 		/*List theList = new ArrayList(authentication.getAuthorities());
 		response.setRolesFromAuthentication(theList);*/
 		
-		System.out.println(authentication.isAuthenticated());
-		System.out.println(authentication.getPrincipal());
+		logger.info("{}",authentication.isAuthenticated());
+		logger.info("{}",authentication.getPrincipal());
 		
 		List<String> roles = new ArrayList<String>();
 		for(GrantedAuthority grantedAuthority: authentication.getAuthorities()) {

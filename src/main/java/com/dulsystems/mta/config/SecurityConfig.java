@@ -2,6 +2,8 @@ package com.dulsystems.mta.config;
 
 import java.util.Arrays;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,12 +23,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 public class SecurityConfig {
+	
+	private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 	
 	private final JwtFilter jwtFilter;
 	private final CorsConfigurationSource corsConfigurationSource;
@@ -39,6 +44,7 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		logger.info("The user enter to filterChain method");
 		
 		http
 			.csrf(AbstractHttpConfigurer::disable)
@@ -46,7 +52,10 @@ public class SecurityConfig {
 			.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.authorizeHttpRequests(auth -> {
 				auth
+					.requestMatchers("/mi-taller-automotriz/test-controller/gettestdata").permitAll()
+					.requestMatchers("/mi-taller-automotriz/test-controller/posttestdata").permitAll()
 					.requestMatchers("/mi-taller-automotriz/auth/login").permitAll()
+					.requestMatchers(new AntPathRequestMatcher("/error")).permitAll()
 					.requestMatchers("/mi-taller-automotriz/user-and-roles/**").hasRole("ADMIN")
 					.requestMatchers("/mi-taller-automotriz/manager-account-owner/**").hasAnyRole("ADMIN","MANAGER","EMPLOYEE")
 					.requestMatchers("/mi-taller-automotriz/address-catalogs/**").hasAnyRole("ADMIN","MANAGER","EMPLOYEE")
